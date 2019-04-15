@@ -50,6 +50,7 @@ def train(model, args):
     # Configure datasets
     import ipdb;
     ipdb.set_trace()
+    print(args.dataset)
     if 'bsds' in args.dataset:
         data_root = '/media/data_cifs/pytorch_projects/datasets/BSDS500'
         mean_bgr = np.array([104.00699, 116.66877, 122.67892])
@@ -219,8 +220,6 @@ def main():
     if args.complete_pretrain:
         model.load_state_dict(torch.load(args.complete_pretrain))
     logger.info(model)
-    print(args.dataset)
-    import ipdb;ipdb.set_trace()
     train(model, args)
 
 def parse_args():
