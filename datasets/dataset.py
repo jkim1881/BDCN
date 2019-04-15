@@ -15,12 +15,12 @@ def load_image_with_cache(path, cache=None, lock=None, matfile=False):
 			with open(path, 'rb') as f:
 				cache[path] = f.read()
 		if matfile:
-			return scipy.io.loadmat(StringIO(cache[path]))
+			return scipy.io.loadmat(StringIO(cache[path]))['groundTruth']
 		else:
 			return Image.open(StringIO(cache[path]))
 	else:
 		if matfile:
-			return scipy.io.loadmat(path)
+			return scipy.io.loadmat(path)['groundTruth']
 		else:
 			return Image.open(path)
 
