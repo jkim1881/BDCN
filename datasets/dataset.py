@@ -55,11 +55,11 @@ class Data(data.Dataset):
 		if not os.path.exists(img_file):
 			img_file = img_file.replace('jpg', 'png')
 		# img = Image.open(img_file)
-		img = load_image_with_cache(img_file, cache=None) #self.cache)
+		img = load_image_with_cache(img_file, self.cache)
 		# load gt image
 		gt_file = self.root + data_file[1]
 		# gt = Image.open(gt_file)
-		gt = load_image_with_cache(gt_file, cache=None) #self.cache)
+		gt = load_image_with_cache(gt_file, self.cache)
 		if gt.mode == '1':
 			gt  = gt.convert('L')
 		return self.transform(img, gt)
@@ -132,10 +132,10 @@ class BSDS_data_jk(data.Dataset):
 		img_file = os.path.join(self.root, 'data', 'images', self.type, self.files[index] + self.img_ext)
 		if not os.path.exists(img_file):
 			raise ValueError('Cannot find image by path :' + img_file)
-		img = load_image_with_cache(img_file, self.cache)
+		img = load_image_with_cache(img_file, cache=None) #self.cache)
 		# load gt image
 		gt_file = os.path.join(self.root, 'data', 'groundTruth', self.type, self.files[index] + self.gt_ext)
-		gt = load_image_with_cache(gt_file, self.cache, matfile=True)
+		gt = load_image_with_cache(gt_file, cache=None, matfile=True) #self.cache, matfile=True)
 		return self.transform(img, gt)
 
 	def transform(self, img, gt):
