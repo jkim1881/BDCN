@@ -48,7 +48,9 @@ def cross_entropy_loss2d(inputs, targets, cuda=False, balance=1.1):
 
 def train(model, args):
     # Configure datasets
-    if 'BSDS' in args.dataset:
+    import ipdb;
+    ipdb.set_trace()
+    if 'bsds' in args.dataset:
         data_root = '/media/data_cifs/pytorch_projects/datasets/BSDS500'
         mean_bgr = np.array([104.00699, 116.66877, 122.67892])
         yita = args.yita if args.yita else 0.5
