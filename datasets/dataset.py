@@ -136,11 +136,11 @@ class BSDS_data_jk(data.Dataset):
 		# load gt image
 		gt_file = os.path.join(self.root, 'data', 'groundTruth', self.type, self.files[index] + self.gt_ext)
 		gt = load_image_with_cache(gt_file, self.cache, matfile=True)
-		print(img.shape)
-		print(gt.shape)
 		return self.transform(img, gt)
 
 	def transform(self, img, gt):
+		import ipdb
+		ipdb.set_trace()
 		gt = np.array(gt, dtype=np.float32)
 		if len(gt.shape) == 3:
 			gt = gt[:, :, 0]
