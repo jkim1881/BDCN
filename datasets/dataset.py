@@ -134,7 +134,7 @@ class BSDS_data_jk(data.Dataset):
 			raise ValueError('Cannot find image by path :' + img_file)
 		img = load_image_with_cache(img_file, self.cache)
 		# load gt image
-		gt_file = os.path.join(self.root, 'data', 'gt', self.type, self.files[index] + self.gt_ext)
+		gt_file = os.path.join(self.root, 'data', 'groundTruth', self.type, self.files[index] + self.gt_ext)
 		gt = load_image_with_cache(gt_file, self.cache, matfile=True)
 		return self.transform(img, gt)
 
