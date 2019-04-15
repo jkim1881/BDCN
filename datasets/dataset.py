@@ -65,6 +65,7 @@ class Data(data.Dataset):
 		return self.transform(img, gt)
 
 	def transform(self, img, gt):
+		import ipdb;ipdb.set_trace()
 		gt = np.array(gt, dtype=np.float32)
 		if len(gt.shape) == 3:
 			gt = gt[:, :, 0]
