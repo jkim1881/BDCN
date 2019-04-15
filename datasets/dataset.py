@@ -118,6 +118,7 @@ class BSDS_data_jk(data.Dataset):
 
 		# sanity check
 		if not(image_filenames == gt_filenames):
+			import ipdb;ipdb.set_trace()
 			raise ValueError('image_filenames and gt_filenames do not match.')
 		else:
 			self.files = image_filenames
