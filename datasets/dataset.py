@@ -139,8 +139,9 @@ class BSDS_data_jk(data.Dataset):
 		return self.transform(img, gt)
 
 	def transform(self, img, gt):
+		import ipdb;
+		ipdb.set_trace()
 		gt = np.array(gt, dtype=np.float32)
-		import ipdb;ipdb.set_trace()
 		if len(gt.shape) == 3:
 			gt = gt[:, :, 0]
 		gt /= 255.
