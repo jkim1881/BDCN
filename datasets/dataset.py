@@ -113,15 +113,17 @@ class BSDS_data_jk(data.Dataset):
 		gt_dir = os.path.join(self.root, 'data', 'groundTruth', self.type)
 		image_list = os.listdir(image_dir)
 		gt_list = os.listdir(gt_dir)
-		image_filenames = [file.split('.')[0] for file in image_list if self.img_ext in file]
-		gt_filenames = [file.split('.')[0] for file in gt_list if self.gt_ext in file]
+		image_filenames_int = [file.split('.')[0] for file in image_list if self.img_ext in file]
+		gt_filenames_int = [file.split('.')[0] for file in gt_list if self.gt_ext in file]
+		image_filenames_int.sort()
+		gt_filenames_int.sort()
 
 		# sanity check
-		if not(image_filenames == gt_filenames):
+		if not(image_filenames_int == gt_filenames_int):
 			import ipdb;ipdb.set_trace()
 			raise ValueError('image_filenames and gt_filenames do not match.')
 		else:
-			self.files = image_filenames
+			self.files = [str(integer) for integer in image_filenames_int]
 
 	def __len__(self):
 		return len(self.files)
