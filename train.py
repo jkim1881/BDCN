@@ -219,6 +219,7 @@ def main():
     if args.complete_pretrain:
         model.load_state_dict(torch.load(args.complete_pretrain))
     logger.info(model)
+    print(args.dataset)
     import ipdb;ipdb.set_trace()
     train(model, args)
 
