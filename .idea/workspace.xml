@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ea4384bc-3848-4698-b672-58beea586834" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datasets/dataset.py" afterPath="$PROJECT_DIR$/datasets/dataset.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/train.py" afterPath="$PROJECT_DIR$/train.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,8 +19,8 @@
       <file leaf-file-name="train.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="220" column="22" lean-forward="true" selection-start-line="220" selection-start-column="22" selection-end-line="221" selection-end-column="23" />
+            <state relative-caret-position="309">
+              <caret line="63" column="43" lean-forward="false" selection-start-line="63" selection-start-column="43" selection-end-line="63" selection-end-column="43" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -29,8 +31,8 @@
       <file leaf-file-name="dataset.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/datasets/dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="136" column="38" lean-forward="true" selection-start-line="136" selection-start-column="38" selection-end-line="136" selection-end-column="38" />
+            <state relative-caret-position="367">
+              <caret line="112" column="61" lean-forward="false" selection-start-line="112" selection-start-column="61" selection-end-line="112" selection-end-column="61" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -90,8 +92,8 @@
       <find>train_img</find>
       <find>iter_per_epoch</find>
       <find>data_iter</find>
-      <find>self.lst</find>
       <find>iter_size</find>
+      <find>self.lst</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -101,8 +103,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/caffe_to_pytorch.py" />
-        <option value="$PROJECT_DIR$/datasets/dataset.py" />
         <option value="$PROJECT_DIR$/train.py" />
+        <option value="$PROJECT_DIR$/datasets/dataset.py" />
       </list>
     </option>
   </component>
@@ -397,8 +399,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/datasets/dataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="136" column="38" lean-forward="true" selection-start-line="136" selection-start-column="38" selection-end-line="136" selection-end-column="38" />
+        <state relative-caret-position="367">
+          <caret line="112" column="61" lean-forward="false" selection-start-line="112" selection-start-column="61" selection-end-line="112" selection-end-column="61" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -407,8 +409,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="220" column="22" lean-forward="true" selection-start-line="220" selection-start-column="22" selection-end-line="221" selection-end-column="23" />
+        <state relative-caret-position="309">
+          <caret line="63" column="43" lean-forward="false" selection-start-line="63" selection-start-column="43" selection-end-line="63" selection-end-column="43" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

@@ -61,7 +61,7 @@ def train(model, args):
     train_img = BSDS_data_jk(data_root, 'train', yita, mean_bgr=mean_bgr, crop_size=crop_size)
     trainloader = torch.utils.data.DataLoader(train_img,
         batch_size=args.batch_size, shuffle=True, num_workers=5)
-    gt_img = BSDS_data_jk(data_root, 'gt', yita, mean_bgr=mean_bgr, crop_size=crop_size)
+    gt_img = BSDS_data_jk(data_root, 'val', yita, mean_bgr=mean_bgr, crop_size=crop_size)
     gt_loader = torch.utils.data.DataLoader(gt_img,
         batch_size=args.batch_size, shuffle=False, num_workers=5)
 

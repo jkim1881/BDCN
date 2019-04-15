@@ -110,7 +110,7 @@ class BSDS_data_jk(data.Dataset):
 		self.img_ext = '.jpg'
 		self.gt_ext = '.mat'
 		image_dir = os.path.join(self.root, 'data', 'images', self.type)
-		gt_dir = os.path.join(self.root, 'data', 'gt', self.type)
+		gt_dir = os.path.join(self.root, 'data', 'groundTruth', self.type)
 		image_list = os.listdir(image_dir)
 		gt_list = os.listdir(gt_dir)
 		image_filenames = [file.split('.')[0] for file in image_list if self.img_ext in file]
