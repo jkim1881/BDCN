@@ -55,11 +55,11 @@ class Data(data.Dataset):
 		if not os.path.exists(img_file):
 			img_file = img_file.replace('jpg', 'png')
 		# img = Image.open(img_file)
-		img = load_image_with_cache(img_file, self.cache)
+		img = load_image_with_cache(img_file, cache=None) #self.cache)
 		# load gt image
 		gt_file = self.root + data_file[1]
 		# gt = Image.open(gt_file)
-		gt = load_image_with_cache(gt_file, self.cache)
+		gt = load_image_with_cache(gt_file, cache=None) #self.cache)
 		if gt.mode == '1':
 			gt  = gt.convert('L')
 		return self.transform(img, gt)
@@ -139,8 +139,6 @@ class BSDS_data_jk(data.Dataset):
 		return self.transform(img, gt)
 
 	def transform(self, img, gt):
-		import ipdb;
-		ipdb.set_trace()
 		gt = np.array(gt, dtype=np.float32)
 		if len(gt.shape) == 3:
 			gt = gt[:, :, 0]
