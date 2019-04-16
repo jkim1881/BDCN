@@ -156,6 +156,7 @@ class BSDS_data_jk(data.Dataset):
 		gt_mean[gt_mean >= self.yita] = 1
 		gt_mean = torch.from_numpy(np.array([gt_mean])).float()
 
+		import ipdb;ipdb.set_trace()
 		img = np.array(img, dtype=np.float32).reshape(img.size[0], img.size[1], 3)
 		if self.rgb:
 			img = img[:, :, ::-1] # RGB->BGR
