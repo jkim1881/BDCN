@@ -101,13 +101,14 @@ def load_image_with_cache(path, cache=None, lock=None, matfile=False):
 class BSDS_data_jk(data.Dataset):
 	def __init__(self, root, type, yita=0.5,
 		mean_bgr = np.array([104.00699, 116.66877, 122.67892]),
-		crop_size=None, rgb=True, scale=None):
+		crop_size=None, rgb=True, scale=None, max_examples=None):
 		self.mean_bgr = mean_bgr
 		self.root = root
 		self.type = type
 		self.yita = yita
 		self.crop_size = crop_size
 		self.rgb = rgb
+		self.max_examples = max_examples
 		self.scale = scale
 		self.cache = {}
 
@@ -127,6 +128,8 @@ class BSDS_data_jk(data.Dataset):
 		if not(image_filenames_int == gt_filenames_int):
 			raise ValueError('image_filenames and gt_filenames do not match.')
 		else:
+			if self.max_examples is not None:
+				image_filenames_int = image_filenames_int[:self.max_examples]
 			self.files = [str(integer) for integer in image_filenames_int]
 
 		self.__getitem__(0)
