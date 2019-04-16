@@ -170,8 +170,8 @@ def train(model, args):
             torch.save(state, '%s/bdcn_%d.pth.tar' % (args.param_dir, step))
         if step % args.display == 0:
             tm = time.time() - start_time
-            logger.info('iter: %d, lr: %e, loss: %f, time using: %f(%fs/iter)' % (step,
-                optimizer.param_groups[0]['lr'], np.mean(mean_loss), tm, tm/args.display))
+            logger.info('iter: %d, lr: %e, loss: %f, time using: %f(%fs/image)' % (step,
+                optimizer.param_groups[0]['lr'], np.mean(mean_loss), tm, tm/(args.iter_size*args.batch_size*args.display)))
             start_time = time.time()
 
         # (jk) RUN VALIDATION ON SPECIFIED ITERATIONS
