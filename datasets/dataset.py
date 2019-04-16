@@ -166,15 +166,15 @@ class BSDS_data_jk(data.Dataset):
 			for scl in self.scale:
 				img_scale = cv2.resize(img, None, fx=scl, fy=scl, interpolation=cv2.INTER_LINEAR)
 				data.append(torch.from_numpy(img_scale.transpose((2,0,1))).float())
-			return data, gt
+			return data, gt_mean
 		img = img.transpose((2, 0, 1))
 		img = torch.from_numpy(img.copy()).float()
 		if self.crop_size:
-			_, h, w = gt.size()
+			_, h, w = gt_mean.shape
 			assert(self.crop_size < h and self.crop_size < w)
 			i = random.randint(0, h - self.crop_size)
 			j = random.randint(0, w - self.crop_size)
 			img = img[:, i:i+self.crop_size, j:j+self.crop_size]
 			gt_mean = gt_mean[:, i:i+self.crop_size, j:j+self.crop_size]
-		return img, gt
+		return img, gt_mean
 
