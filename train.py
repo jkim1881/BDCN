@@ -153,7 +153,7 @@ def train(model, args):
             loss += args.fuse_weight*cross_entropy_loss2d(out[-1], labels, args.cuda, args.balance)/batch_size
             loss.backward()
             import ipdb;ipdb.set_trace()
-            batch_loss += loss.data[0]
+            batch_loss += loss.item()
             cur += 1
         # update parameter
         optimizer.step()
@@ -194,7 +194,7 @@ def train(model, args):
                                                                         args.balance) / batch_size
                     loss += args.fuse_weight * cross_entropy_loss2d(out[-1], labels, args.cuda,
                                                                     args.balance) / batch_size
-                    batch_loss += loss.data[0]
+                    batch_loss += loss.item()
                     val_cur += 1
                 val_mean_loss.append(batch_loss)
             # Report
