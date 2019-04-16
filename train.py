@@ -143,7 +143,7 @@ def train(model, args):
                 cur = 0
                 data_iter = iter(trainloader)
             images, labels = next(data_iter)
-            import ipdb;ipdb.set_trace()
+            # import ipdb;ipdb.set_trace()
             if args.cuda:
                 images, labels = images.cuda(), labels.cuda()
             images, labels = Variable(images), Variable(labels)
