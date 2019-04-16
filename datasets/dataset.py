@@ -139,7 +139,7 @@ class BSDS_data_jk(data.Dataset):
 		return self.transform(img, gt)
 
 	def transform(self, img, gt):
-		print(gt.shape)
+		print(gt)
 		gt = np.array(gt, dtype=np.float32)
 		if len(gt.shape) == 3:
 			gt = gt[:, :, 0]
