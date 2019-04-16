@@ -180,82 +180,82 @@ class BSDS_data_jk(data.Dataset):
 			gt = gt[:, i:i+self.crop_size, j:j+self.crop_size]
 		return img, gt
 
-
-def get_labels(self, files):
-	"""Process and save label images."""
-	labels = {}
-	new_files = {}
-	for k, images in files.iteritems():
-		# Replace extension and path with labels
-		label_vec = []
-		file_vec = []
-		fold = images[0].split(os.path.sep)[-2]
-
-		# New label dir
-		proc_dir = os.path.join(
-			images[0].split(fold)[0],
-			fold,
-			self.processed_labels)
-		py_utils.make_dir(proc_dir)
-
-		# New image dir
-		proc_image_dir = os.path.join(
-			self.config.data_root,
-			self.name,
-			self.images_dir,
-			fold,
-			self.processed_images)
-		py_utils.make_dir(proc_image_dir)
-		ims = []
-		for im in tqdm(images, total=len(images), desc=k):
-			it_label = im.split(os.path.sep)[-1]
-			it_label_path = '%s%s' % (im.split('.')[0], self.lab_extension)
-			it_label_path = it_label_path.replace(
-				self.images_dir,
-				self.labels_dir)
-
-			# Process every label and duplicate images for each
-			label_data = io.loadmat(
-				it_label_path)['groundTruth'].reshape(-1)
-			im_data = misc.imread(im)
-
-
-			ims += [im_data]
-
-			if self.fold_options[k] == 'mean':
-				mean_labs = []
-				for idx, lab in enumerate(label_data):
-
-					# Process labels
-					ip_lab = lab.item()[1].astype(np.float32)
-
-					# ip_lab = im_proc.pad_square(ip_lab)
-					mean_labs += [ip_lab]
-				mean_lab = np.asarray(mean_labs).mean(0)
-				out_lab = os.path.join(
-					proc_dir, '%s.npy' % it_label.split('.')[0])
-				np.save(out_lab, mean_lab)
-				label_vec += [out_lab]
-
-				# Process images
-				proc_im = os.path.join(proc_image_dir, it_label)
-				misc.imsave(proc_im, im_data)
-				file_vec += [proc_im]
-			else:
-				raise NotImplementedError
-		labels[k] = label_vec
-		new_files[k] = file_vec
-		ims = np.array(ims)
-		np.savez(
-			os.path.join(
-				self.config.data_root,
-				self.name,
-				self.images_dir,
-				fold,
-				'file_paths'
-			),
-			labels=labels,
-			files=new_files,
-			mean=np.mean(ims, axis=(0, 1, 2), keepdims=True),
-			stds=np.std(ims, axis=(0, 1, 2), keepdims=True))
-	return labels, new_files
+#
+# def get_labels(self, files):
+# 	"""Process and save label images."""
+# 	labels = {}
+# 	new_files = {}
+# 	for k, images in files.iteritems():
+# 		# Replace extension and path with labels
+# 		label_vec = []
+# 		file_vec = []
+# 		fold = images[0].split(os.path.sep)[-2]
+#
+# 		# New label dir
+# 		proc_dir = os.path.join(
+# 			images[0].split(fold)[0],
+# 			fold,
+# 			self.processed_labels)
+# 		py_utils.make_dir(proc_dir)
+#
+# 		# New image dir
+# 		proc_image_dir = os.path.join(
+# 			self.config.data_root,
+# 			self.name,
+# 			self.images_dir,
+# 			fold,
+# 			self.processed_images)
+# 		py_utils.make_dir(proc_image_dir)
+# 		ims = []
+# 		for im in tqdm(images, total=len(images), desc=k):
+# 			it_label = im.split(os.path.sep)[-1]
+# 			it_label_path = '%s%s' % (im.split('.')[0], self.lab_extension)
+# 			it_label_path = it_label_path.replace(
+# 				self.images_dir,
+# 				self.labels_dir)
+#
+# 			# Process every label and duplicate images for each
+# 			label_data = io.loadmat(
+# 				it_label_path)['groundTruth'].reshape(-1)
+# 			im_data = misc.imread(im)
+#
+#
+# 			ims += [im_data]
+#
+# 			if self.fold_options[k] == 'mean':
+# 				mean_labs = []
+# 				for idx, lab in enumerate(label_data):
+#
+# 					# Process labels
+# 					ip_lab = lab.item()[1].astype(np.float32)
+#
+# 					# ip_lab = im_proc.pad_square(ip_lab)
+# 					mean_labs += [ip_lab]
+# 				mean_lab = np.asarray(mean_labs).mean(0)
+# 				out_lab = os.path.join(
+# 					proc_dir, '%s.npy' % it_label.split('.')[0])
+# 				np.save(out_lab, mean_lab)
+# 				label_vec += [out_lab]
+#
+# 				# Process images
+# 				proc_im = os.path.join(proc_image_dir, it_label)
+# 				misc.imsave(proc_im, im_data)
+# 				file_vec += [proc_im]
+# 			else:
+# 				raise NotImplementedError
+# 		labels[k] = label_vec
+# 		new_files[k] = file_vec
+# 		ims = np.array(ims)
+# 		np.savez(
+# 			os.path.join(
+# 				self.config.data_root,
+# 				self.name,
+# 				self.images_dir,
+# 				fold,
+# 				'file_paths'
+# 			),
+# 			labels=labels,
+# 			files=new_files,
+# 			mean=np.mean(ims, axis=(0, 1, 2), keepdims=True),
+# 			stds=np.std(ims, axis=(0, 1, 2), keepdims=True))
+# 	return labels, new_files
