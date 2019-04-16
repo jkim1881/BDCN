@@ -118,14 +118,13 @@ class BSDS_data_jk(data.Dataset):
 		image_filenames_int.sort()
 		gt_filenames_int.sort()
 
-		self.__getitem__(0)
-
 		# sanity check
 		if not(image_filenames_int == gt_filenames_int):
 			raise ValueError('image_filenames and gt_filenames do not match.')
 		else:
 			self.files = [str(integer) for integer in image_filenames_int]
 
+		self.__getitem__(0)
 	def __len__(self):
 		return len(self.files)
 
