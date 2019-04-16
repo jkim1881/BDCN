@@ -152,6 +152,7 @@ def train(model, args):
                 loss += args.side_weight*cross_entropy_loss2d(out[k], labels, args.cuda, args.balance)/batch_size
             loss += args.fuse_weight*cross_entropy_loss2d(out[-1], labels, args.cuda, args.balance)/batch_size
             loss.backward()
+            import ipdb;ipdb.set_trace()
             batch_loss += loss.data[0]
             cur += 1
         # update parameter
