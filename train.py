@@ -143,6 +143,7 @@ def train(model, args):
                 cur = 0
                 data_iter = iter(trainloader)
             images, labels = next(data_iter)
+            import ipdb;ipdb.set_trace()
             if args.cuda:
                 images, labels = images.cuda(), labels.cuda()
             images, labels = Variable(images), Variable(labels)
@@ -155,7 +156,6 @@ def train(model, args):
             batch_loss += loss.item()
             cur += 1
         # update parameter
-        import ipdb;ipdb.set_trace()
         optimizer.step()
         if len(mean_loss) < args.average_loss:
             mean_loss.append(batch_loss)
