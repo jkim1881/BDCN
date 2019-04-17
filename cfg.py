@@ -1,5 +1,5 @@
 config = {
-    'bsds500': {'data_root': 'path_to/bsds500/HED-BSDS/',
+    'bsds500': {'data_root': '/media/data_cifs/image_datasets/hed_bsds/HED-BSDS/',
                 'data_lst': 'train_pair.lst',
                 'mean_bgr': [104.00699, 116.66877, 122.67892],
                 'yita': 0.5},
