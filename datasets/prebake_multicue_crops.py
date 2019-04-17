@@ -57,6 +57,9 @@ for train_val in ['train','test']:
         if np.max(gt_boundaries[0]) == 255:
             print('max gt boundaries value is 255. normalizing to [0,1]')
             gt_mean_boundaries /= 255.
+        if np.max(gt_boundaries[0]) == 65535:
+            print('max gt boundaries value is 65535. normalizing to [0,1]')
+            gt_mean_boundaries /= 65535.
         else:
             print('max gt boundaries value is ' + str(np.max(gt_boundaries[0])) + '. Not doing normalization (?????)')
         gt_mean_edges = np.asarray(gt_edges, dtype=np.float32).mean(0)
@@ -65,6 +68,9 @@ for train_val in ['train','test']:
         if np.max(gt_edges[0]) == 255:
             print('max gt edges value is 255. normalizing to [0,1]')
             gt_mean_edges /= 255.
+        if np.max(gt_edges[0]) == 65535:
+            print('max gt edges value is 65535. normalizing to [0,1]')
+            gt_mean_edges /= 65535.
         else:
             print('max gt edges value is ' + str(np.max(gt_edges[0])) + '. Not doing normalization (?????)')
 
@@ -73,8 +79,8 @@ for train_val in ['train','test']:
         for i_th_crop in range(10):
             offset = [np.random.randint(low=0, high=img.shape[0]-crop_size), np.random.randint(low=0, high=img.shape[1]-crop_size)]
             im_crop = img[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size,:]
-            gt_boundaries_crop = gt_mean_boundaries[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size,:]
-            gt_edges_crop = gt_mean_edges[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size,:]
+            gt_boundaries_crop = gt_mean_boundaries[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size]
+            gt_edges_crop = gt_mean_edges[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size]
 
             scipy.misc.imsave(os.path.join(out_datset, 'data', 'images', train_val, fn + '_' + str(i_th_crop) + '.jpg'),
                               im_crop)
