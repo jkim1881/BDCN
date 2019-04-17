@@ -37,7 +37,7 @@ for train_val in ['train','test']:
     os.makedirs(os.path.join(out_datset, 'data', 'groundTruth', train_val))
     for fn in image_fn_int_dict[train_val]:
         print('filename: ' + fn)
-        candidate_img_timestamps = [img_filename.split('_')[-1] for img_filename in image_list if fn in img_filename]
+        candidate_img_timestamps = [img_filename.split('_')[-1].split('.')[0] for img_filename in image_list if fn in img_filename]
         candidate_img_timestamps.sort()
         timestamp = candidate_img_timestamps[-1]
 
