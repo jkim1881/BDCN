@@ -149,7 +149,7 @@ def train(model, args):
                 images, labels = images.cuda(), labels.cuda()
             images, labels = Variable(images), Variable(labels)
             out = model(images)
-            import ipdb;ipdb.set_trace()
+            # import ipdb;ipdb.set_trace()
             loss = 0
             for k in xrange(10):
                 loss += args.side_weight*cross_entropy_loss2d(out[k], labels, args.cuda, args.balance)/batch_size
