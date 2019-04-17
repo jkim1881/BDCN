@@ -163,7 +163,7 @@ class BSDS_crops(data.Dataset):
 			gt = gt[:, :, 0]
 		# gt_mean /= 255.
 		gt[gt >= self.yita] = 1
-		gt = torch.from_numpy(gt).float()
+		gt = torch.from_numpy([gt]).float()
 
 		img = np.array(img, dtype=np.float32)
 		if self.rgb:
