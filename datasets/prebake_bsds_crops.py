@@ -27,7 +27,10 @@ for train_val in ['train','val']:
         files = [str(integer) for integer in image_filenames_int]
 
     # loop over examples and apply crops
+    if not os.path.isdir(out_datset):
+        os.makedirs(out_datset)
     for fn in files:
+        print('filename: ' + fn)
         img = scipy.misc.imread(os.path.join(in_dataset, 'data', 'images', train_val, fn + '.jpg'))
         gt = scipy.io.loadmat(os.path.join(in_dataset, 'data', 'groundTruth', train_val, fn + '.mat'))['groundTruth'].reshape(-1)
 
@@ -50,9 +53,9 @@ for train_val in ['train','val']:
             else:
                 raise ValueError('img shape must be '+str(img_size))
 
-            scipy.misc.imsave(os.path.join(in_dataset, 'data', 'images', train_val, fn + '_' + str(offset) + '.jpg'),
+            scipy.misc.imsave(os.path.join(out_datset, 'data', 'images', train_val, fn + '_' + str(offset) + '.jpg'),
                               im_crop)
-            np.save(os.path.join(in_dataset, 'data', 'groundTruth', train_val, fn + '_' + str(offset) + '.npy'),
+            np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val, fn + '_' + str(offset) + '.npy'),
                               gt_crop)
 
     print('FIN')
