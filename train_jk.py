@@ -10,7 +10,7 @@ import re
 import os
 import sys
 import bdcn
-from datasets.dataset import Data
+from datasets.dataset import BSDS_data_jk
 import cfg
 import log
 import cv2
@@ -47,17 +47,25 @@ def cross_entropy_loss2d(inputs, targets, cuda=False, balance=1.1):
     return loss
 
 def train(model, args):
-    data_root = cfg.config[args.dataset]['data_root']
-    data_lst = cfg.config[args.dataset]['data_lst']
-    if 'Multicue' in args.dataset:
-        data_lst = data_lst % args.k
-    mean_bgr = np.array(cfg.config[args.dataset]['mean_bgr'])
-    yita = args.yita if args.yita else cfg.config[args.dataset]['yita']
+    # Configure datasets
+    # import ipdb;
+    # ipdb.set_trace()
+    print(args.dataset)
+    if 'bsds' in args.dataset:
+        data_root = '/media/data_cifs/pytorch_projects/datasets/BSDS500'
+        mean_bgr = np.array([104.00699, 116.66877, 122.67892])
+        yita = args.yita if args.yita else 0.5
     crop_size = args.crop_size
-    train_img = Data(data_root, data_lst, yita, mean_bgr=mean_bgr, crop_size=crop_size)
+
+    # Construct data loader
+    train_img = BSDS_data_jk(data_root, 'train', yita, mean_bgr=mean_bgr, crop_size=crop_size, max_examples=args.max_training_examples)
     trainloader = torch.utils.data.DataLoader(train_img,
         batch_size=args.batch_size, shuffle=True, num_workers=5)
+    gt_img = BSDS_data_jk(data_root, 'val', yita, mean_bgr=mean_bgr, crop_size=crop_size, max_examples=args.max_training_examples)
+    gt_loader = torch.utils.data.DataLoader(gt_img,
+        batch_size=args.batch_size, shuffle=False, num_workers=5)
 
+    # Configure train
     params_dict = dict(model.named_parameters())
     base_lr = args.base_lr
     weight_decay = args.weight_decay
@@ -104,9 +112,12 @@ def train(model, args):
     start_step = 1
     mean_loss = []
     cur = 0
+    val_cur = 0
     pos = 0
     data_iter = iter(trainloader)
     iter_per_epoch = len(trainloader)
+    val_data_iter = iter(gt_loader)
+    val_iter_per_epoch = len(gt_loader)
     logger.info('*'*40)
     logger.info('train images in all are %d ' % iter_per_epoch)
     logger.info('*'*40)
@@ -132,6 +143,7 @@ def train(model, args):
                 cur = 0
                 data_iter = iter(trainloader)
             images, labels = next(data_iter)
+            # import ipdb;ipdb.set_trace()
             if args.cuda:
                 images, labels = images.cuda(), labels.cuda()
             images, labels = Variable(images), Variable(labels)
@@ -141,7 +153,7 @@ def train(model, args):
                 loss += args.side_weight*cross_entropy_loss2d(out[k], labels, args.cuda, args.balance)/batch_size
             loss += args.fuse_weight*cross_entropy_loss2d(out[-1], labels, args.cuda, args.balance)/batch_size
             loss.backward()
-            batch_loss += loss.data[0]
+            batch_loss += loss.item()
             cur += 1
         # update parameter
         optimizer.step()
@@ -153,14 +165,43 @@ def train(model, args):
         if step % args.step_size == 0:
             adjust_learning_rate(optimizer, step, args.step_size, args.gamma)
         if step % args.snapshots == 0:
+            logger.info('iter: %d, Saving snapshot.....'%(step))
             torch.save(model.state_dict(), '%s/bdcn_%d.pth' % (args.param_dir, step))
             state = {'step': step+1,'param':model.state_dict(),'solver':optimizer.state_dict()}
             torch.save(state, '%s/bdcn_%d.pth.tar' % (args.param_dir, step))
         if step % args.display == 0:
             tm = time.time() - start_time
-            logger.info('iter: %d, lr: %e, loss: %f, time using: %f(%fs/iter)' % (step,
-                optimizer.param_groups[0]['lr'], np.mean(mean_loss), tm, tm/args.display))
+            logger.info('iter: %d, lr: %e, loss: %f, time using: %f(%fs/batch)' % (step,
+                optimizer.param_groups[0]['lr'], np.mean(mean_loss), tm, tm/(args.iter_size*args.display)))
             start_time = time.time()
+
+        # (jk) RUN VALIDATION ON SPECIFIED ITERATIONS
+        if ((step % args.validation_period) == 0) and (step > 0):
+            val_mean_loss = []
+            for val_step in xrange(args.validation_iters):
+                batch_loss = 0
+                for i in xrange(args.iter_size):
+                    if val_cur == val_iter_per_epoch:
+                        val_cur = 0
+                        val_data_iter = iter(gt_loader)
+                    images, labels = next(val_data_iter)
+                    if args.cuda:
+                        images, labels = images.cuda(), labels.cuda()
+                    images, labels = Variable(images), Variable(labels)
+                    out = model(images)
+                    loss = 0
+                    for k in xrange(10):
+                        loss += args.side_weight * cross_entropy_loss2d(out[k], labels, args.cuda,
+                                                                        args.balance) / batch_size
+                    loss += args.fuse_weight * cross_entropy_loss2d(out[-1], labels, args.cuda,
+                                                                    args.balance) / batch_size
+                    batch_loss += loss.item()
+                    val_cur += 1
+                val_mean_loss.append(batch_loss)
+            # Report
+            logger.info('>>> Val over %d images, loss: %f' % (args.validation_iters*args.iter_size,
+                                                              np.mean(val_mean_loss)))
+
 
 def main():
     args = parse_args()
@@ -187,6 +228,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Train BDCN for different args')
     parser.add_argument('-d', '--dataset', type=str, choices=cfg.config.keys(),
         default='bsds500', help='The dataset to train')
+    parser.add_argument('--max-training-examples', type=int, default=None,
+        help='max iters to train network, default is None (200 for BSDS)')
     parser.add_argument('--param-dir', type=str, default='params',
         help='the directory to store the params')
     parser.add_argument('--lr', dest='base_lr', type=float, default=1e-6,
@@ -205,6 +248,10 @@ def parse_args():
         help='init net from pretrained model default is None')
     parser.add_argument('--max-iter', type=int, default=40000,
         help='max iters to train network, default is 40000')
+    parser.add_argument('--validation-period', type=int, default=5000,
+        help='(jk) validation period, default is 5000')
+    parser.add_argument('--validation-iters', type=int, default=10,
+        help='(jk) iterations per val, default is 10 (10*10 = 100 imgs)')
     parser.add_argument('--iter-size', type=int, default=10,
         help='iter size equal to the batch size, default 10')
     parser.add_argument('--average-loss', type=int, default=50,
@@ -239,3 +286,5 @@ def parse_args():
 
 if __name__ == '__main__':
     main()
+
+
