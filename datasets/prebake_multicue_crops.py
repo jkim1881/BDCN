@@ -6,7 +6,6 @@ import os
 # parameters
 in_dataset = '/media/data_cifs/pytorch_projects/datasets/Multicue/multicue'
 out_datset = '/media/data_cifs/pytorch_projects/datasets/Multicue_crops'
-task = 'boundaries'
 img_size = [720, 1280]
 crop_size = 500
 
@@ -42,28 +41,41 @@ for train_val in ['train','test']:
         timestamp = candidate_img_timestamps[-1]
 
         img = scipy.misc.imread(os.path.join(in_dataset, 'images', fn + '_left_' + timestamp + '.png'))
-        gt = [scipy.misc.imread(os.path.join(in_dataset, 'ground-truth/images', fn + '_left_' + timestamp + '.' + subj_id + '.png'))
-              for subj_id in ['1','2','3','4','5']]
+        gt_boundaries = [scipy.misc.imread(os.path.join(in_dataset, 'ground-truth/images/boundaries', fn + '_left_' + timestamp + '.' + subj_id + '.png'))
+                         for subj_id in ['1','2','3','4','5']]
+        gt_edges = [scipy.misc.imread(os.path.join(in_dataset, 'ground-truth/images/edges', fn + '_left_' + timestamp + '.' + subj_id + '.png'))
+                         for subj_id in ['1','2','3','4','5']]
 
         ### PREPROC GT
-        gt_mean = np.asarray(gt, dtype=np.float32).mean(0)
-        if len(gt_mean.shape) == 3:
-            gt_mean = gt_mean[:, :, 0]
-        if np.max(gt[0]) == 255:
-            print('max gt value is 255. normalizing to [0,1]')
-            gt_mean /= 255.
+        gt_mean_boundaries = np.asarray(gt_boundaries, dtype=np.float32).mean(0)
+        if len(gt_mean_boundaries.shape) == 3:
+            gt_mean_boundaries = gt_mean_boundaries[:, :, 0]
+        if np.max(gt_boundaries[0]) == 255:
+            print('max gt boundaries value is 255. normalizing to [0,1]')
+            gt_mean_boundaries /= 255.
         else:
-            print('max gt value is ' + str(np.max(gt[0])) + '. Not doing normalization (?????)')
+            print('max gt boundaries value is ' + str(np.max(gt_boundaries[0])) + '. Not doing normalization (?????)')
+        gt_mean_edges = np.asarray(gt_edges, dtype=np.float32).mean(0)
+        if len(gt_mean_edges.shape) == 3:
+            gt_mean_edges = gt_mean_edges[:, :, 0]
+        if np.max(gt_edges[0]) == 255:
+            print('max gt edges value is 255. normalizing to [0,1]')
+            gt_mean_edges /= 255.
+        else:
+            print('max gt edges value is ' + str(np.max(gt_edges[0])) + '. Not doing normalization (?????)')
+
 
         ### CROP AND SAVE
         for i_th_crop in range(10):
             offset = [np.random.randint(low=0, high=img.shape[0]-crop_size), np.random.randint(low=0, high=img.shape[1]-crop_size)]
             im_crop = img[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size,:]
-            gt_crop = gt_mean[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size,:]
+            gt_boundaries_crop = gt_mean_boundaries[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size,:]
+            gt_edges_crop = gt_mean_edges[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size,:]
 
             scipy.misc.imsave(os.path.join(out_datset, 'data', 'images', train_val, fn + '_' + str(i_th_crop) + '.jpg'),
                               im_crop)
-            np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val, fn + '_' + str(i_th_crop) + '.npy'),
-                              gt_crop)
-
+            np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val, fn + '_' + str(i_th_crop) + 'boundaries.npy'),
+                                gt_boundaries_crop)
+            np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val, fn + '_' + str(i_th_crop) + 'edges.npy'),
+                                gt_edges_crop)
     print('FIN')
