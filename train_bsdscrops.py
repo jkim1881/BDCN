@@ -10,7 +10,7 @@ import re
 import os
 import sys
 import bdcn
-from datasets.dataset import BSDS_data_jk
+from datasets.dataset import BSDS_crops
 import cfg
 import log
 import cv2
@@ -58,10 +58,11 @@ def train(model, args):
     crop_size = args.crop_size
 
     # Construct data loader
-    train_img = BSDS_data_jk(data_root, 'train', yita, mean_bgr=mean_bgr, crop_size=crop_size, max_examples=args.max_training_examples)
+    train_img = BSDS_crops(data_root, 'train', yita, mean_bgr=mean_bgr, crop_size=crop_size,
+                           max_examples=args.max_training_examples, random_sample=False)
     trainloader = torch.utils.data.DataLoader(train_img,
         batch_size=args.batch_size, shuffle=True, num_workers=5)
-    gt_img = BSDS_data_jk(data_root, 'val', yita, mean_bgr=mean_bgr, crop_size=crop_size, max_examples=args.max_training_examples)
+    gt_img = BSDS_crops(data_root, 'val', yita, mean_bgr=mean_bgr, crop_size=crop_size)
     gt_loader = torch.utils.data.DataLoader(gt_img,
         batch_size=args.batch_size, shuffle=False, num_workers=5)
 

@@ -106,7 +106,8 @@ def load_image_with_cache_crops(path, cache=None, lock=None, npy=False):
 class BSDS_crops(data.Dataset):
 	def __init__(self, root, type, yita=0.5,
 		mean_bgr = np.array([104.00699, 116.66877, 122.67892]),
-		crop_size=None, rgb=True, scale=None, max_examples=None):
+		crop_size=None, rgb=True, scale=None,
+		max_examples=None, random_sample=False):
 		self.mean_bgr = mean_bgr
 		self.root = root
 		self.type = type
@@ -114,6 +115,7 @@ class BSDS_crops(data.Dataset):
 		self.crop_size = crop_size
 		self.rgb = rgb
 		self.max_examples = max_examples
+		self.random_sample = random_sample
 		self.scale = scale
 		self.cache = {}
 
@@ -134,6 +136,9 @@ class BSDS_crops(data.Dataset):
 			raise ValueError('image_filenames and gt_filenames do not match.')
 		else:
 			if self.max_examples is not None:
+				if self.random_sample:
+					import random
+					random.shuffle(image_filenames_int)
 				image_filenames_int = image_filenames_int[:self.max_examples]
 			self.files = [str(integer) for integer in image_filenames_int]
 

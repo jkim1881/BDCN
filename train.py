@@ -152,7 +152,7 @@ def train(model, args):
             pos = (pos + 1) % args.average_loss
         if step % args.step_size == 0:
             adjust_learning_rate(optimizer, step, args.step_size, args.gamma)
-        if (step % args.snapshots == 0) or (step == args.max_iter):
+        if (step % args.snapshots == 0):
             torch.save(model.state_dict(), '%s/bdcn_%d.pth' % (args.param_dir, step))
             state = {'step': step+1,'param':model.state_dict(),'solver':optimizer.state_dict()}
             torch.save(state, '%s/bdcn_%d.pth.tar' % (args.param_dir, step))
