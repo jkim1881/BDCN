@@ -28,7 +28,8 @@ for train_val in ['train','val']:
 
     # loop over examples and apply crops
     if not os.path.isdir(out_datset):
-        os.makedirs(out_datset)
+        os.makedirs(os.path.join(out_datset,'data', 'images'))
+        os.makedirs(os.path.join(out_datset, 'data', 'groundTruth'))
     for fn in files:
         print('filename: ' + fn)
         img = scipy.misc.imread(os.path.join(in_dataset, 'data', 'images', train_val, fn + '.jpg'))
