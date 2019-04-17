@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.misc
+import scipy.io
 import os
 
 # parameters
