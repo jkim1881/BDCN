@@ -41,8 +41,8 @@ for train_val in ['train','test']:
         candidate_img_timestamps.sort()
         timestamp = candidate_img_timestamps[-1]
 
-        img = scipy.misc.imread(os.path.join(in_dataset, 'data', 'images', fn + '_left_' + timestamp + '.png'))
-        gt = [scipy.misc.imread(os.path.join(in_dataset, 'data', 'ground-truth/images', fn + '_left_' + timestamp + '.' + subj_id + '.png'))
+        img = scipy.misc.imread(os.path.join(in_dataset, 'images', fn + '_left_' + timestamp + '.png'))
+        gt = [scipy.misc.imread(os.path.join(in_dataset, 'ground-truth/images', fn + '_left_' + timestamp + '.' + subj_id + '.png'))
               for subj_id in ['1','2','3','4','5']]
 
         ### PREPROC GT
