@@ -52,7 +52,7 @@ def train(model, args):
     # ipdb.set_trace()
     print(args.dataset)
     if 'bsds' in args.dataset:
-        data_root = '/media/data_cifs/pytorch_projects/datasets/BSDS500'
+        data_root = '/media/data_cifs/pytorch_projects/datasets/BSDS500_crops'
         mean_bgr = np.array([104.00699, 116.66877, 122.67892])
         yita = args.yita if args.yita else 0.5
     crop_size = args.crop_size

@@ -1,1 +1,1 @@
-from .dataset import BSDS_data_jk, Data
+from .dataset import BSDS_crops, Data

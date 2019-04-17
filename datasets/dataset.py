@@ -86,24 +86,24 @@ class Data(data.Dataset):
 		return img, gt
 
 
-def load_image_with_cache_jk(path, cache=None, lock=None, matfile=False):
+def load_image_with_cache_crops(path, cache=None, lock=None, npy=False):
 	if cache is not None:
 		if not cache.has_key(path):
 			with open(path, 'rb') as f:
 				cache[path] = f.read()
-		if matfile:
-			return scipy.io.loadmat(StringIO(cache[path]))['groundTruth'].reshape(-1)
+		if npy:
+			return np.load(path)
 		else:
 			return scipy.misc.imread(StringIO(cache[path]))
 			# return Image.open(StringIO(cache[path]))
 	else:
-		if matfile:
-			return scipy.io.loadmat(path)['groundTruth'].reshape(-1)
+		if npy:
+			return np.load(path)
 		else:
 			return scipy.misc.imread(path)
 			# return Image.open(path)
 
-class BSDS_data_jk(data.Dataset):
+class BSDS_crops(data.Dataset):
 	def __init__(self, root, type, yita=0.5,
 		mean_bgr = np.array([104.00699, 116.66877, 122.67892]),
 		crop_size=None, rgb=True, scale=None, max_examples=None):
@@ -119,7 +119,7 @@ class BSDS_data_jk(data.Dataset):
 
 		# get list of images and gts from a specified path
 		self.img_ext = '.jpg'
-		self.gt_ext = '.mat'
+		self.gt_ext = '.npy'
 		image_dir = os.path.join(self.root, 'data', 'images', self.type)
 		gt_dir = os.path.join(self.root, 'data', 'groundTruth', self.type)
 		image_list = os.listdir(image_dir)
@@ -147,24 +147,19 @@ class BSDS_data_jk(data.Dataset):
 		img_file = os.path.join(self.root, 'data', 'images', self.type, self.files[index] + self.img_ext)
 		if not os.path.exists(img_file):
 			raise ValueError('Cannot find image by path :' + img_file)
-		img = load_image_with_cache_jk(img_file, cache=None) #self.cache)
+		img = load_image_with_cache_crops(img_file, cache=None) #self.cache)
 		# load gt image
 		gt_file = os.path.join(self.root, 'data', 'groundTruth', self.type, self.files[index] + self.gt_ext)
-		gt = load_image_with_cache_jk(gt_file, cache=None, matfile=True) #self.cache, matfile=True)
+		gt = load_image_with_cache_crops(gt_file, cache=None, npy=True) #self.cache, matfile=True)
 		return self.transform(img, gt)
 
 	def transform(self, img, gt):
-		gt_arr = []
-		for idx, gt_subj in enumerate(gt):
-			gt_arr += [gt_subj.item()[1].astype(np.float32)]
-		gt_mean = np.asarray(gt_arr, dtype=np.float32).mean(0)
-		if len(gt_mean.shape) == 3:
-			gt_mean = gt_mean[:, :, 0]
+		if len(gt.shape) == 3:
+			gt = gt[:, :, 0]
 		# gt_mean /= 255.
-		gt_mean[gt_mean >= self.yita] = 1
-		gt_mean = torch.from_numpy(np.array([gt_mean])).float()
+		gt[gt >= self.yita] = 1
+		gt = torch.from_numpy(gt).float()
 
-		# import ipdb;ipdb.set_trace()
 		img = np.array(img, dtype=np.float32)
 		if self.rgb:
 			img = img[:, :, ::-1] # RGB->BGR
@@ -174,15 +169,15 @@ class BSDS_data_jk(data.Dataset):
 			for scl in self.scale:
 				img_scale = cv2.resize(img, None, fx=scl, fy=scl, interpolation=cv2.INTER_LINEAR)
 				data.append(torch.from_numpy(img_scale.transpose((2,0,1))).float())
-			return data, gt_mean
+			return data, gt
 		img = img.transpose((2, 0, 1))
 		img = torch.from_numpy(img.copy()).float()
 		if self.crop_size:
-			_, h, w = gt_mean.shape
+			_, h, w = gt.shape
 			assert(self.crop_size < h and self.crop_size < w)
 			i = random.randint(0, h - self.crop_size)
 			j = random.randint(0, w - self.crop_size)
 			img = img[:, i:i+self.crop_size, j:j+self.crop_size]
-			gt_mean = gt_mean[:, i:i+self.crop_size, j:j+self.crop_size]
-		return img, gt_mean
+			gt = gt[:, i:i+self.crop_size, j:j+self.crop_size]
+		return img, gt
 
