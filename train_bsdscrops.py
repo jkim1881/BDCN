@@ -201,7 +201,7 @@ def train(model, args):
                     val_cur += 1
                 val_mean_loss.append(batch_loss)
             # Report
-            logger.info('>>> Val over %d images, loss: %f' % (args.validation_iters*args.iter_size,
+            logger.info('>>> Val over %d images, loss: %f' % (args.validation_iters*batch_size,
                                                               np.mean(val_mean_loss)))
 
 
@@ -252,8 +252,8 @@ def parse_args():
         help='max iters to train network, default is 40000')
     parser.add_argument('--validation-period', type=int, default=5000,
         help='(jk) validation period, default is 5000')
-    parser.add_argument('--validation-iters', type=int, default=10,
-        help='(jk) iterations per val, default is 10 (10*10 = 100 imgs)')
+    parser.add_argument('--validation-iters', type=int, default=50,
+        help='(jk) iterations per val, default is 10 (50*10 = 500 imgs)')
     parser.add_argument('--iter-size', type=int, default=10,
         help='iter size equal to the batch size, default 10')
     parser.add_argument('--average-loss', type=int, default=50,
