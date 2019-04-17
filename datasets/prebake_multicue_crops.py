@@ -11,24 +11,28 @@ crop_size = 500
 
 # get list of images and gts from a specified path.
 image_dir = os.path.join(in_dataset, 'images')
-gt_dir = os.path.join(in_dataset, 'ground-truth/images', task)
+gt_boundaries_dir = os.path.join(in_dataset, 'ground-truth/images/boundaries')
+gt_edges_dir = os.path.join(in_dataset, 'ground-truth/images/edges')
 image_list = os.listdir(image_dir)
-gt_list = os.listdir(gt_dir)
+gt_boundaries_list = os.listdir(gt_boundaries_dir)
+gt_edges_list = os.listdir(gt_edges_dir)
 image_filenames_int = [file.split('.')[0].split('_')[0] for file in image_list if '.png' in file]
-gt_filenames_int = [file.split('.')[0].split('_')[0] for file in gt_list if '.png' in file]
+gt_boundaries_filenames_int = [file.split('.')[0].split('_')[0] for file in gt_boundaries_list if '.png' in file]
+gt_edges_filenames_int = [file.split('.')[0].split('_')[0] for file in gt_edges_list if '.png' in file]
 image_filenames_int = list(np.unique(np.array(image_filenames_int)))
-gt_filenames_int = list(np.unique(np.array(gt_filenames_int)))
+gt_boundaries_filenames_int = list(np.unique(np.array(gt_boundaries_filenames_int)))
+gt_edges_filenames_int = list(np.unique(np.array(gt_edges_filenames_int)))
 image_filenames_int.sort()
-gt_filenames_int.sort()
+gt_boundaries_filenames_int.sort()
+gt_edges_filenames_int.sort()
 
 # sanity check. Partition it into train, val and test
-if not (image_filenames_int == gt_filenames_int):
-    raise ValueError('image_filenames and gt_filenames do not match.')
+if not ((image_filenames_int == gt_boundaries_filenames_int)
+        and (image_filenames_int == gt_edges_filenames_int)):
+    raise ValueError('image_filenames and gt_boundaries/edges_filenames do not match.')
 else:
     image_fn_int_dict = {'train': image_filenames_int[:int(0.8)*len(image_filenames_int)],
                          'test': image_filenames_int[int(0.8)*len(image_filenames_int):]}
-    gt_filenames_int = {'train': gt_filenames_int[:int(0.8)*len(gt_filenames_int)],
-                         'test': gt_filenames_int[int(0.8)*len(gt_filenames_int):]}
 
 # loop over examples and apply crops
 for train_val in ['train','test']:
