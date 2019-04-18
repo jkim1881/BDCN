@@ -240,7 +240,7 @@ def train(model, args):
                         img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
                         img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
                         img_max - img_min)
-                        gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
+                        gt_transposed = np.array(labels.cpu().detach()[batchid, 0, :, :])
                         plt.subplot(131);
                         plt.imshow(img_transposed);
                         plt.subplot(132);
