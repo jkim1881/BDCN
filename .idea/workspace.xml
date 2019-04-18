@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea4384bc-3848-4698-b672-58beea586834" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/train_bsdscrops.py" afterPath="$PROJECT_DIR$/train_smallstrain.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datasets/dataset.py" afterPath="$PROJECT_DIR$/datasets/dataset.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,11 +15,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="train_bsdscrops.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/train_bsdscrops.py">
+      <file leaf-file-name="train_smallstrain.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/train_smallstrain.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3392">
-              <caret line="268" column="67" lean-forward="true" selection-start-line="268" selection-start-column="67" selection-end-line="268" selection-end-column="67" />
+            <state relative-caret-position="398">
+              <caret line="298" column="30" lean-forward="true" selection-start-line="298" selection-start-column="30" selection-end-line="298" selection-end-column="30" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -27,21 +27,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prebake_multicue_crops.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="prebake_multicue_crops.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/datasets/prebake_multicue_crops.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="80" column="78" lean-forward="false" selection-start-line="80" selection-start-column="78" selection-end-line="80" selection-end-column="78" />
+            <state relative-caret-position="-477">
+              <caret line="34" column="86" lean-forward="false" selection-start-line="34" selection-start-column="86" selection-end-line="34" selection-end-column="86" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dataset.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dataset.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/datasets/dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="244" column="0" lean-forward="true" selection-start-line="244" selection-start-column="0" selection-end-line="244" selection-end-column="0" />
+            <state relative-caret-position="164">
+              <caret line="206" column="39" lean-forward="false" selection-start-line="206" selection-start-column="35" selection-end-line="206" selection-end-column="39" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -62,8 +62,8 @@
       <file leaf-file-name="cfg.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cfg.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="67" lean-forward="false" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="67" />
+            <state relative-caret-position="375">
+              <caret line="25" column="18" lean-forward="false" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -95,8 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>parse_args</find>
-      <find>args.batch</find>
       <find>trainloader</find>
       <find>complete_pre</find>
       <find>get_upsampling_weight</find>
@@ -121,9 +119,12 @@
       <find>param-dir</find>
       <find>pretrain</find>
       <find>io</find>
-      <find>BC</find>
-      <find>self.rgb</find>
       <find>gt_filenames_int</find>
+      <find>self.rgb</find>
+      <find>BC</find>
+      <find>task</find>
+      <find>gamma</find>
+      <find>step-4568-4097</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -139,9 +140,10 @@
         <option value="$PROJECT_DIR$/train_jk.py" />
         <option value="$PROJECT_DIR$/datasets/__init__.py" />
         <option value="$PROJECT_DIR$/train.py" />
-        <option value="$PROJECT_DIR$/train_bsdscrops.py" />
         <option value="$PROJECT_DIR$/datasets/prebake_multicue_crops.py" />
         <option value="$PROJECT_DIR$/datasets/dataset.py" />
+        <option value="$PROJECT_DIR$/train_bsdscrops.py" />
+        <option value="$PROJECT_DIR$/train_smallstrain.py" />
       </list>
     </option>
   </component>
@@ -336,12 +338,12 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2173913" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2433121" sideWeight="0.17391305" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32738853" sideWeight="0.5196182" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32953367" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284974" sideWeight="0.4843462" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32738853" sideWeight="0.48038176" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2433121" sideWeight="0.82608694" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2433121" sideWeight="0.82608694" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -364,7 +366,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/train_bsdscrops.py">
+    <entry file="file://$PROJECT_DIR$/train_smallstrain.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -420,7 +422,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train_bsdscrops.py">
+    <entry file="file://$PROJECT_DIR$/train_smallstrain.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1665">
           <caret line="126" column="54" lean-forward="true" selection-start-line="126" selection-start-column="54" selection-end-line="126" selection-end-column="54" />
@@ -522,18 +524,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="206" column="39" lean-forward="false" selection-start-line="206" selection-start-column="35" selection-end-line="206" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/cfg.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="67" lean-forward="false" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="67" />
+        <state relative-caret-position="375">
+          <caret line="25" column="18" lean-forward="false" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train_bsdscrops.py">
+    <entry file="file://$PROJECT_DIR$/train_smallstrain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3392">
-          <caret line="268" column="67" lean-forward="true" selection-start-line="268" selection-start-column="67" selection-end-line="268" selection-end-column="67" />
+        <state relative-caret-position="398">
+          <caret line="298" column="30" lean-forward="true" selection-start-line="298" selection-start-column="30" selection-end-line="298" selection-end-column="30" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -542,19 +554,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/datasets/prebake_multicue_crops.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="80" column="78" lean-forward="false" selection-start-line="80" selection-start-column="78" selection-end-line="80" selection-end-column="78" />
+        <state relative-caret-position="-477">
+          <caret line="34" column="86" lean-forward="false" selection-start-line="34" selection-start-column="86" selection-end-line="34" selection-end-column="86" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datasets/dataset.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="244" column="0" lean-forward="true" selection-start-line="244" selection-start-column="0" selection-end-line="244" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

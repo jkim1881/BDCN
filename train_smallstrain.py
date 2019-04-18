@@ -10,7 +10,7 @@ import re
 import os
 import sys
 import bdcn
-from datasets.dataset import BSDS_crops
+from datasets.dataset import BSDS_crops, Multicue_crops
 import cfg
 import log
 import cv2
@@ -51,20 +51,41 @@ def train(model, args):
     # import ipdb;
     # ipdb.set_trace()
     print(args.dataset)
+    crop_size = args.crop_size
     if 'bsds' in args.dataset:
         data_root = '/media/data_cifs/pytorch_projects/datasets/BSDS500_crops'
         mean_bgr = np.array([104.00699, 116.66877, 122.67892])
         yita = args.yita if args.yita else 0.5
-    crop_size = args.crop_size
+        # Construct data loader
+        train_img = BSDS_crops(data_root, type='train',
+                               yita=yita, mean_bgr=mean_bgr, crop_size=crop_size,
+                               max_examples=args.max_training_examples, random_sample=False)
+        trainloader = torch.utils.data.DataLoader(train_img,
+                                                  batch_size=args.batch_size, shuffle=True, num_workers=5)
+        gt_img = BSDS_crops(data_root, type='val',
+                            yita=yita, mean_bgr=mean_bgr, crop_size=crop_size)
+        gt_loader = torch.utils.data.DataLoader(gt_img,
+                                                batch_size=args.batch_size, shuffle=False, num_workers=5)
+    if 'Multicue' in args.dataset:
+        if 'Edges' in args.dataset:
+            task='edges'
+            yita = args.yita if args.yita else 0.3
+        if 'Boundaries' in args.dataset:
+            task='boundaries'
+            yita = args.yita if args.yita else 0.4
+        data_root = '/media/data_cifs/pytorch_projects/datasets/BSDS500_crops'
+        mean_bgr = np.array([104.00699, 116.66877, 122.67892])
 
-    # Construct data loader
-    train_img = BSDS_crops(data_root, 'train', yita, mean_bgr=mean_bgr, crop_size=crop_size,
-                           max_examples=args.max_training_examples, random_sample=False)
-    trainloader = torch.utils.data.DataLoader(train_img,
-        batch_size=args.batch_size, shuffle=True, num_workers=5)
-    gt_img = BSDS_crops(data_root, 'val', yita, mean_bgr=mean_bgr, crop_size=crop_size)
-    gt_loader = torch.utils.data.DataLoader(gt_img,
-        batch_size=args.batch_size, shuffle=False, num_workers=5)
+        # Construct data loader
+        train_img = Multicue_crops(data_root, type='train', task=task,
+                                   yita=yita, mean_bgr=mean_bgr, crop_size=crop_size,
+                                   max_examples=args.max_training_examples, random_sample=False)
+        trainloader = torch.utils.data.DataLoader(train_img,
+                                                  batch_size=args.batch_size, shuffle=True, num_workers=5)
+        gt_img = Multicue_crops(data_root, type='val', task=task,
+                                yita=yita, mean_bgr=mean_bgr, crop_size=crop_size)
+        gt_loader = torch.utils.data.DataLoader(gt_img,
+                                                batch_size=args.batch_size, shuffle=False, num_workers=5)
 
     # Configure train
     params_dict = dict(model.named_parameters())
