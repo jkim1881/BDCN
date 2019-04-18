@@ -73,7 +73,7 @@ def train(model, args):
         if 'Boundaries' in args.dataset:
             task='boundaries'
             yita = args.yita if args.yita else 0.4
-        data_root = '/media/data_cifs/pytorch_projects/datasets/BSDS500_crops'
+        data_root = '/media/data_cifs/pytorch_projects/datasets/Multicue_crops'
         mean_bgr = np.array([104.00699, 116.66877, 122.67892])
 
         # Construct data loader
