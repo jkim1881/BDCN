@@ -31,9 +31,8 @@ if not ((image_filenames_int == gt_boundaries_filenames_int)
         and (image_filenames_int == gt_edges_filenames_int)):
     raise ValueError('image_filenames and gt_boundaries/edges_filenames do not match.')
 else:
-    import ipdb;ipdb.set_trace()
-    image_fn_int_dict = {'train': image_filenames_int[:int(0.8)*len(image_filenames_int)],
-                         'test': image_filenames_int[int(0.8)*len(image_filenames_int):]}
+    image_fn_int_dict = {'train': image_filenames_int[:int(0.8*len(image_filenames_int))],
+                         'test': image_filenames_int[int(0.8*len(image_filenames_int)):]}
 
 # loop over examples and apply crops
 for train_val in ['train','test']:
