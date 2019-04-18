@@ -173,7 +173,7 @@ def train(model, args):
                 images, labels = images.cuda(), labels.cuda()
             images, labels = Variable(images), Variable(labels)
 
-            plt.subplot(121);plt.imshow(images);plt.subplot(122);plt.imshow(labels);plt.show()
+            plt.subplot(121);plt.imshow(images.cpu());plt.subplot(122);plt.imshow(labels.cpu());plt.show()
 
             out = model(images)
             # import ipdb;ipdb.set_trace()
