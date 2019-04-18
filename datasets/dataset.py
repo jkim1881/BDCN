@@ -219,6 +219,8 @@ class Multicue_crops(data.Dataset):
 		self.random_sample = random_sample
 		self.scale = scale
 		self.cache = {}
+		if not (self.task=='edges' or self.task=='boundaries'):
+			return ValueError('task should either be edges or boundaries.')
 
 		# get list of images and gts from a specified path
 		self.img_ext = '.jpg'
@@ -241,7 +243,7 @@ class Multicue_crops(data.Dataset):
 					import random
 					random.shuffle(image_filenames_int)
 				image_filenames_int = image_filenames_int[:self.max_examples]
-			self.files = [str(integer) for integer in image_filenames_int]
+			self.files = [name for name in image_filenames_int]
 
 		self.__getitem__(0)
 
@@ -255,7 +257,7 @@ class Multicue_crops(data.Dataset):
 			raise ValueError('Cannot find image by path :' + img_file)
 		img = load_image_with_cache_multicue_crops(img_file, cache=None) #self.cache)
 		# load gt image
-		gt_file = os.path.join(self.root, 'data', 'groundTruth', self.type, self.files[index] + self.gt_ext)
+		gt_file = os.path.join(self.root, 'data', 'groundTruth', self.type, self.files[index] + '.' + self.task + self.gt_ext)
 		gt = load_image_with_cache_multicue_crops(gt_file, cache=None, npy=True) #self.cache, matfile=True)
 		return self.transform(img, gt)
 
