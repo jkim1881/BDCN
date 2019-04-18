@@ -174,6 +174,22 @@ def train(model, args):
             images, labels = Variable(images), Variable(labels)
 
             out = model(images)
+
+            if (step ==1) or (step == 100):
+                batchid = 0
+                img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
+                img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
+                img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
+                    img_max - img_min)
+                gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
+                plt.subplot(131);
+                plt.imshow(img_transposed);
+                plt.subplot(132);
+                plt.imshow(gt_transposed);
+                plt.subplot(133);
+                plt.imshow(np.array(out.cpu()[batchid, 0, :, :]));
+                plt.show()
+
             # import ipdb;ipdb.set_trace()
             loss = 0
             for k in xrange(10):
@@ -216,19 +232,23 @@ def train(model, args):
                         images, labels = images.cuda(), labels.cuda()
                     images, labels = Variable(images), Variable(labels)
 
-                    batchid = 0
-                    img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
-                    img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
-                    img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
-                    img_max - img_min)
-                    gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
-                    plt.subplot(121);
-                    plt.imshow(img_transposed);
-                    plt.subplot(122);
-                    plt.imshow(gt_transposed);
-                    plt.show()
-
                     out = model(images)
+
+                    if step == 100:
+                        batchid = 0
+                        img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
+                        img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
+                        img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
+                        img_max - img_min)
+                        gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
+                        plt.subplot(131);
+                        plt.imshow(img_transposed);
+                        plt.subplot(132);
+                        plt.imshow(gt_transposed);
+                        plt.subplot(133);
+                        plt.imshow(np.array(out.cpu()[batchid, 0, :, :]));
+                        plt.show()
+
                     loss = 0
                     for k in xrange(10):
                         loss += args.side_weight * cross_entropy_loss2d(out[k], labels, args.cuda,
