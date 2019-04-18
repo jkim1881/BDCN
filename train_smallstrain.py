@@ -82,7 +82,7 @@ def train(model, args):
                                    max_examples=args.max_training_examples, random_sample=False)
         trainloader = torch.utils.data.DataLoader(train_img,
                                                   batch_size=args.batch_size, shuffle=True, num_workers=5)
-        gt_img = Multicue_crops(data_root, type='val', task=task,
+        gt_img = Multicue_crops(data_root, type='test', task=task,
                                 yita=yita, mean_bgr=mean_bgr, crop_size=crop_size)
         gt_loader = torch.utils.data.DataLoader(gt_img,
                                                 batch_size=args.batch_size, shuffle=False, num_workers=5)
