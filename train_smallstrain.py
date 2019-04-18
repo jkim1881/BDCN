@@ -176,6 +176,7 @@ def train(model, args):
             out = model(images)
 
             if (step ==1) or (step == 100):
+                import ipdb;ipdb.set_trace()
                 batchid = 0
                 img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
                 img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
