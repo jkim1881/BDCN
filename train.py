@@ -264,6 +264,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Train BDCN for different args')
     parser.add_argument('-d', '--dataset', type=str, choices=cfg.config.keys(),
         default='bsds500', help='The dataset to train')
+    parser.add_argument('--max-training-examples', type=int, default=None,
+        help='(jk) max iters to train network, default is None (200 for BSDS)')
     parser.add_argument('--param-dir', type=str, default='params',
         help='the directory to store the params')
     parser.add_argument('--lr', dest='base_lr', type=float, default=1e-6,
