@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ea4384bc-3848-4698-b672-58beea586834" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/train_smallstrain.py" afterPath="$PROJECT_DIR$/train_smallstrain.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,8 +18,8 @@
       <file leaf-file-name="train_smallstrain.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train_smallstrain.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="179" column="0" lean-forward="true" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
+            <state relative-caret-position="265">
+              <caret line="178" column="28" lean-forward="false" selection-start-line="178" selection-start-column="28" selection-end-line="178" selection-end-column="28" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -39,7 +40,7 @@
       <file leaf-file-name="dataset.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/datasets/dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
+            <state relative-caret-position="1405">
               <caret line="242" column="33" lean-forward="true" selection-start-line="242" selection-start-column="33" selection-end-line="242" selection-end-column="33" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -121,9 +122,9 @@
       <find>self.rgb</find>
       <find>BC</find>
       <find>gamma</find>
-      <find>task</find>
-      <find>step-4568-4097</find>
       <find>gt_filenames_int</find>
+      <find>step-4568-4097</find>
+      <find>task</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -523,6 +524,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/prebake_multicue_crops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1290">
+          <caret line="89" column="46" lean-forward="true" selection-start-line="89" selection-start-column="46" selection-end-line="89" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/cfg.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -533,7 +542,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/datasets/dataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
+        <state relative-caret-position="1405">
           <caret line="242" column="33" lean-forward="true" selection-start-line="242" selection-start-column="33" selection-end-line="242" selection-end-column="33" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -541,18 +550,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datasets/prebake_multicue_crops.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1290">
-          <caret line="89" column="46" lean-forward="true" selection-start-line="89" selection-start-column="46" selection-end-line="89" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/train_smallstrain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="179" column="0" lean-forward="true" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
+        <state relative-caret-position="265">
+          <caret line="178" column="28" lean-forward="false" selection-start-line="178" selection-start-column="28" selection-end-line="178" selection-end-column="28" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

@@ -174,8 +174,13 @@ def train(model, args):
             images, labels = Variable(images), Variable(labels)
 
             import ipdb;ipdb.set_trace()
-            plt.subplot(121);plt.imshow(np.transpose(images.cpu()[0,:,:,:],(1,2,0)));
-            plt.subplot(122);plt.imshow(labels.cpu()[0,0,:,:]);
+            batchid = 0
+            img_min = np.min(np.array(images.cpu().flatten()))
+            img_max = np.max(np.array(images.cpu().flatten()))
+            img_transposed = (np.transpose(images.cpu()[batchid, :, :, :], (1, 2, 0)) + img_min)/(img_max-img_min)
+            gt_transposed = labels.cpu()[batchid,0,:,:]
+            plt.subplot(121);plt.imshow(img_transposed);
+            plt.subplot(122);plt.imshow(gt_transposed);
             plt.show()
 
             out = model(images)
