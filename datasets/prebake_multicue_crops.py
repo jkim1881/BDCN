@@ -84,8 +84,8 @@ for train_val in ['train','test']:
 
             scipy.misc.imsave(os.path.join(out_datset, 'data', 'images', train_val, fn + '_' + str(i_th_crop) + '.jpg'),
                               im_crop)
-            np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val, fn + '_' + str(i_th_crop) + 'boundaries.npy'),
+            np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val, fn + '_' + str(i_th_crop) + '.boundaries.npy'),
                                 gt_boundaries_crop)
-            np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val, fn + '_' + str(i_th_crop) + 'edges.npy'),
+            np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val, fn + '_' + str(i_th_crop) + '.edges.npy'),
                                 gt_edges_crop)
     print('FIN')
