@@ -188,7 +188,7 @@ def train(model, args):
                 plt.subplot(132);
                 plt.imshow(gt_transposed);
                 plt.subplot(133);
-                plt.imshow(np.array(out.cpu()[batchid, 0, :, :]));
+                plt.imshow(np.array(out[-1].cpu()[batchid, 0, :, :]));
                 plt.show()
 
             # import ipdb;ipdb.set_trace()
@@ -247,7 +247,7 @@ def train(model, args):
                         plt.subplot(132);
                         plt.imshow(gt_transposed);
                         plt.subplot(133);
-                        plt.imshow(np.array(out.cpu()[batchid, 0, :, :]));
+                        plt.imshow(np.array(out[-1].cpu()[batchid, 0, :, :]));
                         plt.show()
 
                     loss = 0
