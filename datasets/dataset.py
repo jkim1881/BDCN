@@ -236,7 +236,6 @@ class Multicue_crops(data.Dataset):
 
 		# sanity check
 		if not(image_filenames_int == gt_filenames_int):
-			import ipdb;ipdb.set_trace()
 			raise ValueError('image_filenames and gt_filenames do not match.')
 		else:
 			if self.max_examples is not None:

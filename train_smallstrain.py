@@ -157,6 +157,9 @@ def train(model, args):
         model.load_state_dict(state['param'])
     model.train()
     batch_size = args.iter_size * args.batch_size
+
+    import matplotlib.pyplot as plt
+
     for step in xrange(start_step, args.max_iter + 1):
         optimizer.zero_grad()
         batch_loss = 0
@@ -169,6 +172,9 @@ def train(model, args):
             if args.cuda:
                 images, labels = images.cuda(), labels.cuda()
             images, labels = Variable(images), Variable(labels)
+
+            plt.subplot(121);plt.imshow(images);plt.subplot(122);plt.imshow(labels);plt.show()
+
             out = model(images)
             # import ipdb;ipdb.set_trace()
             loss = 0
