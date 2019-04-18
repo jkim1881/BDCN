@@ -230,7 +230,7 @@ class Multicue_crops(data.Dataset):
 		image_list = os.listdir(image_dir)
 		gt_list = os.listdir(gt_dir)
 		image_filenames_int = [file.split('.')[0] for file in image_list if self.img_ext in file]
-		gt_filenames_int = [file.split('.')[0] for file in gt_list if self.gt_ext in file]
+		gt_filenames_int = [file.split('.')[0] for file in gt_list if (self.gt_ext in file) and (self.task in file)]
 		image_filenames_int.sort()
 		gt_filenames_int.sort()
 
