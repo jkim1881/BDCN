@@ -207,8 +207,8 @@ class BDCN(nn.Module):
 
 
 class BDCN_ti(nn.Module):
-    def __init__(self, pretrain=None, logger=None, rate=4.,):
-        super(BDCN, self).__init__()
+    def __init__(self, pretrain=None, logger=None, rate=4.):
+        super(BDCN_ti, self).__init__()
         self.pretrain = pretrain
         t = 1
 
