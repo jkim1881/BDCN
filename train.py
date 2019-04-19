@@ -10,7 +10,7 @@ import re
 import os
 import sys
 import bdcn
-from datasets.dataset import Data, Data_tv
+from datasets.dataset import Data, Data_tv, BSDS_crops
 import cfg
 import log
 import cv2
@@ -57,9 +57,11 @@ def train(model, args):
     train_img = Data_tv(data_root, data_lst, yita,
                         mean_bgr=mean_bgr, crop_size=crop_size,
                         random_sample=False, front_or_end='front', use_ratio=0.8)
-    val_img = Data_tv(data_root, data_lst, yita,
-                        mean_bgr=mean_bgr, crop_size=crop_size,
-                        random_sample=False, front_or_end='end', use_ratio=0.8)
+    # val_img = Data_tv(data_root, data_lst, yita,
+    #                     mean_bgr=mean_bgr, crop_size=crop_size,
+    #                     random_sample=False, front_or_end='end', use_ratio=0.8)
+    val_img = BSDS_crops('/media/data_cifs/pytorch_projects/datasets/BSDS500_crops', type='val',
+                         yita=yita, mean_bgr=mean_bgr, crop_size=crop_size)
     trainloader = torch.utils.data.DataLoader(train_img,
         batch_size=args.batch_size, shuffle=True, num_workers=5)
     valloader = torch.utils.data.DataLoader(val_img,
