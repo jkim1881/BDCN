@@ -159,6 +159,7 @@ def train(model, args):
     batch_size = args.iter_size * args.batch_size
 
     import matplotlib.pyplot as plt
+    display=False
 
     for step in xrange(start_step, args.max_iter + 1):
         optimizer.zero_grad()
@@ -175,7 +176,7 @@ def train(model, args):
 
             out = model(images)
 
-            if (step ==1) or (step == 100):
+            if ((step ==1) or (step == 100)) and display:
                 batchid = 0
                 img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
                 img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
@@ -234,7 +235,7 @@ def train(model, args):
 
                     out = model(images)
 
-                    if (step == 100) and (val_step)==0:
+                    if (step == 100) and (val_step==0) and display:
                         batchid = 0
                         img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
                         img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
