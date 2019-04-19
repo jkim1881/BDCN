@@ -9,7 +9,7 @@ out_datset = '/media/data_cifs/pytorch_projects/datasets/BSDS500_crops'
 img_size = [321, 481]
 crop_size = 320
 
-for train_val in ['train','val']:
+for train_val in ['test']:
     # get list of images and gts from a specified path
     image_dir = os.path.join(in_dataset, 'data', 'images', train_val)
     gt_dir = os.path.join(in_dataset, 'data', 'groundTruth', train_val)
