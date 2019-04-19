@@ -226,7 +226,7 @@ def train(model, args):
                 for i in xrange(args.iter_size):
                     if val_cur == val_iter_per_epoch:
                         val_cur = 0
-                        val_data_iter = iter(val_img)
+                        val_data_iter = iter(valloader)
                     images, labels = next(val_data_iter)
                     if args.cuda:
                         images, labels = images.cuda(), labels.cuda()
