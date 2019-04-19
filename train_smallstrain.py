@@ -234,7 +234,7 @@ def train(model, args):
 
                     out = model(images)
 
-                    if (step == 100) and (val_step==0) and args.display_imgs==1:
+                    if (step >= 100) and (val_step==0) and args.display_imgs==1:
                         batchid = 0
                         img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
                         img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
