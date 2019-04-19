@@ -30,7 +30,8 @@ config = {
     'MulticueBoundaries': {'data_root': 'path_to/multicue/',
                            'data_lst': 'train_boundaries_aug%d.lst',
                            'mean_bgr': [104.00699, 116.66877, 122.67892],
-                           'yita': 0.4}
+                           'yita': 0.4},
+    'tiltillusion': {},
 }
 
 config_test = {
