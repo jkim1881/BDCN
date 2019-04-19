@@ -61,7 +61,6 @@ class MSBlock(nn.Module):
                 if m.bias is not None:
                     m.bias.data.zero_()
 
-
 class BDCN(nn.Module):
     def __init__(self, pretrain=None, logger=None, rate=4):
         super(BDCN, self).__init__()
@@ -205,6 +204,132 @@ class BDCN(nn.Module):
                 else:
                     param.normal_(0, 0.01)
         # print self.conv1_1_down.weight
+
+
+class BDCN_ti(nn.Module):
+    def __init__(self, pretrain=None, logger=None, rate=4.,):
+        super(BDCN, self).__init__()
+        self.pretrain = pretrain
+        t = 1
+
+        self.features = vgg16_c.VGG16_C(pretrain, logger)
+        self.msblock1_1 = MSBlock(64, rate)
+        self.msblock1_2 = MSBlock(64, rate)
+        self.conv1_1_down = nn.Conv2d(32*t, 21, (1, 1), stride=1)
+        self.conv1_2_down = nn.Conv2d(32*t, 21, (1, 1), stride=1)
+        self.score_dsn1 = nn.Conv2d(21, 1, (1, 1), stride=1)
+        self.score_dsn1_1 = nn.Conv2d(21, 1, 1, stride=1)
+        self.msblock2_1 = MSBlock(128, rate)
+        self.msblock2_2 = MSBlock(128, rate)
+        self.conv2_1_down = nn.Conv2d(32*t, 21, (1, 1), stride=1)
+        self.conv2_2_down = nn.Conv2d(32*t, 21, (1, 1), stride=1)
+        self.score_dsn2 = nn.Conv2d(21, 1, (1, 1), stride=1)
+        self.score_dsn2_1 = nn.Conv2d(21, 1, (1, 1), stride=1)
+        self.msblock3_1 = MSBlock(256, rate)
+        self.msblock3_2 = MSBlock(256, rate)
+        self.msblock3_3 = MSBlock(256, rate)
+        self.conv3_1_down = nn.Conv2d(32*t, 21, (1, 1), stride=1)
+        self.conv3_2_down = nn.Conv2d(32*t, 21, (1, 1), stride=1)
+        self.conv3_3_down = nn.Conv2d(32*t, 21, (1, 1), stride=1)
+        self.score_dsn3 = nn.Conv2d(21, 1, (1, 1), stride=1)
+        self.score_dsn3_1 = nn.Conv2d(21, 1, (1, 1), stride=1)
+        self.msblock4_1 = MSBlock(512, rate)
+        self.msblock4_2 = MSBlock(512, rate)
+        self.msblock4_3 = MSBlock(512, rate)
+        self.conv4_1_down = nn.Conv2d(32*t, 21, (1, 1), stride=1)
+        self.conv4_2_down = nn.Conv2d(32*t, 21, (1, 1), stride=1)
+        self.conv4_3_down = nn.Conv2d(32*t, 21, (1, 1), stride=1)
+        self.score_dsn4 = nn.Conv2d(21, 1, (1, 1), stride=1)
+        self.score_dsn4_1 = nn.Conv2d(21, 1, (1, 1), stride=1)
+        self.msblock5_1 = MSBlock(512, rate)
+        self.msblock5_2 = MSBlock(512, rate)
+        self.msblock5_3 = MSBlock(512, rate)
+        self.conv5_1_down = nn.Conv2d(32*t, 21, (1, 1), stride=1)
+        self.conv5_2_down = nn.Conv2d(32*t, 21, (1, 1), stride=1)
+        self.conv5_3_down = nn.Conv2d(32*t, 21, (1, 1), stride=1)
+        self.score_dsn5 = nn.Conv2d(21, 1, (1, 1), stride=1)
+        self.score_dsn5_1 = nn.Conv2d(21, 1, (1, 1), stride=1)
+        self.upsample_2 = nn.ConvTranspose2d(1, 1, 4, stride=2, bias=False)
+        self.upsample_4 = nn.ConvTranspose2d(1, 1, 8, stride=4, bias=False)
+        self.upsample_8 = nn.ConvTranspose2d(1, 1, 16, stride=8, bias=False)
+        self.upsample_8_5 = nn.ConvTranspose2d(1, 1, 16, stride=8, bias=False)
+        self.fuse = nn.Conv2d(10, 1, 1, stride=1)
+
+        # TI layers
+        self.upsample_ti_2 = nn.Upsample(scale_factor=2, mode='triliniear')
+        self.upsample_ti_4 = nn.Upsample(scale_factor=4, mode='triliniear')
+        self.upsample_ti_8 = nn.Upsample(scale_factor=8, mode='triliniear')
+        self.upsample_ti_8_5 = nn.Upsample(scale_factor=8, mode='triliniear')
+
+        self.ti_readout_1 = nn.Conv2d(110, 110, (1, 1), stride=1, bias=True)
+        self.ti_activation_1 = nn.ReLU(inplace=True)
+        self.ti_readout_2 = nn.Conv2d(110, 2, (1, 1), stride=1, bias=True)
+
+        self._initialize_weights(logger)
+
+    def forward(self, x):
+        features = self.features(x)
+        sum1 = self.conv1_1_down(self.msblock1_1(features[0])) + \
+                self.conv1_2_down(self.msblock1_2(features[1]))
+        s1ti = sum1
+        # print(s1ti.data.shape)
+        sum2 = self.conv2_1_down(self.msblock2_1(features[2])) + \
+            self.conv2_2_down(self.msblock2_2(features[3]))
+        s2ti = self.upsample_ti_2(sum2)
+        # s2ti = crop(s2ti, x, 1, 1)
+        # print(s2ti.data.shape)
+        sum3 = self.conv3_1_down(self.msblock3_1(features[4])) + \
+            self.conv3_2_down(self.msblock3_2(features[5])) + \
+            self.conv3_3_down(self.msblock3_3(features[6]))
+        s3ti = self.upsample_ti_4(sum3)
+        # s3ti = crop(s3ti, x, 2, 2)
+        # print(s3ti.data.shape)
+        sum4 = self.conv4_1_down(self.msblock4_1(features[7])) + \
+            self.conv4_2_down(self.msblock4_2(features[8])) + \
+            self.conv4_3_down(self.msblock4_3(features[9]))
+        s4ti = self.upsample_ti_8(sum4)
+        # s4ti = crop(s4ti, x, 4, 4)
+        # print(s4ti.data.shape)
+        sum5 = self.conv5_1_down(self.msblock5_1(features[10])) + \
+            self.conv5_2_down(self.msblock5_2(features[11])) + \
+            self.conv5_3_down(self.msblock5_3(features[12]))
+        s5ti = self.upsample_ti_8_5(sum5)
+        # s5ti = crop(s5ti, x, 0, 0)
+        # print(s5ti.data.shape)
+        ti1, ti2, ti3, ti4, ti5 = s1ti.detach(), s2ti.detach(), s3ti.detach(), s4ti.detach(), s5ti.detach()
+
+        out = self.ti_readout_1(torch.cat([ti1, ti2, ti3, ti4, ti5], 1))
+        out = self.ti_readout_2(self.ti_activation_1(out))
+
+        return out
+
+    def _initialize_weights(self, logger=None):
+        for name, param in self.state_dict().items():
+            if self.pretrain and 'features' in name:
+                continue
+            # elif 'down' in name:
+            #     param.zero_()
+            elif 'upsample' in name:
+                if logger:
+                    logger.info('init upsamle layer %s ' % name)
+                k = int(name.split('.')[0].split('_')[1])
+                param.copy_(get_upsampling_weight(1, 1, k*2))
+            elif 'fuse' in name:
+                if logger:
+                    logger.info('init params %s ' % name)
+                if 'bias' in name:
+                    param.zero_()
+                else:
+                    nn.init.constant(param, 0.080)
+            else:
+                if logger:
+                    logger.info('init params %s ' % name)
+                if 'bias' in name:
+                    param.zero_()
+                else:
+                    param.normal_(0, 0.01)
+        # print self.conv1_1_down.weight
+
 
 if __name__ == '__main__':
     model = BDCN('./caffemodel2pytorch/vgg16.pth')

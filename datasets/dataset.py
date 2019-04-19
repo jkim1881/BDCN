@@ -222,8 +222,6 @@ class BSDS_crops(data.Dataset):
 				image_filenames_int = image_filenames_int[:self.max_examples]
 			self.files = [str(integer) for integer in image_filenames_int]
 
-		self.__getitem__(0)
-
 	def __len__(self):
 		return len(self.files)
 
@@ -325,8 +323,6 @@ class Multicue_crops(data.Dataset):
 				image_filenames_int = image_filenames_int[:self.max_examples]
 			self.files = [name for name in image_filenames_int]
 
-		self.__getitem__(0)
-
 	def __len__(self):
 		return len(self.files)
 
@@ -369,3 +365,62 @@ class Multicue_crops(data.Dataset):
 			gt = gt[:, i:i+self.crop_size, j:j+self.crop_size]
 		return img, gt
 
+def load_image_with_cache_tilt_illusion(path, cache=None):
+	if cache is not None:
+		if not cache.has_key(path):
+			with open(path, 'rb') as f:
+				cache[path] = f.read()
+		return scipy.misc.imread(StringIO(cache[path]))
+		# return Image.open(StringIO(cache[path]))
+	else:
+		return scipy.misc.imread(path)
+
+class Tilt_illusion(data.Dataset):
+	def __init__(self, root, type,
+		crop_size=None, rgb=True, scale=None):
+		self.root = root
+		self.type = type # train or test
+		self.crop_size = crop_size
+		self.rgb = rgb
+		self.scale = scale
+		self.cache = {}
+
+		# get list of images and gts from a specified path
+		self.metadata = np.load(os.path.join(self.root, type, 'metadata', '1.npy'))
+		self.image_dir = os.path.join(self.root, self.type, 'imgs')
+
+	def __len__(self):
+		return len(self.metadata.shape[0])
+
+	def __getitem__(self, index):
+		# load Image
+		img_file = os.path.join(self.image_dir, self.metadata[index, 1])
+		if not os.path.exists(img_file):
+			raise ValueError('Cannot find image by path :' + img_file)
+		img = load_image_with_cache_multicue_crops(img_file, cache=None) #self.cache)
+		# load gt image
+		gt = np.array([np.sin(np.deg2rad(self.metadata[index, 4])), np.cos(np.deg2rad(self.metadata[index, 4]))])
+		return self.transform(img, gt)
+
+	def transform(self, img, gt):
+		gt = torch.from_numpy(np.array([gt])).float()
+
+		img = np.array(img, dtype=np.float32)
+		if self.rgb:
+			img = img[:, :, ::-1] # RGB->BGR
+		img -= self.mean_bgr
+		data = []
+		if self.scale is not None:
+			for scl in self.scale:
+				img_scale = cv2.resize(img, None, fx=scl, fy=scl, interpolation=cv2.INTER_LINEAR)
+				data.append(torch.from_numpy(img_scale.transpose((2,0,1))).float())
+			return data, gt
+		img = img.transpose((2, 0, 1))
+		img = torch.from_numpy(img.copy()).float()
+		if self.crop_size:
+			_, h, w = img.shape
+			assert(self.crop_size < h and self.crop_size < w)
+			i = random.randint(0, h - self.crop_size)
+			j = random.randint(0, w - self.crop_size)
+			img = img[:, i:i+self.crop_size, j:j+self.crop_size]
+		return img, gt
