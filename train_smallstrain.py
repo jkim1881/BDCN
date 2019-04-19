@@ -62,7 +62,7 @@ def train(model, args):
                                max_examples=args.max_training_examples, random_sample=False)
         trainloader = torch.utils.data.DataLoader(train_img,
                                                   batch_size=args.batch_size, shuffle=True, num_workers=5)
-        val_img = BSDS_crops(data_root, type='val',
+        val_img = BSDS_crops(data_root, type='test',
                             yita=yita, mean_bgr=mean_bgr, crop_size=crop_size)
         valloader = torch.utils.data.DataLoader(val_img,
                                                 batch_size=args.batch_size, shuffle=False, num_workers=5)
