@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ea4384bc-3848-4698-b672-58beea586834" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/train_smallstrain.py" afterPath="$PROJECT_DIR$/train_smallstrain.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,11 +15,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="train_smallstrain.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="train_smallstrain.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train_smallstrain.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="55" column="78" lean-forward="true" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="78" />
+            <state relative-caret-position="301">
+              <caret line="66" column="33" lean-forward="false" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -29,8 +30,8 @@
       <file leaf-file-name="train.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="65" column="64" lean-forward="true" selection-start-line="65" selection-start-column="64" selection-end-line="65" selection-end-column="64" />
+            <state relative-caret-position="356">
+              <caret line="66" column="36" lean-forward="true" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -38,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prebake_bsds_crops.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="prebake_bsds_crops.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/datasets/prebake_bsds_crops.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
-              <caret line="29" column="54" lean-forward="false" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
+              <caret line="29" column="26" lean-forward="true" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -51,7 +52,7 @@
       <file leaf-file-name="dataset.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/datasets/dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1053">
+            <state relative-caret-position="451">
               <caret line="113" column="22" lean-forward="false" selection-start-line="113" selection-start-column="22" selection-end-line="113" selection-end-column="22" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -106,7 +107,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>resume</find>
       <find>pretra</find>
       <find>args.dataset</find>
       <find>train</find>
@@ -132,9 +132,10 @@
       <find>task</find>
       <find>step-4568-4097</find>
       <find>max_training</find>
-      <find>self.fi</find>
       <find>gt_filenames_int</find>
       <find>max-training</find>
+      <find>self.fi</find>
+      <find>val_lo</find>
       <find>val_im</find>
     </findStrings>
   </component>
@@ -152,9 +153,9 @@
         <option value="$PROJECT_DIR$/train_bsdscrops.py" />
         <option value="$PROJECT_DIR$/datasets/__init__.py" />
         <option value="$PROJECT_DIR$/datasets/dataset.py" />
-        <option value="$PROJECT_DIR$/train_smallstrain.py" />
-        <option value="$PROJECT_DIR$/train.py" />
         <option value="$PROJECT_DIR$/datasets/prebake_bsds_crops.py" />
+        <option value="$PROJECT_DIR$/train.py" />
+        <option value="$PROJECT_DIR$/train_smallstrain.py" />
       </list>
     </option>
   </component>
@@ -523,26 +524,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train_smallstrain.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="55" column="78" lean-forward="true" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="78" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datasets/dataset.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1053">
-          <caret line="113" column="22" lean-forward="false" selection-start-line="113" selection-start-column="22" selection-end-line="113" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datasets/prebake_multicue_crops.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1290">
@@ -551,21 +532,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/prebake_bsds_crops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="29" column="26" lean-forward="true" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="113" column="22" lean-forward="false" selection-start-line="113" selection-start-column="22" selection-end-line="113" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="65" column="64" lean-forward="true" selection-start-line="65" selection-start-column="64" selection-end-line="65" selection-end-column="64" />
+        <state relative-caret-position="356">
+          <caret line="66" column="36" lean-forward="true" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datasets/prebake_bsds_crops.py">
+    <entry file="file://$PROJECT_DIR$/train_smallstrain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="29" column="54" lean-forward="false" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
-          <folding />
+        <state relative-caret-position="301">
+          <caret line="66" column="33" lean-forward="false" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

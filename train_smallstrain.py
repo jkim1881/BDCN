@@ -62,9 +62,9 @@ def train(model, args):
                                max_examples=args.max_training_examples, random_sample=False)
         trainloader = torch.utils.data.DataLoader(train_img,
                                                   batch_size=args.batch_size, shuffle=True, num_workers=5)
-        val_img = BSDS_crops(data_root, type='val',
+        val_img = BSDS_crops(data_root, type='test',
                             yita=yita, mean_bgr=mean_bgr, crop_size=crop_size)
-        val_loader = torch.utils.data.DataLoader(val_img,
+        valloader = torch.utils.data.DataLoader(val_img,
                                                 batch_size=args.batch_size, shuffle=False, num_workers=5)
     if 'Multicue' in args.dataset:
         if 'Edges' in args.dataset:
@@ -158,7 +158,7 @@ def train(model, args):
     model.train()
     batch_size = args.iter_size * args.batch_size
 
-    # import matplotlib.pyplot as plt
+    import matplotlib.pyplot as plt
 
     for step in xrange(start_step, args.max_iter + 1):
         optimizer.zero_grad()
@@ -175,20 +175,20 @@ def train(model, args):
 
             out = model(images)
 
-            # if (step ==1) or (step == 100):
-            #     batchid = 0
-            #     img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
-            #     img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
-            #     img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
-            #         img_max - img_min)
-            #     gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
-            #     plt.subplot(131);
-            #     plt.imshow(img_transposed);
-            #     plt.subplot(132);
-            #     plt.imshow(gt_transposed);
-            #     plt.subplot(133);
-            #     plt.imshow(np.array(out[-1].cpu().detach()[batchid, 0, :, :]));
-            #     plt.show()
+            if (step ==1) or (step == 100):
+                batchid = 0
+                img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
+                img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
+                img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
+                    img_max - img_min)
+                gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
+                plt.subplot(131);
+                plt.imshow(img_transposed);
+                plt.subplot(132);
+                plt.imshow(gt_transposed);
+                plt.subplot(133);
+                plt.imshow(np.array(out[-1].cpu().detach()[batchid, 0, :, :]));
+                plt.show()
 
             # import ipdb;ipdb.set_trace()
             loss = 0
@@ -234,20 +234,20 @@ def train(model, args):
 
                     out = model(images)
 
-                    # if step == 100:
-                    #     batchid = 0
-                    #     img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
-                    #     img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
-                    #     img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
-                    #     img_max - img_min)
-                    #     gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
-                    #     plt.subplot(131);
-                    #     plt.imshow(img_transposed);
-                    #     plt.subplot(132);
-                    #     plt.imshow(gt_transposed);
-                    #     plt.subplot(133);
-                    #     plt.imshow(np.array(out[-1].cpu().detach()[batchid, 0, :, :]));
-                    #     plt.show()
+                    if step == 100:
+                        batchid = 0
+                        img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
+                        img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
+                        img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
+                        img_max - img_min)
+                        gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
+                        plt.subplot(131);
+                        plt.imshow(img_transposed);
+                        plt.subplot(132);
+                        plt.imshow(gt_transposed);
+                        plt.subplot(133);
+                        plt.imshow(np.array(out[-1].cpu().detach()[batchid, 0, :, :]));
+                        plt.show()
 
                     loss = 0
                     for k in xrange(10):
