@@ -159,7 +159,6 @@ def train(model, args):
     batch_size = args.iter_size * args.batch_size
 
     import matplotlib.pyplot as plt
-    display=False
 
     for step in xrange(start_step, args.max_iter + 1):
         optimizer.zero_grad()
@@ -176,7 +175,7 @@ def train(model, args):
 
             out = model(images)
 
-            if ((step ==1) or (step == 100)) and display:
+            if ((step ==1) or (step == 100)) and args.display==1:
                 batchid = 0
                 img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
                 img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
@@ -235,7 +234,7 @@ def train(model, args):
 
                     out = model(images)
 
-                    if (step == 100) and (val_step==0) and display:
+                    if (step == 100) and (val_step==0) and args.display==1:
                         batchid = 0
                         img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
                         img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
@@ -343,6 +342,8 @@ def parse_args():
         help='the loss weight of fuse, default 1.1')
     parser.add_argument('--gamma', type=float, default=0.1,
         help='the decay of learning rate, default 0.1')
+    parser.add_argument('--display', type=int, default=0,
+        help='(jk) display imgs at 1st and 100th iteration (val on the 100th)')
     return parser.parse_args()
 
 if __name__ == '__main__':

@@ -137,7 +137,8 @@ def train(model, args):
     model.train()
     batch_size = args.iter_size * args.batch_size
 
-    # import matplotlib.pyplot as plt
+    import matplotlib.pyplot as plt
+
     for step in xrange(start_step, args.max_iter + 1):
         optimizer.zero_grad()
         batch_loss = 0
@@ -153,20 +154,20 @@ def train(model, args):
 
             out = model(images)
 
-            # if (step ==1) or (step == 100):
-            #     batchid = 0
-            #     img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
-            #     img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
-            #     img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
-            #         img_max - img_min)
-            #     gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
-            #     plt.subplot(131);
-            #     plt.imshow(img_transposed);
-            #     plt.subplot(132);
-            #     plt.imshow(gt_transposed);
-            #     plt.subplot(133);
-            #     plt.imshow(np.array(out[-1].cpu().detach()[batchid, 0, :, :]));
-            #     plt.show()
+            if ((step ==1) or (step == 100)) and args.display==1:
+                batchid = 0
+                img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
+                img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
+                img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
+                    img_max - img_min)
+                gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
+                plt.subplot(131);
+                plt.imshow(img_transposed);
+                plt.subplot(132);
+                plt.imshow(gt_transposed);
+                plt.subplot(133);
+                plt.imshow(np.array(out[-1].cpu().detach()[batchid, 0, :, :]));
+                plt.show()
 
             # import ipdb;ipdb.set_trace()
             loss = 0
@@ -212,20 +213,20 @@ def train(model, args):
 
                     out = model(images)
 
-                    # if step == 100:
-                    #     batchid = 0
-                    #     img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
-                    #     img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
-                    #     img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
-                    #     img_max - img_min)
-                    #     gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
-                    #     plt.subplot(131);
-                    #     plt.imshow(img_transposed);
-                    #     plt.subplot(132);
-                    #     plt.imshow(gt_transposed);
-                    #     plt.subplot(133);
-                    #     plt.imshow(np.array(out[-1].cpu().detach()[batchid, 0, :, :]));
-                    #     plt.show()
+                    if (step == 100) and (val_step==0) and args.display==1:
+                        batchid = 0
+                        img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
+                        img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
+                        img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
+                        img_max - img_min)
+                        gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
+                        plt.subplot(131);
+                        plt.imshow(img_transposed);
+                        plt.subplot(132);
+                        plt.imshow(gt_transposed);
+                        plt.subplot(133);
+                        plt.imshow(np.array(out[-1].cpu().detach()[batchid, 0, :, :]));
+                        plt.show()
 
                     loss = 0
                     for k in xrange(10):
@@ -320,6 +321,8 @@ def parse_args():
         help='the loss weight of fuse, default 1.1')
     parser.add_argument('--gamma', type=float, default=0.1,
         help='the decay of learning rate, default 0.1')
+    parser.add_argument('--display', type=int, default=0,
+        help='(jk) display imgs at 1st and 100th iteration (val on the 100th)')
     return parser.parse_args()
 
 if __name__ == '__main__':
