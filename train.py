@@ -60,7 +60,7 @@ def train(model, args):
     # val_img = Data_tv(data_root, data_lst, yita,
     #                     mean_bgr=mean_bgr, crop_size=crop_size,
     #                     random_sample=False, front_or_end='end', use_ratio=0.8)
-    val_img = BSDS_crops('/media/data_cifs/pytorch_projects/datasets/BSDS500_crops', type='val',
+    val_img = BSDS_crops('/media/data_cifs/pytorch_projects/datasets/BSDS500_crops', type='test',
                          yita=yita, mean_bgr=mean_bgr, crop_size=crop_size)
     trainloader = torch.utils.data.DataLoader(train_img,
         batch_size=args.batch_size, shuffle=True, num_workers=5)
