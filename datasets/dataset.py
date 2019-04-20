@@ -394,6 +394,7 @@ class Tilt_illusion(data.Dataset):
 
 	def __getitem__(self, index):
 		# load Image
+		import ipdb;ipdb.set_trace()
 		img_file = os.path.join(self.image_dir, self.metadata[index, 1])
 		if not os.path.exists(img_file):
 			raise ValueError('Cannot find image by path :' + img_file)
