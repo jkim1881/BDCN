@@ -406,12 +406,11 @@ class Tilt_illusion(data.Dataset):
 			raise ValueError('Cannot find image by path :' + img_file)
 		img = load_image_with_cache_multicue_crops(img_file, cache=None) #self.cache)
 		# load gt image
-		import ipdb;ipdb.set_trace()
-		print(self.metadata[index, 4])
-		gt = np.array([np.sin(np.pi*self.metadata[index, 4]/180.), np.cos(np.pi*self.metadata[index, 4]/180.)])
+		gt = self.metadata[index, 4]
 		return self.transform(img, gt)
 
 	def transform(self, img, gt):
+		gt = np.array([np.sin(np.pi*gt/180.), np.cos(np.pi*gt/180.)])
 		gt = torch.from_numpy(np.array([gt])).float()
 
 		img = np.array(img, dtype=np.float32)-127
