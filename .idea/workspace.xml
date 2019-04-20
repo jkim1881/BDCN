@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea4384bc-3848-4698-b672-58beea586834" name="Default" comment="" />
+    <list default="true" id="ea4384bc-3848-4698-b672-58beea586834" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,8 +53,8 @@
       <file leaf-file-name="bdcn.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bdcn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="337" column="41" lean-forward="false" selection-start-line="337" selection-start-column="38" selection-end-line="337" selection-end-column="41" />
+            <state relative-caret-position="354">
+              <caret line="304" column="17" lean-forward="false" selection-start-line="304" selection-start-column="17" selection-end-line="304" selection-end-column="17" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -155,8 +157,8 @@
         <option value="$PROJECT_DIR$/train_smallstrain.py" />
         <option value="$PROJECT_DIR$/cfg.py" />
         <option value="$PROJECT_DIR$/datasets/dataset.py" />
-        <option value="$PROJECT_DIR$/bdcn.py" />
         <option value="$PROJECT_DIR$/train_tiltillusion.py" />
+        <option value="$PROJECT_DIR$/bdcn.py" />
       </list>
     </option>
   </component>
@@ -589,8 +591,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bdcn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="337" column="41" lean-forward="false" selection-start-line="337" selection-start-column="38" selection-end-line="337" selection-end-column="41" />
+        <state relative-caret-position="354">
+          <caret line="304" column="17" lean-forward="false" selection-start-line="304" selection-start-column="17" selection-end-line="304" selection-end-column="17" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
