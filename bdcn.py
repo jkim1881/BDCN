@@ -330,6 +330,23 @@ class BDCN_ti(nn.Module):
                     param.normal_(0, 0.01)
         # print self.conv1_1_down.weight
 
+    def initialize_ti_weights(self):
+        # TI layers
+        self.upsample_ti_2 = nn.Upsample(scale_factor=2, mode='triliniear')
+        self.upsample_ti_4 = nn.Upsample(scale_factor=4, mode='triliniear')
+        self.upsample_ti_8 = nn.Upsample(scale_factor=8, mode='triliniear')
+        self.upsample_ti_8_5 = nn.Upsample(scale_factor=8, mode='triliniear')
+
+        self.ti_readout_1 = nn.Conv2d(110, 110, (1, 1), stride=1, bias=True)
+        self.ti_activation_1 = nn.ReLU(inplace=True)
+        self.ti_readout_2 = nn.Conv2d(110, 2, (1, 1), stride=1, bias=True)
+
+        for name, param in self.state_dict().items():
+            if 'ti' in name:
+                if 'bias' in name:
+                    param.zero_()
+                else:
+                    param.normal_(0, 0.01)
 
 if __name__ == '__main__':
     model = BDCN('./caffemodel2pytorch/vgg16.pth')

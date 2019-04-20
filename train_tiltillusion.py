@@ -227,6 +227,7 @@ def main():
     model = bdcn.BDCN_ti(pretrain=args.pretrain, logger=logger)
     if args.complete_pretrain:
         model.load_state_dict(torch.load(args.complete_pretrain))
+    model.initialize_ti_weights()
     logger.info(model)
     train(model, args)
 
