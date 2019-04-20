@@ -394,6 +394,7 @@ class Tilt_illusion(data.Dataset):
 		if self.metadata is not None:
 			self.metadata=self.metadata[:self.max_examples,:]
 
+		self.__getitem__(10)
 
 	def __len__(self):
 		return self.metadata.shape[0]
@@ -412,6 +413,7 @@ class Tilt_illusion(data.Dataset):
 		gt = torch.from_numpy(np.array([gt])).float()
 
 		img = np.array(img, dtype=np.float32)
+		import ipdb;ipdb.set_trace()
 		if self.rgb:
 			img = img[:, :, ::-1] # RGB->BGR
 		img -= self.mean_bgr
