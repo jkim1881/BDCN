@@ -398,7 +398,6 @@ class Tilt_illusion(data.Dataset):
 		self.gt_trig = np.concatenate((np.expand_dims(np.sin(np.pi * self.gt / 180.),axis=0),
 									   np.expand_dims(np.cos(np.pi * self.gt / 180.),axis=0)
 									   ),axis=0)
-		self.__getitem__(10)
 
 	def __len__(self):
 		return self.metadata.shape[0]
@@ -414,7 +413,6 @@ class Tilt_illusion(data.Dataset):
 		return self.transform(img, gt)
 
 	def transform(self, img, gt):
-		print(gt)
 		gt = torch.from_numpy(np.array([gt])).float()
 
 		img = np.array(img, dtype=np.float32)-127
