@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ea4384bc-3848-4698-b672-58beea586834" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datasets/dataset.py" afterPath="$PROJECT_DIR$/datasets/dataset.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="train_tiltillusion.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="train_tiltillusion.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train_tiltillusion.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="70" column="9" lean-forward="true" selection-start-line="70" selection-start-column="9" selection-end-line="70" selection-end-column="9" />
+            <state relative-caret-position="157">
+              <caret line="236" column="34" lean-forward="true" selection-start-line="236" selection-start-column="34" selection-end-line="236" selection-end-column="34" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -54,8 +53,8 @@
       <file leaf-file-name="bdcn.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bdcn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="332" column="0" lean-forward="true" selection-start-line="332" selection-start-column="0" selection-end-line="332" selection-end-column="0" />
+            <state relative-caret-position="-318">
+              <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -73,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dataset.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dataset.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/datasets/dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="55">
-              <caret line="381" column="35" lean-forward="true" selection-start-line="381" selection-start-column="35" selection-end-line="381" selection-end-column="35" />
+            <state relative-caret-position="45">
+              <caret line="386" column="0" lean-forward="true" selection-start-line="386" selection-start-column="0" selection-end-line="386" selection-end-column="0" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -125,7 +124,6 @@
       <find>display</find>
       <find>args.display</find>
       <find>args.di</find>
-      <find>max-tra</find>
       <find>max_training_ex</find>
       <find>pretrain</find>
       <find>weights</find>
@@ -136,9 +134,10 @@
       <find>val_cur</find>
       <find>forward</find>
       <find>crop</find>
+      <find>complete</find>
       <find>load_</find>
       <find>self.fi</find>
-      <find>complete</find>
+      <find>max-tra</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -351,6 +350,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="451" y="23" width="985" height="877" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2173913" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -571,18 +571,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bdcn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="332" column="0" lean-forward="true" selection-start-line="332" selection-start-column="0" selection-end-line="332" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train_tiltillusion.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="70" column="9" lean-forward="true" selection-start-line="70" selection-start-column="9" selection-end-line="70" selection-end-column="9" />
+        <state relative-caret-position="-318">
+          <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -591,10 +581,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/datasets/dataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="381" column="35" lean-forward="true" selection-start-line="381" selection-start-column="35" selection-end-line="381" selection-end-column="35" />
+        <state relative-caret-position="45">
+          <caret line="386" column="0" lean-forward="true" selection-start-line="386" selection-start-column="0" selection-end-line="386" selection-end-column="0" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train_tiltillusion.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="236" column="34" lean-forward="true" selection-start-line="236" selection-start-column="34" selection-end-line="236" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>

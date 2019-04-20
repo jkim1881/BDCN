@@ -377,7 +377,8 @@ def load_image_with_cache_tilt_illusion(path, cache=None):
 
 class Tilt_illusion(data.Dataset):
 	def __init__(self, root, type,
-		crop_size=None, rgb=True, scale=None):
+		crop_size=None, rgb=True, scale=None,
+		max_examples=None):
 		self.root = root
 		self.type = type # train or test
 		self.crop_size = crop_size
@@ -388,15 +389,17 @@ class Tilt_illusion(data.Dataset):
 		# get list of images and gts from a specified path
 		self.metadata = np.reshape(np.load(os.path.join(self.root, self.type, 'metadata', '1.npy')), (-1,11))
 		self.image_dir = os.path.join(self.root, self.type, 'imgs')
+		self.max_examples = max_examples
 
-		self.__getitem__(5)
+		if self.metadata is not None:
+			self.metadata=self.metadata[:self.max_examples,:]
+
 
 	def __len__(self):
 		return self.metadata.shape[0]
 
 	def __getitem__(self, index):
 		# load Image
-		import ipdb;ipdb.set_trace()
 		img_file = os.path.join(self.image_dir, self.metadata[index, 1])
 		if not os.path.exists(img_file):
 			raise ValueError('Cannot find image by path :' + img_file)
