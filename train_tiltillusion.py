@@ -132,6 +132,8 @@ def train(model, args):
             images, labels = Variable(images), Variable(labels)
 
             out = model(images)
+            import ipdb;
+            ipdb.set_trace()
             loss = l2_loss(out, labels)
 
             if ((step ==1) or (step == 100)) and args.display_imgs==1:
@@ -188,7 +190,6 @@ def train(model, args):
                     images, labels = Variable(images), Variable(labels)
 
                     out = model(images)
-                    import ipdb;ipdb.set_trace()
                     loss = l2_loss(out, labels)
 
                     if (step >= 100) and (val_step==0) and args.display_imgs==1:
