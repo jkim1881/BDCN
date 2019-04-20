@@ -390,7 +390,7 @@ class Tilt_illusion(data.Dataset):
 		self.image_dir = os.path.join(self.root, self.type, 'imgs')
 
 	def __len__(self):
-		return len(self.metadata.shape[0])
+		return self.metadata.shape[0]
 
 	def __getitem__(self, index):
 		# load Image
