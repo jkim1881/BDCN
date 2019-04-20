@@ -52,6 +52,11 @@ def l2_loss_center(out, labels):
     return out_center, torch.nn.MSELoss(size_average=None, reduce=None, reduction='mean')(out_center, labels)
 
 def l2_loss(out, labels):
+    # ipdb > out.shape
+    # torch.Size([B, 2, 1, 1])
+    # ipdb > labels.shape
+    # torch.Size([B, 1, 2])
+    labels = labels.permute(0,2,1).unsqueeze(3)
     return torch.nn.MSELoss(size_average=None, reduce=None, reduction='mean')(out, labels)
 
 
@@ -132,8 +137,8 @@ def train(model, args):
             images, labels = Variable(images), Variable(labels)
 
             out = model(images)
-            import ipdb;
-            ipdb.set_trace()
+            # import ipdb;
+            # ipdb.set_trace()
             loss = l2_loss(out, labels)
 
             if ((step ==1) or (step == 100)) and args.display_imgs==1:
