@@ -174,7 +174,6 @@ class BDCN(nn.Module):
         p4_2 = s41 + o51
         p5_2 = s51
 
-        import ipdb;ipdb.set_trace()
         fuse = self.fuse(torch.cat([p1_1, p2_1, p3_1, p4_1, p5_1, p1_2, p2_2, p3_2, p4_2, p5_2], 1))
 
         return [p1_1, p2_1, p3_1, p4_1, p5_1, p1_2, p2_2, p3_2, p4_2, p5_2, fuse]
@@ -287,6 +286,8 @@ class BDCN_ti(nn.Module):
         s5ti = self.upsample_ti_8_5(sum5)
         # s5ti = crop(s5ti, x, 0, 0)
         # print(s5ti.data.shape)
+        import ipdb;
+        ipdb.set_trace()
         ti1, ti2, ti3, ti4, ti5 = s1ti.detach(), s2ti.detach(), s3ti.detach(), s4ti.detach(), s5ti.detach()
 
         out = self.ti_readout_1(torch.cat([ti1, ti2, ti3, ti4, ti5], 1))
