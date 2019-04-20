@@ -400,7 +400,7 @@ class Tilt_illusion(data.Dataset):
 
 	def __getitem__(self, index):
 		# load Image
-		img_file = os.path.join(self.image_dir, self.metadata[index, 1])
+		img_file = os.path.join(self.image_dir, '1', self.metadata[index, 1])
 		if not os.path.exists(img_file):
 			raise ValueError('Cannot find image by path :' + img_file)
 		img = load_image_with_cache_multicue_crops(img_file, cache=None) #self.cache)
