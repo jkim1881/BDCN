@@ -257,6 +257,12 @@ class BDCN_ti(nn.Module):
 
         self._initialize_weights(logger)
 
+    def center_crop(self, x, keepdims=True):
+        crop =  x[:,:,x.shape[2]//2, x.shape[3]//2]
+        crop._unsqueeze(0)
+        crop._unsqueeze(0)
+        return crop
+
     def forward(self, x):
         features = self.features(x)
         sum1 = self.conv1_1_down(self.msblock1_1(features[0])) + \
@@ -287,11 +293,11 @@ class BDCN_ti(nn.Module):
         # s5ti = crop(s5ti, x, 0, 0)
         # print(s5ti.data.shape)
         ti1, ti2, ti3, ti4, ti5 = s1ti.detach(), s2ti.detach(), s3ti.detach(), s4ti.detach(), s5ti.detach()
+        ti_list = [ti1, ti2, ti3, ti4, ti5]
+        ti_list = [self.center_crop(tensor, keepdims=True) for tensor in ti_list]
 
-
-        import ipdb;
-        ipdb.set_trace()
-        out = self.ti_readout_1(torch.cat([ti1, ti2, ti3, ti4, ti5], 1))
+        import ipdb;ipdb.set_trace()
+        out = self.ti_readout_1(torch.cat(ti_list, 1))
         out = self.ti_readout_2(self.ti_activation_1(out))
 
         return out
