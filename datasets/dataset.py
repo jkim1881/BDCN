@@ -412,11 +412,12 @@ class Tilt_illusion(data.Dataset):
 	def transform(self, img, gt):
 		gt = torch.from_numpy(np.array([gt])).float()
 
-		img = np.array(img, dtype=np.float32)
+		img = np.array(img, dtype=np.float32)-127
+		img -= 127.
+		img = np.tile(img, (1,1,3))
 		import ipdb;ipdb.set_trace()
 		if self.rgb:
 			img = img[:, :, ::-1] # RGB->BGR
-		img -= self.mean_bgr
 		data = []
 		if self.scale is not None:
 			for scl in self.scale:
