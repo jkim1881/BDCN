@@ -322,10 +322,10 @@ class BDCN_ti(nn.Module):
 
     def initialize_ti_weights(self):
         # TI layers
-        self.upsample_ti_2 = nn.Upsample(scale_factor=2, mode='triliniear')
-        self.upsample_ti_4 = nn.Upsample(scale_factor=4, mode='triliniear')
-        self.upsample_ti_8 = nn.Upsample(scale_factor=8, mode='triliniear')
-        self.upsample_ti_8_5 = nn.Upsample(scale_factor=8, mode='triliniear')
+        self.upsample_ti_2 = nn.Upsample(scale_factor=2, mode='trilinear')
+        self.upsample_ti_4 = nn.Upsample(scale_factor=4, mode='trilinear')
+        self.upsample_ti_8 = nn.Upsample(scale_factor=8, mode='trilinear')
+        self.upsample_ti_8_5 = nn.Upsample(scale_factor=8, mode='trilinear')
 
         self.ti_readout_1 = nn.Conv2d(110, 110, (1, 1), stride=1, bias=True)
         self.ti_activation_1 = nn.ReLU(inplace=True)
