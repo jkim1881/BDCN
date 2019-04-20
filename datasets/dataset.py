@@ -408,7 +408,7 @@ class Tilt_illusion(data.Dataset):
 		# load gt image
 		import ipdb;ipdb.set_trace()
 		print(self.metadata[index, 4])
-		gt = np.array([np.sin(np.deg2rad(self.metadata[index, 4])), np.cos(np.deg2rad(self.metadata[index, 4]))])
+		gt = np.array([np.sin(np.pi*self.metadata[index, 4]/180.), np.cos(np.pi*self.metadata[index, 4]/180.)])
 		return self.transform(img, gt)
 
 	def transform(self, img, gt):
