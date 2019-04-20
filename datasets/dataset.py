@@ -407,6 +407,7 @@ class Tilt_illusion(data.Dataset):
 		img = load_image_with_cache_multicue_crops(img_file, cache=None) #self.cache)
 		# load gt image
 		import ipdb;ipdb.set_trace()
+		print(self.metadata[index, 4])
 		gt = np.array([np.sin(np.deg2rad(self.metadata[index, 4])), np.cos(np.deg2rad(self.metadata[index, 4]))])
 		return self.transform(img, gt)
 
