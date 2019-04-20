@@ -255,16 +255,6 @@ class BDCN_ti(nn.Module):
         self.upsample_8_5 = nn.ConvTranspose2d(1, 1, 16, stride=8, bias=False)
         self.fuse = nn.Conv2d(10, 1, 1, stride=1)
 
-        # TI layers
-        self.upsample_ti_2 = nn.Upsample(scale_factor=2, mode='triliniear')
-        self.upsample_ti_4 = nn.Upsample(scale_factor=4, mode='triliniear')
-        self.upsample_ti_8 = nn.Upsample(scale_factor=8, mode='triliniear')
-        self.upsample_ti_8_5 = nn.Upsample(scale_factor=8, mode='triliniear')
-
-        self.ti_readout_1 = nn.Conv2d(110, 110, (1, 1), stride=1, bias=True)
-        self.ti_activation_1 = nn.ReLU(inplace=True)
-        self.ti_readout_2 = nn.Conv2d(110, 2, (1, 1), stride=1, bias=True)
-
         self._initialize_weights(logger)
 
     def forward(self, x):
