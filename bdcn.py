@@ -296,7 +296,6 @@ class BDCN_ti(nn.Module):
         ti_list = [ti1, ti2, ti3, ti4, ti5]
         ti_list = [self.center_crop(tensor, keepdims=True) for tensor in ti_list]
 
-        import ipdb;ipdb.set_trace()
         out = self.ti_readout_1(torch.cat(ti_list, 1))
         out = self.ti_readout_2(self.ti_activation_1(out))
 
