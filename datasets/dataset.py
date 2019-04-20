@@ -416,14 +416,11 @@ class Tilt_illusion(data.Dataset):
 		gt = torch.from_numpy(np.array([gt])).float()
 
 		img = np.array(img, dtype=np.float32)-127
+		if self.scale is not None:
+			img = cv2.resize(img, None, fx=self.scale[0], fy=self.scale[0], interpolation=cv2.INTER_LINEAR)
 		img -= 127.
 		img = np.transpose(np.tile(img, (3,1,1)),(1,2,0))
 		data = []
-		if self.scale is not None:
-			for scl in self.scale:
-				img_scale = cv2.resize(img, None, fx=scl, fy=scl, interpolation=cv2.INTER_LINEAR)
-				data.append(torch.from_numpy(img_scale.transpose((2,0,1))).float())
-			return data, gt
 		img = img.transpose((2, 0, 1))
 		img = torch.from_numpy(img.copy()).float()
 		if self.crop_size:
