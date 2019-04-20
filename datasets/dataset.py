@@ -410,6 +410,7 @@ class Tilt_illusion(data.Dataset):
 		return self.transform(img, gt)
 
 	def transform(self, img, gt):
+		print(gt)
 		gt = np.array([np.sin(np.pi*gt/180.), np.cos(np.pi*gt/180.)])
 		gt = torch.from_numpy(np.array([gt])).float()
 
