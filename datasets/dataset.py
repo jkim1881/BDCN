@@ -395,8 +395,7 @@ class Tilt_illusion(data.Dataset):
 			self.metadata=self.metadata[:self.max_examples,:]
 
 		self.gt = self.metadata[:,4].astype(np.float)
-		self.gt_trig = np.concatenate(
-			np.expand_dims((np.sin(np.pi * self.gt / 180.), np.cos(np.pi * self.gt / 180.)),axis=1), axis=1)
+		self.gt_trig = np.concatenate((np.sin(np.pi * self.gt / 180.), np.cos(np.pi * self.gt / 180.)),axis=0)
 		import ipdb;ipdb.set_trace()
 		self.__getitem__(10)
 
@@ -410,7 +409,7 @@ class Tilt_illusion(data.Dataset):
 			raise ValueError('Cannot find image by path :' + img_file)
 		img = load_image_with_cache_multicue_crops(img_file, cache=None) #self.cache)
 		# load gt image
-		gt = self.gt_trig[index,:]
+		gt = self.gt_trig[:,index]
 		return self.transform(img, gt)
 
 	def transform(self, img, gt):
