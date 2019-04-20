@@ -415,7 +415,6 @@ class Tilt_illusion(data.Dataset):
 		img = np.array(img, dtype=np.float32)-127
 		img -= 127.
 		img = np.transpose(np.tile(img, (3,1,1)),(1,2,0))
-		import ipdb;ipdb.set_trace()
 		data = []
 		if self.scale is not None:
 			for scl in self.scale:
