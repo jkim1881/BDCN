@@ -259,8 +259,8 @@ class BDCN_ti(nn.Module):
 
     def center_crop(self, x, keepdims=True):
         crop =  x[:,:,x.shape[2]//2, x.shape[3]//2]
-        crop.unsqueeze(0)
-        crop.unsqueeze(0)
+        if keepdims:
+            crop = crop.unsqueeze(2).unsqueeze(2)
         return crop
 
     def forward(self, x):
