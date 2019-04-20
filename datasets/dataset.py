@@ -394,6 +394,9 @@ class Tilt_illusion(data.Dataset):
 		if self.metadata is not None:
 			self.metadata=self.metadata[:self.max_examples,:]
 
+		self.gt = self.metadata[:,4]
+		self.gt_trig = np.concatenate((np.sin(np.pi * self.gt / 180.), np.cos(np.pi * self.gt / 180.)), axis=1)
+
 		self.__getitem__(10)
 
 	def __len__(self):
@@ -406,12 +409,11 @@ class Tilt_illusion(data.Dataset):
 			raise ValueError('Cannot find image by path :' + img_file)
 		img = load_image_with_cache_multicue_crops(img_file, cache=None) #self.cache)
 		# load gt image
-		gt = self.metadata[index, 4]
+		gt = self.gt_trig[index,:]
 		return self.transform(img, gt)
 
 	def transform(self, img, gt):
 		print(gt)
-		gt = np.array([np.sin(np.pi*gt/180.), np.cos(np.pi*gt/180.)])
 		gt = torch.from_numpy(np.array([gt])).float()
 
 		img = np.array(img, dtype=np.float32)-127
