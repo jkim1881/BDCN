@@ -286,10 +286,11 @@ class BDCN_ti(nn.Module):
         s5ti = self.upsample_ti_8_5(sum5)
         # s5ti = crop(s5ti, x, 0, 0)
         # print(s5ti.data.shape)
-        import ipdb;
-        ipdb.set_trace()
         ti1, ti2, ti3, ti4, ti5 = s1ti.detach(), s2ti.detach(), s3ti.detach(), s4ti.detach(), s5ti.detach()
 
+
+        import ipdb;
+        ipdb.set_trace()
         out = self.ti_readout_1(torch.cat([ti1, ti2, ti3, ti4, ti5], 1))
         out = self.ti_readout_2(self.ti_activation_1(out))
 
