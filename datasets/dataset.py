@@ -389,6 +389,8 @@ class Tilt_illusion(data.Dataset):
 		self.metadata = np.load(os.path.join(self.root, type, 'metadata', '1.npy'))
 		self.image_dir = os.path.join(self.root, self.type, 'imgs')
 
+		self.__getitem__(5)
+
 	def __len__(self):
 		return self.metadata.shape[0]
 
