@@ -386,7 +386,7 @@ class Tilt_illusion(data.Dataset):
 		self.cache = {}
 
 		# get list of images and gts from a specified path
-		self.metadata = np.load(os.path.join(self.root, type, 'metadata', '1.npy'))
+		self.metadata = np.reshape(np.load(os.path.join(self.root, self.type, 'metadata', '1.npy')), (-1,11))
 		self.image_dir = os.path.join(self.root, self.type, 'imgs')
 
 		self.__getitem__(5)
