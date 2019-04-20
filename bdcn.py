@@ -335,9 +335,9 @@ class BDCN_ti(nn.Module):
         self.upsample_ti_8 = nn.Upsample(scale_factor=8, mode='bilinear')
         self.upsample_ti_8_5 = nn.Upsample(scale_factor=8, mode='bilinear')
 
-        self.ti_readout_1 = nn.Conv2d(110, 110, (1, 1), stride=1, bias=True)
+        self.ti_readout_1 = nn.Conv2d(105, 105, (1, 1), stride=1, bias=True)
         self.ti_activation_1 = nn.ReLU(inplace=True)
-        self.ti_readout_2 = nn.Conv2d(110, 2, (1, 1), stride=1, bias=True)
+        self.ti_readout_2 = nn.Conv2d(105, 2, (1, 1), stride=1, bias=True)
 
         for name, param in self.state_dict().items():
             if 'ti' in name:
