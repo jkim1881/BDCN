@@ -38,7 +38,7 @@ def train(model, args):
     if 'tiltillusion' in args.dataset:
         data_root = '/media/data_cifs/tilt_illusion'
         # Construct data loader
-        test_img = Tilt_illusion(data_root, type='test',
+        test_img = Tilt_illusion(data_root, type='test', test_mode=True,
                                   max_examples=args.max_test_examples, scale=[0.4], crop_size=crop_size)
         testloader = torch.utils.data.DataLoader(test_img,
                                                   batch_size=args.batch_size, shuffle=True, num_workers=5)
@@ -66,7 +66,7 @@ def train(model, args):
             if cur == iter_per_epoch:
                 cur = 0
                 data_iter = iter(testloader)
-            images, labels = next(data_iter)
+            images, labels, meta = next(data_iter)
             # import ipdb;ipdb.set_trace()
             if args.cuda:
                 images, labels = images.cuda(), labels.cuda()
