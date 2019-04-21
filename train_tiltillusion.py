@@ -79,6 +79,11 @@ def l2_loss(out, labels):
     negcos = torch.nn.modules.distance.CosineSimilarity(dim=1, eps=1e-8)(labels,-out)
     return torch.min(pos,neg) - torch.max(cos,negcos) # mirror-symmetric loss
 
+def cos_loss(out, labels):
+    cos = torch.nn.modules.distance.CosineSimilarity(dim=1, eps=1e-8)(labels,out)
+    negcos = torch.nn.modules.distance.CosineSimilarity(dim=1, eps=1e-8)(labels,-out)
+    return torch.max(cos,negcos) # mirror-symmetric loss
+
 def train(model, args):
     # Configure datasets
     # import ipdb;
