@@ -399,6 +399,7 @@ class Tilt_illusion(data.Dataset):
 		self.gt_trig = np.concatenate((np.expand_dims(np.sin(np.pi * self.gt / 180.),axis=0),
 									   np.expand_dims(np.cos(np.pi * self.gt / 180.),axis=0)
 									   ),axis=0)
+		self.__getitem__(40)
 
 	def __len__(self):
 		return self.metadata.shape[0]
@@ -412,6 +413,7 @@ class Tilt_illusion(data.Dataset):
 		# load gt image
 		gt = self.gt_trig[:,index]
 		meta = self.metadata[index,3:] #[r1, theta1, lambda1, shift1, r2 ....]
+		import ipdb;ipdb.set_trace()
 		return self.transform(img, gt, meta)
 
 	def transform(self, img, gt, meta):
