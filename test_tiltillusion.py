@@ -66,17 +66,23 @@ def train(model, args):
             if cur == iter_per_epoch:
                 cur = 0
                 data_iter = iter(testloader)
-            images, labels, meta = next(data_iter)
+            images, labels, meta = next(data_iter) # [r1, theta1, lambda1, shift1, r2 ....]
             # import ipdb;ipdb.set_trace()
             if args.cuda:
                 images, labels = images.cuda(), labels.cuda()
             images, labels = Variable(images), Variable(labels)
 
             out = model(images)
+            out = out.squeeze()
+            out_deg = ((np.arctan2(out[:,0],out[:,1])%1)*180/np.pi)%180
+            labels = labels.squeeze()
+            labels_deg = ((np.arctan2(labels[:,0], labels[:,1])%1)*180/np.pi)%180
+
+            labels_diff = labels_deg - meta[:,1]
             import ipdb;ipdb.set_trace()
-            # out.squeeze().shape = labels.squeeze().shape = [10,2]
-            # import ipdb;
-            # ipdb.set_trace()
+
+            # cdegree (theta1), sdegree (theta2), ydegree, r1, lambda1, shift1, shift2
+            theta1_estimated =
 
             loss = l2_loss(out, labels)
 
