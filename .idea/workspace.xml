@@ -30,8 +30,8 @@
       <file leaf-file-name="train_tiltillusion.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train_tiltillusion.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="84" column="39" lean-forward="true" selection-start-line="84" selection-start-column="11" selection-end-line="84" selection-end-column="39" />
+            <state relative-caret-position="297">
+              <caret line="83" column="12" lean-forward="false" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="12" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -617,8 +617,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/train_tiltillusion.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="84" column="39" lean-forward="true" selection-start-line="84" selection-start-column="11" selection-end-line="84" selection-end-column="39" />
+        <state relative-caret-position="297">
+          <caret line="83" column="12" lean-forward="false" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="12" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
