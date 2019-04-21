@@ -108,9 +108,9 @@ def main():
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
     torch.manual_seed(long(time.time()))
     model = bdcn.BDCN_ti(pretrain=None, logger=logger)
+    model.initialize_ti_weights()
     if args.complete_pretrain:
         model.load_state_dict(torch.load(args.complete_pretrain))
-    model.initialize_ti_weights()
     logger.info(model)
     train(model, args)
 
