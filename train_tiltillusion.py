@@ -76,7 +76,8 @@ def l2_loss(out, labels):
     pos = torch.nn.MSELoss(size_average=None, reduce=None, reduction='mean')(out, labels)
     neg = torch.nn.MSELoss(size_average=None, reduce=None, reduction='mean')(-out, labels)
     cos = torch.nn.modules.distance.CosineSimilarity(dim=1, eps=1e-8)(labels,out)
-    return torch.min(pos,neg) + cos # mirror-symmetric loss
+    negcos = cos = torch.nn.modules.distance.CosineSimilarity(dim=1, eps=1e-8)(labels,-out)
+    return torch.min(pos,neg) + torch.min(cos,negcos) # mirror-symmetric loss
 
 def train(model, args):
     # Configure datasets
