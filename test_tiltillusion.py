@@ -29,6 +29,12 @@ def l2_loss(out, labels):
     return torch.nn.MSELoss(size_average=None, reduce=None, reduction='mean')(out, labels)
 
 
+def orientation_diff(array1, array2):
+    concat = np.concatenate((np.expand_dims(array1, axis=1),
+                             np.expand_dims(array2, axis=1)), axis=1)
+    return [row[0] - row[1] if np.abs(row[0] - row[1])<np.abs(row[0] - row[1]-180) else row[0] - row[1]-180 for row in concat]
+
+
 def train(model, args):
     # Configure datasets
     # import ipdb;
@@ -112,12 +118,12 @@ def train(model, args):
 
     # plot
     import matplotlib.pyplot as plt
-    plt.subplot(131)
-    plt.scatter(accumulator[:, 0], accumulator[:,2], vmin=0, vmax=180)
-    plt.subplot(132)
-    cs_diff = np.minimum(accumulator[:, 0] - accumulator[:, 1], 180-(accumulator[:, 0] - accumulator[:, 1]))
-    out_gt_diff =  np.minimum(accumulator[:, 0] - accumulator[:, 2], 180-(accumulator[:, 0] - accumulator[:, 2]))
-    plt.scatter(cs_diff, out_gt_diff, vmin=0, vmax=180)
+    plt.subplot(121)
+    plt.scatter(accumulator[:, 0], accumulator[:,2], s=10, vmin=0, vmax=180)
+    plt.subplot(122)
+    cs_diff = orientation_diff(accumulator[:, 1], accumulator[:, 0])
+    out_gt_diff = orientation_diff(accumulator[:, 2], accumulator[:, 0])
+    plt.scatter(cs_diff, out_gt_diff, s=10, vmin=0, vmax=180)
     plt.show()
 
 def main():
