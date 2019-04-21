@@ -60,6 +60,7 @@ def train(model, args):
 
     import matplotlib.pyplot as plt
 
+    accumulator = np.zeros((0,6))
     for step in xrange(start_step, args.max_test_examples/(args.iter_size*args.batch_size) + 1):
         batch_loss = 0
         for i in xrange(args.iter_size):
@@ -74,14 +75,17 @@ def train(model, args):
 
             out = model(images)
             out = out.squeeze().cpu().detach().numpy()
-            out_deg = ((np.arctan2(out[:,0],out[:,1])%1)*180/np.pi)%180
+            out_deg = ((np.arctan2(out[:,0], out[:,1]))*180/np.pi)%180
             labels = labels.squeeze().cpu().detach().numpy()
-            labels_deg = ((np.arctan2(labels[:,0], labels[:,1])%1)*180/np.pi)%180
+            labels_deg = ((np.arctan2(labels[:,0], labels[:,1]))*180/np.pi)%180
             meta = meta.cpu().detach().numpy()
+
+            results = np.concatenate((meta[:,1], meta[:,5], out_deg, meta[:,0], meta[:,1], meta[:,2]),
+                                      axis=1)
+            accumulator = np.concatenate((accumulator, results), axis=0)
 
             import ipdb;
             ipdb.set_trace()
-            labels_diff = labels_deg - meta[:,1]
 
 
             # cdegree (theta1), sdegree (theta2), ydegree, r1, lambda1, shift1, shift2
