@@ -14,6 +14,23 @@ from datasets.dataset import BSDS_crops, Multicue_crops, Tilt_illusion
 import cfg
 import log
 import cv2
+import matplotlib.pyplot as plt
+
+def plot_grad_flow(named_parameters):
+    ave_grads = []
+    layers = []
+    for n, p in named_parameters:
+        if(p.requires_grad) and ("bias" not in n):
+            layers.append(n)
+            ave_grads.append(p.grad.abs().mean())
+    plt.plot(ave_grads, alpha=0.3, color="b")
+    plt.hlines(0, 0, len(ave_grads)+1, linewidth=1, color="k" )
+    plt.xticks(range(0,len(ave_grads), 1), layers, rotation="vertical")
+    plt.xlim(xmin=0, xmax=len(ave_grads))
+    plt.xlabel("Layers")
+    plt.ylabel("average gradient")
+    plt.title("Gradient flow")
+    plt.grid(True)
 
 def adjust_learning_rate(optimizer, steps, step_size, gamma=0.1, logger=None):
     """Sets the learning rate to the initial LR decayed by 10 every 30 epochs"""
@@ -136,6 +153,7 @@ def train(model, args):
             # import ipdb;
             # ipdb.set_trace()
             loss = l2_loss(out, labels)
+            loss.backward()
 
             if (step%200 < 3) and args.display_imgs==1:
                 batchid = 0
@@ -144,9 +162,9 @@ def train(model, args):
                 img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]),
                                                (1, 2, 0)) - img_min) / (
                                      img_max - img_min)
-                plt.subplot(121);
+                plt.subplot(131);
                 plt.imshow(img_transposed);
-                plt.subplot(122);
+                plt.subplot(132);
                 ax = plt.gca()
                 circ = plt.Circle((0, 0), 1, color='black', fill=False)
                 ax.add_artist(circ)
@@ -158,10 +176,11 @@ def train(model, args):
                          -labels.squeeze().detach().cpu()[batchid, 1], marker='o')
                 plt.xlim(-2, 2)
                 plt.ylim(-2, 2)
+                plt.subplot(133)
+                plot_grad_flow(model.named_parameters())
                 plt.show()
 
             # import ipdb;ipdb.set_trace()
-            loss.backward()
             batch_loss += loss.item()
             cur += 1
         # update parameter
