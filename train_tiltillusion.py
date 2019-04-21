@@ -298,7 +298,7 @@ def parse_args():
         help='the loss weight of fuse, default 1.1')
     parser.add_argument('--gamma', type=float, default=0.1,
         help='the decay of learning rate, default 0.1')
-    parser.add_argument('--display_imgs', type=int, default=0,
+    parser.add_argument('--display-imgs', type=int, default=0,
         help='(jk) display imgs at 1st and 100th iteration (val on the 100th)')
     return parser.parse_args()
 
