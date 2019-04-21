@@ -82,7 +82,7 @@ def train(model, args):
             import ipdb;ipdb.set_trace()
 
             # cdegree (theta1), sdegree (theta2), ydegree, r1, lambda1, shift1, shift2
-            theta1_estimated =
+            # theta1_estimated =
 
             loss = l2_loss(out, labels)
 
