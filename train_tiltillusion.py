@@ -137,22 +137,27 @@ def train(model, args):
             # ipdb.set_trace()
             loss = l2_loss(out, labels)
 
-            if ((step <3) or ((step > 100) and (step < 103))) and args.display_imgs==1:
+            if (step%100 < 3) and args.display_imgs==1:
                 batchid = 0
                 img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
                 img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
-                img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
-                    img_max - img_min)
+                img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]),
+                                               (1, 2, 0)) - img_min) / (
+                                     img_max - img_min)
                 plt.subplot(121);
                 plt.imshow(img_transposed);
                 plt.subplot(122);
                 ax = plt.gca()
                 circ = plt.Circle((0, 0), 1, color='black', fill=False)
                 ax.add_artist(circ)
-                plt.plot(out.squeeze().detach().cpu()[batchid,0], out.squeeze().detach().cpu()[batchid,1], marker='x')
-                plt.plot(labels.squeeze().detach().cpu()[batchid, 0], labels.squeeze().detach().cpu()[batchid, 1], marker='o')
-                plt.xlim(-2,2)
-                plt.ylim(-2,2)
+                plt.plot(out.squeeze().detach().cpu()[batchid, 0], out.squeeze().detach().cpu()[batchid, 1],
+                         marker='x')
+                plt.plot(labels.squeeze().detach().cpu()[batchid, 0],
+                         labels.squeeze().detach().cpu()[batchid, 1], marker='o')
+                plt.plot(-labels.squeeze().detach().cpu()[batchid, 0],
+                         -labels.squeeze().detach().cpu()[batchid, 1], marker='o')
+                plt.xlim(-2, 2)
+                plt.ylim(-2, 2)
                 plt.show()
 
             # import ipdb;ipdb.set_trace()
@@ -196,7 +201,7 @@ def train(model, args):
                     out = model(images)
                     loss = l2_loss(out, labels)
 
-                    if (step >= 100) and ((val_step > 0) and (val_step < 3)) and args.display_imgs==1:
+                    if (val_step < 3) and args.display_imgs==1:
                         batchid = 0
                         img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
                         img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
@@ -213,6 +218,8 @@ def train(model, args):
                                  marker='x')
                         plt.plot(labels.squeeze().detach().cpu()[batchid, 0],
                                  labels.squeeze().detach().cpu()[batchid, 1], marker='o')
+                        plt.plot(-labels.squeeze().detach().cpu()[batchid, 0],
+                                 -labels.squeeze().detach().cpu()[batchid, 1], marker='o')
                         plt.xlim(-2, 2)
                         plt.ylim(-2, 2)
                         plt.show()
