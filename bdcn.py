@@ -296,9 +296,9 @@ class BDCN_ti(nn.Module):
         ti_list = [ti1, ti2, ti3, ti4, ti5]
         ti_list = [self.center_crop(tensor, keepdims=True) for tensor in ti_list]
 
-        import ipdb;ipdb.set_trace()
         # out = self.ti_readout_1(torch.cat(ti_list, 1))
-        out = self.ti_readout_1(self.center_crop(features, keepdims=True) )
+        catcat = torch.cat([self.center_crop(feat, keepdims=True) for feat in features], 1)
+        out = self.ti_readout_1(catcat)
         out = self.ti_readout_2(self.ti_activation_1(out))
 
         return out
@@ -337,7 +337,7 @@ class BDCN_ti(nn.Module):
         self.upsample_ti_8 = nn.Upsample(scale_factor=8, mode='bilinear')
         self.upsample_ti_8_5 = nn.Upsample(scale_factor=8, mode='bilinear')
 
-        self.ti_readout_1 = nn.Conv2d(105, 105, (1, 1), stride=1, bias=True)
+        self.ti_readout_1 = nn.Conv2d(4224, 105, (1, 1), stride=1, bias=True)
         self.ti_activation_1 = nn.ReLU(inplace=True)
         self.ti_readout_2 = nn.Conv2d(105, 2, (1, 1), stride=1, bias=True)
 
