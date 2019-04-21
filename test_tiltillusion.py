@@ -112,7 +112,12 @@ def train(model, args):
 
     # plot
     import matplotlib.pyplot as plt
-    plt.scatter(accumulator[:,0], accumulator[:,2], vmin=0, vmax=180)
+    plt.subplot(131)
+    plt.scatter(accumulator[:, 0], accumulator[:,2], vmin=0, vmax=180)
+    plt.subplot(132)
+    cs_diff = np.minimum(accumulator[:, 0] - accumulator[:, 1], 180-(accumulator[:, 0] - accumulator[:, 1]))
+    out_gt_diff =  np.minimum(accumulator[:, 0] - accumulator[:, 2], 180-(accumulator[:, 0] - accumulator[:, 2]))
+    plt.scatter(cs_diff, out_gt_diff, vmin=0, vmax=180)
     plt.show()
 
 def main():
