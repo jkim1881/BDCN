@@ -46,19 +46,15 @@ def cross_entropy_loss2d(inputs, targets, cuda=False, balance=1.1):
     loss = nn.BCELoss(weights, size_average=False)(inputs, targets)
     return loss
 
-def l2_loss_center(out, labels):
-    _, _, h, w = out.size()
-    out_center = out[:, :, h//2, w//2]
-    return out_center, torch.nn.MSELoss(size_average=None, reduce=None, reduction='mean')(out_center, labels)
-
 def l2_loss(out, labels):
     # ipdb > out.shape
     # torch.Size([B, 2, 1, 1])
     # ipdb > labels.shape
     # torch.Size([B, 1, 2])
     labels = labels.permute(0,2,1).unsqueeze(3)
-    return torch.nn.MSELoss(size_average=None, reduce=None, reduction='mean')(out, labels)
-
+    pos = torch.nn.MSELoss(size_average=None, reduce=None, reduction='mean')(out, labels)
+    neg = torch.nn.MSELoss(size_average=None, reduce=None, reduction='mean')(-out, labels)
+    return torch.min(pos,neg) # mirror-symmetric loss
 
 def train(model, args):
     # Configure datasets
@@ -70,11 +66,11 @@ def train(model, args):
         data_root = '/media/data_cifs/tilt_illusion'
         # Construct data loader
         train_img = Tilt_illusion(data_root, type='train',
-                                  max_examples=args.max_training_examples, scale=[0.4], crop_size=crop_size)
+                                  max_examples=args.max_training_examples, scale=[0.3], crop_size=crop_size)
         trainloader = torch.utils.data.DataLoader(train_img,
                                                   batch_size=args.batch_size, shuffle=True, num_workers=5)
         val_img = Tilt_illusion(data_root, type='test',
-                            crop_size=crop_size, scale=[0.4])
+                            crop_size=crop_size, scale=[0.3])
         valloader = torch.utils.data.DataLoader(val_img,
                                                 batch_size=args.batch_size, shuffle=False, num_workers=5)
     else:

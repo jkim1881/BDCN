@@ -412,11 +412,13 @@ class Tilt_illusion(data.Dataset):
 		img = load_image_with_cache_multicue_crops(img_file, cache=None) #self.cache)
 		# load gt image
 		gt = self.gt_trig[:,index]
-		meta = self.metadata[index,3:].astype(np.float) #[r1, theta1, lambda1, shift1, r2 ....]
-		# import ipdb;ipdb.set_trace()
-		return self.transform(img, gt, meta)
+		if self.test_mode:
+			meta = self.metadata[index,3:].astype(np.float) #[r1, theta1, lambda1, shift1, r2 ....]
+			return self.transform(img, gt, meta)
+		else:
+			return self.transform(img, gt)
 
-	def transform(self, img, gt, meta):
+	def transform(self, img, gt, meta=None):
 		gt = torch.from_numpy(np.array([gt])).float()
 
 		img = np.array(img, dtype=np.float32)-127
@@ -433,4 +435,7 @@ class Tilt_illusion(data.Dataset):
 			i = random.randint(0, h - self.crop_size)
 			j = random.randint(0, w - self.crop_size)
 			img = img[:, i:i+self.crop_size, j:j+self.crop_size]
-		return img, gt, meta
+		if meta is not None:
+			return img, gt, meta
+		else:
+			return img, gt

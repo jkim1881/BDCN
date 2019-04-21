@@ -39,7 +39,7 @@ def train(model, args):
         data_root = '/media/data_cifs/tilt_illusion'
         # Construct data loader
         test_img = Tilt_illusion(data_root, type='test', test_mode=True,
-                                  max_examples=args.max_test_examples, scale=[0.4], crop_size=crop_size)
+                                  max_examples=args.max_test_examples, scale=[0.3], crop_size=crop_size)
         testloader = torch.utils.data.DataLoader(test_img,
                                                   batch_size=args.batch_size, shuffle=True, num_workers=5)
     else:
