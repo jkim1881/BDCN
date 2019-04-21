@@ -346,7 +346,7 @@ class BDCN_ti(nn.Module):
                 if 'bias' in name:
                     param.zero_()
                 else:
-                    param.normal_(0, 0.01)
+                    param.normal_(0, 0.001)
 
 if __name__ == '__main__':
     model = BDCN('./caffemodel2pytorch/vgg16.pth')
