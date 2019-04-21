@@ -78,6 +78,7 @@ def l2_loss(out, labels):
     return torch.min(pos,neg)  # mirror-symmetric loss
 
 def cos_loss(out, labels):
+    labels = labels.permute(0, 2, 1).unsqueeze(3)
     cos = torch.nn.CosineSimilarity(dim=1, eps=1e-08)(labels,out)
     negcos = torch.nn.CosineSimilarity(dim=1, eps=1e-08)(labels,-out)
     return torch.max(cos, negcos) # mirror-symmetric loss
