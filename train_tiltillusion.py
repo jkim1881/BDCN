@@ -144,14 +144,13 @@ def train(model, args):
                 img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
                 img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
                     img_max - img_min)
-                plt.subplot(131);
+                plt.subplot(121);
                 plt.imshow(img_transposed);
-                plt.subplot(132);
-                plt.scatter(out.squeeze().cpu()[batchid,1], out.squeeze().cpu()[batchid,0])
+                plt.subplot(122);
+                plt.plot(out.squeeze().detach().cpu()[batchid,1], out.squeeze().detach().cpu()[batchid,0], marker='x')
+                plt.plot(labels.squeeze().detach().cpu()[batchid, 1], labels.squeeze().detach().cpu()[batchid, 0], marker='o')
                 plt.xlim(-2,2)
                 plt.ylim(-2,2)
-                plt.subplot(133);
-                plt.imshow(np.array(out[-1].cpu().detach()[batchid, 0, :, :]));
                 plt.show()
 
             # import ipdb;ipdb.set_trace()
