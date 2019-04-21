@@ -74,11 +74,11 @@ def train(model, args):
             images, labels = Variable(images), Variable(labels)
 
             out = model(images)
-            out = out.squeeze().cpu().detach().numpy()
+            out = out.clone().squeeze().cpu().detach().numpy()
             out_deg = ((np.arctan2(out[:,0], out[:,1]))*180/np.pi)%180
-            labels = labels.squeeze().cpu().detach().numpy()
+            labels = labels.clone().queeze().cpu().detach().numpy()
             labels_deg = ((np.arctan2(labels[:,0], labels[:,1]))*180/np.pi)%180
-            meta = meta.cpu().detach().numpy()
+            meta = meta.clone().cpu().detach().numpy()
 
             results = np.concatenate((np.expand_dims(meta[:, 1], axis=1),
                                       np.expand_dims(meta[:, 5], axis=1),
