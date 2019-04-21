@@ -73,9 +73,9 @@ def train(model, args):
             images, labels = Variable(images), Variable(labels)
 
             out = model(images)
-            out = out.squeeze()
+            out = out.squeeze().detatch().numpy()
             out_deg = ((np.arctan2(out[:,0],out[:,1])%1)*180/np.pi)%180
-            labels = labels.squeeze()
+            labels = labels.squeeze().detatch().numpy()
             labels_deg = ((np.arctan2(labels[:,0], labels[:,1])%1)*180/np.pi)%180
 
             labels_diff = labels_deg - meta[:,1]
