@@ -32,12 +32,11 @@ def l2_loss(out, labels):
 def orientation_diff(array1, array2):
     concat = np.concatenate((np.expand_dims(array1, axis=1),
                              np.expand_dims(array2, axis=1)), axis=1)
-    diffs = np.concatenate((np.expand_dims(concat[0] - concat[1], axis=1),
-                            np.expand_dims(concat[0] - concat[1] - 180, axis=1),
-                            np.expand_dims(concat[0] - concat[1] + 180, axis=1)), axis=1)
+    diffs = np.concatenate((np.expand_dims(concat[:,0] - concat[:,1], axis=1),
+                            np.expand_dims(concat[:,0] - concat[:,1] - 180, axis=1),
+                            np.expand_dims(concat[:,0] - concat[:,1] + 180, axis=1)), axis=1)
     diffs_argmin = np.argmin(np.abs(diffs),axis=1)
-    import ipdb;ipdb.set_trace()
-    return [idiff[argmin] for idiff, argmin in diffs, diffs_argmin]
+    return [idiff[argmin] for idiff, argmin in zip(diffs, diffs_argmin)]
 
 
 def train(model, args):
