@@ -60,7 +60,7 @@ def train(model, args):
 
     import matplotlib.pyplot as plt
 
-    accumulator = np.zeros((0,6))
+    accumulator = np.zeros((0,7))
     for step in xrange(start_step, args.max_test_examples/(args.iter_size*args.batch_size) + 1):
         batch_loss = 0
         for i in xrange(args.iter_size):
