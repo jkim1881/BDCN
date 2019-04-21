@@ -137,7 +137,7 @@ def train(model, args):
             # ipdb.set_trace()
             loss = l2_loss(out, labels)
 
-            if ((step ==1) or (step == 100)) and args.display_imgs==1:
+            if ((step <3) or ((step > 100) and (step < 103))) and args.display_imgs==1:
                 batchid = 0
                 img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
                 img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
@@ -193,7 +193,7 @@ def train(model, args):
                     out = model(images)
                     loss = l2_loss(out, labels)
 
-                    if (step >= 100) and (val_step==0) and args.display_imgs==1:
+                    if (step >= 100) and ((val_step > 0) and (val_step < 3)) and args.display_imgs==1:
                         batchid = 0
                         img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
                         img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
