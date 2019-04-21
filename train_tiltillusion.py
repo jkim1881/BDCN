@@ -138,16 +138,18 @@ def train(model, args):
             loss = l2_loss(out, labels)
 
             if ((step ==1) or (step == 100)) and args.display_imgs==1:
+                import ipdb;ipdb.set_trace()
                 batchid = 0
                 img_min = np.min(np.array(images.cpu()[batchid, :, :, :].flatten()))
                 img_max = np.max(np.array(images.cpu()[batchid, :, :, :].flatten()))
                 img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
                     img_max - img_min)
-                gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
                 plt.subplot(131);
                 plt.imshow(img_transposed);
                 plt.subplot(132);
-                plt.imshow(gt_transposed);
+                plt.scatter(out.squeeze().cpu()[batchid,1], out.squeeze().cpu()[batchid,0])
+                plt.xlim(-2,2)
+                plt.ylim(-2,2)
                 plt.subplot(133);
                 plt.imshow(np.array(out[-1].cpu().detach()[batchid, 0, :, :]));
                 plt.show()
