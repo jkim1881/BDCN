@@ -160,8 +160,6 @@ def train(model, args):
             images, labels = Variable(images), Variable(labels)
 
             out = model(images)
-            import ipdb;
-            ipdb.set_trace()
             loss = l2_loss(out, labels) #+ cos_loss(out, labels)
             loss.backward()
 
