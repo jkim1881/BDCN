@@ -24,6 +24,9 @@ def plot_grad_flow(named_parameters):
             if p.grad is not None:
                 layers.append(n)
                 ave_grads.append(p.grad.abs().mean())
+            else:
+                layers.append(n)
+                ave_grads.append(0)
     plt.plot(ave_grads, alpha=0.3, color="b")
     plt.hlines(0, 0, len(ave_grads)+1, linewidth=1, color="k" )
     plt.xticks(range(0,len(ave_grads), 1), layers, rotation="vertical")
@@ -72,7 +75,8 @@ def l2_loss(out, labels):
     labels = labels.permute(0,2,1).unsqueeze(3)
     pos = torch.nn.MSELoss(size_average=None, reduce=None, reduction='mean')(out, labels)
     neg = torch.nn.MSELoss(size_average=None, reduce=None, reduction='mean')(-out, labels)
-    return torch.min(pos,neg) # mirror-symmetric loss
+    cos = torch.nn.modules.distance.CosineSimilarity(dim=1, eps=1e-8)(labels,out)
+    return torch.min(pos,neg) + cos # mirror-symmetric loss
 
 def train(model, args):
     # Configure datasets
