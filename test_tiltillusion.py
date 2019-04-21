@@ -74,19 +74,19 @@ def train(model, args):
             images, labels = Variable(images), Variable(labels)
 
             out = model(images)
-            out = out.clone().squeeze().cpu().detach().numpy()
-            out_deg = ((np.arctan2(out[:,0], out[:,1]))*180/np.pi)%180
-            labels = labels.clone().queeze().cpu().detach().numpy()
-            labels_deg = ((np.arctan2(labels[:,0], labels[:,1]))*180/np.pi)%180
-            meta = meta.clone().cpu().detach().numpy()
+            out_arr = out.squeeze().cpu().detach().numpy()
+            out_deg = ((np.arctan2(out_arr[:,0], out_arr[:,1]))*180/np.pi)%180
+            labels_arr = labels.squeeze().cpu().detach().numpy()
+            labels_deg = ((np.arctan2(labels_arr[:,0], labels_arr[:,1]))*180/np.pi)%180
+            meta_arr = meta.cpu().detach().numpy()
 
-            results = np.concatenate((np.expand_dims(meta[:, 1], axis=1),
-                                      np.expand_dims(meta[:, 5], axis=1),
+            results = np.concatenate((np.expand_dims(meta_arr[:, 1], axis=1),
+                                      np.expand_dims(meta_arr[:, 5], axis=1),
                                       np.expand_dims(out_deg,    axis=1),
-                                      np.expand_dims(meta[:, 0], axis=1),
-                                      np.expand_dims(meta[:, 2], axis=1),
-                                      np.expand_dims(meta[:, 3], axis=1),
-                                      np.expand_dims(meta[:, 7], axis=1)),
+                                      np.expand_dims(meta_arr[:, 0], axis=1),
+                                      np.expand_dims(meta_arr[:, 2], axis=1),
+                                      np.expand_dims(meta_arr[:, 3], axis=1),
+                                      np.expand_dims(meta_arr[:, 7], axis=1)),
                                       axis=1)
             accumulator = np.concatenate((accumulator, results), axis=0)
 
