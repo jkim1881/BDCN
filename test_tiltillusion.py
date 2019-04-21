@@ -77,6 +77,7 @@ def train(model, args):
             out_deg = ((np.arctan2(out[:,0],out[:,1])%1)*180/np.pi)%180
             labels = labels.squeeze().cpu().detach().numpy()
             labels_deg = ((np.arctan2(labels[:,0], labels[:,1])%1)*180/np.pi)%180
+            meta = meta.cpu().detach().numpy()
 
             import ipdb;
             ipdb.set_trace()
