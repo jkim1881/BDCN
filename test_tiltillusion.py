@@ -36,6 +36,7 @@ def orientation_diff(array1, array2):
                             np.expand_dims(concat[0] - concat[1] - 180, axis=1),
                             np.expand_dims(concat[0] - concat[1] + 180, axis=1)), axis=1)
     diffs_argmin = np.argmin(np.abs(diffs),axis=1)
+    import ipdb;ipdb.set_trace()
     return [idiff[argmin] for idiff, argmin in diffs, diffs_argmin]
 
 
