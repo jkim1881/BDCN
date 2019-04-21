@@ -78,8 +78,10 @@ def train(model, args):
             labels = labels.squeeze().cpu().detach().numpy()
             labels_deg = ((np.arctan2(labels[:,0], labels[:,1])%1)*180/np.pi)%180
 
+            import ipdb;
+            ipdb.set_trace()
             labels_diff = labels_deg - meta[:,1]
-            import ipdb;ipdb.set_trace()
+
 
             # cdegree (theta1), sdegree (theta2), ydegree, r1, lambda1, shift1, shift2
             # theta1_estimated =
