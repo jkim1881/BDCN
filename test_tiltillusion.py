@@ -80,12 +80,13 @@ def train(model, args):
             labels_deg = ((np.arctan2(labels[:,0], labels[:,1]))*180/np.pi)%180
             meta = meta.cpu().detach().numpy()
 
-            results = np.concatenate((np.expand_dims(meta[:,1], axis=1),
-                                      np.expand_dims(meta[:,5], axis=1),
-                                      np.expand_dims(out_deg, axis=1),
-                                      np.expand_dims(meta[:,0], axis=1),
-                                      np.expand_dims(meta[:,1], axis=1),
-                                      np.expand_dims(meta[:,2], axis=1)),
+            results = np.concatenate((np.expand_dims(meta[:, 1], axis=1),
+                                      np.expand_dims(meta[:, 5], axis=1),
+                                      np.expand_dims(out_deg,    axis=1),
+                                      np.expand_dims(meta[:, 0], axis=1),
+                                      np.expand_dims(meta[:, 2], axis=1),
+                                      np.expand_dims(meta[:, 3], axis=1),
+                                      np.expand_dims(meta[:, 7], axis=1)),
                                       axis=1)
             accumulator = np.concatenate((accumulator, results), axis=0)
 
