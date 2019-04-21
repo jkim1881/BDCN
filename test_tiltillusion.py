@@ -74,6 +74,7 @@ def train(model, args):
 
             out = model(images)
             import ipdb;ipdb.set_trace()
+            # out.squeeze().shape = labels.squeeze().shape = [10,2]
             # import ipdb;
             # ipdb.set_trace()
 
