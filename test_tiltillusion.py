@@ -90,9 +90,6 @@ def train(model, args):
                                       axis=1)
             accumulator = np.concatenate((accumulator, results), axis=0)
 
-            import ipdb;
-            ipdb.set_trace()
-
             # cdegree (theta1), sdegree (theta2), ydegree, r1, lambda1, shift1, shift2
             # theta1_estimated =
 
@@ -112,6 +109,11 @@ def train(model, args):
             logger.info('iter: %d, loss: %f, time using: %f(%fs/batch)' % (step,
                np.mean(mean_loss), tm, tm/(args.iter_size*args.display)))
             start_time = time.time()
+
+    # plot
+    import matplotlib.pyplot as plt
+    plt.scatter(accumulator[:,0], accumulator[:,2], vmin=0, vmax=180)
+    plt.show()
 
 def main():
     args = parse_args()
