@@ -146,7 +146,7 @@ def train(model, args):
                 plt.subplot(121);
                 plt.imshow(img_transposed);
                 plt.subplot(122);
-                plt.Circle((0, 0), size=1, color='black', fill=False)
+                plt.Circle((0, 0), 1, color='black', fill=False)
                 plt.plot(out.squeeze().detach().cpu()[batchid,1], out.squeeze().detach().cpu()[batchid,0], marker='x')
                 plt.plot(labels.squeeze().detach().cpu()[batchid, 1], labels.squeeze().detach().cpu()[batchid, 0], marker='o')
                 plt.xlim(-2,2)
@@ -204,7 +204,7 @@ def train(model, args):
                         plt.subplot(121);
                         plt.imshow(img_transposed);
                         plt.subplot(122);
-                        plt.Circle((0, 0), size=1, color='black', fill=False)
+                        plt.Circle((0, 0), 1, color='black', fill=False)
                         plt.plot(out.squeeze().detach().cpu()[batchid, 1], out.squeeze().detach().cpu()[batchid, 0],
                                  marker='x')
                         plt.plot(labels.squeeze().detach().cpu()[batchid, 1],
