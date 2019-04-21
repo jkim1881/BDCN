@@ -115,6 +115,7 @@ def train(model, args):
                 params += [{'params': v, 'lr': base_lr, 'weight_decay': weight_decay*1, 'name': key}]
             elif 'bias' in key:
                 params += [{'params': v, 'lr': base_lr, 'weight_decay': weight_decay*0, 'name': key}]
+    import ipdb;ipdb.set_trace()
     optimizer = torch.optim.SGD(params, momentum=args.momentum,
         lr=args.base_lr, weight_decay=args.weight_decay)
     start_step = 1
