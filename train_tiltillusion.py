@@ -75,14 +75,12 @@ def l2_loss(out, labels):
     labels = labels.permute(0,2,1).unsqueeze(3)
     pos = torch.nn.MSELoss(size_average=None, reduce=None, reduction='mean')(out, labels)
     neg = torch.nn.MSELoss(size_average=None, reduce=None, reduction='mean')(-out, labels)
-    cos = torch.nn.modules.distance.CosineSimilarity(dim=1, eps=1e-8)(labels,out)
-    negcos = torch.nn.modules.distance.CosineSimilarity(dim=1, eps=1e-8)(labels,-out)
-    return torch.min(pos,neg) - torch.max(cos,negcos) # mirror-symmetric loss
+    return torch.min(pos,neg)  # mirror-symmetric loss
 
 def cos_loss(out, labels):
     cos = torch.nn.modules.distance.CosineSimilarity(dim=1, eps=1e-8)(labels,out)
     negcos = torch.nn.modules.distance.CosineSimilarity(dim=1, eps=1e-8)(labels,-out)
-    return torch.max(cos,negcos) # mirror-symmetric loss
+    return torch.max(cos, negcos) # mirror-symmetric loss
 
 def train(model, args):
     # Configure datasets
@@ -163,7 +161,7 @@ def train(model, args):
             out = model(images)
             # import ipdb;
             # ipdb.set_trace()
-            loss = cos_loss(out, labels)#l2_loss(out, labels)
+            loss = l2_loss(out, labels)
             loss.backward()
 
             if (step%200 < 3) and args.display_imgs==1:
