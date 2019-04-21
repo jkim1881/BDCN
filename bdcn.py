@@ -337,7 +337,7 @@ class BDCN_ti(nn.Module):
         self.upsample_ti_8 = nn.Upsample(scale_factor=8, mode='bilinear')
         self.upsample_ti_8_5 = nn.Upsample(scale_factor=8, mode='bilinear')
 
-        self.ti_readout_1 = nn.Conv2d(4224, 2, (1, 1), stride=1, bias=True) # originally 105
+        self.ti_readout_1 = nn.Conv2d(4224, 2, (1, 1), stride=1, bias=True) # originally 105->105
         # self.ti_activation_1 = nn.ReLU(inplace=True)
         # self.ti_readout_2 = nn.Conv2d(16, 2, (1, 1), stride=1, bias=True)
 
