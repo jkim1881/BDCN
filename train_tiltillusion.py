@@ -162,6 +162,7 @@ def train(model, args):
 
             out = model(images)
             loss = l2_loss(out, labels) #+ cos_loss(out, labels)
+            import ipdb;ipdb.set_trace()
             loss.backward()
 
             if (step%200 < 3) and args.display_imgs==1:
