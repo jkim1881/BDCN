@@ -299,7 +299,7 @@ class BDCN_ti(nn.Module):
         # out = self.ti_readout_1(torch.cat(ti_list, 1))
         catcat = torch.cat([self.center_crop(feat, keepdims=True) for feat in features], 1)
         out = self.ti_readout_1(catcat)
-        # out = self.ti_readout_2(self.ti_activation_1(out))
+        out = self.ti_readout_2(self.ti_activation_1(out))
 
         return out
 
@@ -337,16 +337,16 @@ class BDCN_ti(nn.Module):
         self.upsample_ti_8 = nn.Upsample(scale_factor=8, mode='bilinear')
         self.upsample_ti_8_5 = nn.Upsample(scale_factor=8, mode='bilinear')
 
-        self.ti_readout_1 = nn.Conv2d(4224, 2, (1, 1), stride=1, bias=True) # originally 105->105
-        # self.ti_activation_1 = nn.ReLU(inplace=True)
-        # self.ti_readout_2 = nn.Conv2d(16, 2, (1, 1), stride=1, bias=True)
+        self.ti_readout_1 = nn.Conv2d(4224, 16, (1, 1), stride=1, bias=True) # originally 105
+        self.ti_activation_1 = nn.ReLU(inplace=True)
+        self.ti_readout_2 = nn.Conv2d(16, 2, (1, 1), stride=1, bias=True)
 
         for name, param in self.state_dict().items():
             if 'ti' in name:
                 if 'bias' in name:
                     param.zero_()
                 else:
-                    param.normal_(0, 0.001)
+                    param.normal_(0, 0.01)
 
 if __name__ == '__main__':
     model = BDCN('./caffemodel2pytorch/vgg16.pth')
