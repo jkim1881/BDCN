@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ea4384bc-3848-4698-b672-58beea586834" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/train_tiltillusion.py" afterPath="$PROJECT_DIR$/train_tiltillusion.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,8 +29,8 @@
       <file leaf-file-name="train_tiltillusion.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train_tiltillusion.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="149" column="71" lean-forward="true" selection-start-line="149" selection-start-column="71" selection-end-line="149" selection-end-column="71" />
+            <state relative-caret-position="458">
+              <caret line="163" column="46" lean-forward="true" selection-start-line="163" selection-start-column="46" selection-end-line="163" selection-end-column="46" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -617,8 +616,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/train_tiltillusion.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="149" column="71" lean-forward="true" selection-start-line="149" selection-start-column="71" selection-end-line="149" selection-end-column="71" />
+        <state relative-caret-position="458">
+          <caret line="163" column="46" lean-forward="true" selection-start-line="163" selection-start-column="46" selection-end-line="163" selection-end-column="46" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

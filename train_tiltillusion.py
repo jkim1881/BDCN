@@ -149,8 +149,8 @@ def train(model, args):
                 ax = plt.gca()
                 circ = plt.Circle((0, 0), 1, color='black', fill=False)
                 ax.add_artist(circ)
-                plt.plot(out.squeeze().detach().cpu()[batchid,1], out.squeeze().detach().cpu()[batchid,0], marker='x')
-                plt.plot(labels.squeeze().detach().cpu()[batchid, 1], labels.squeeze().detach().cpu()[batchid, 0], marker='o')
+                plt.plot(out.squeeze().detach().cpu()[batchid,0], out.squeeze().detach().cpu()[batchid,1], marker='x')
+                plt.plot(labels.squeeze().detach().cpu()[batchid, 0], labels.squeeze().detach().cpu()[batchid, 1], marker='o')
                 plt.xlim(-2,2)
                 plt.ylim(-2,2)
                 plt.show()
@@ -206,11 +206,13 @@ def train(model, args):
                         plt.subplot(121);
                         plt.imshow(img_transposed);
                         plt.subplot(122);
-                        plt.Circle((0, 0), 1, color='black', fill=False)
-                        plt.plot(out.squeeze().detach().cpu()[batchid, 1], out.squeeze().detach().cpu()[batchid, 0],
+                        ax = plt.gca()
+                        circ = plt.Circle((0, 0), 1, color='black', fill=False)
+                        ax.add_artist(circ)
+                        plt.plot(out.squeeze().detach().cpu()[batchid, 0], out.squeeze().detach().cpu()[batchid, 1],
                                  marker='x')
-                        plt.plot(labels.squeeze().detach().cpu()[batchid, 1],
-                                 labels.squeeze().detach().cpu()[batchid, 0], marker='o')
+                        plt.plot(labels.squeeze().detach().cpu()[batchid, 0],
+                                 labels.squeeze().detach().cpu()[batchid, 1], marker='o')
                         plt.xlim(-2, 2)
                         plt.ylim(-2, 2)
                         plt.show()
