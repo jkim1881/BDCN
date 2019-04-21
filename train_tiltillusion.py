@@ -81,6 +81,7 @@ def cos_loss(out, labels):
     labels = labels.permute(0, 2, 1).unsqueeze(3)
     cos = torch.nn.CosineSimilarity(dim=1, eps=1e-08)(labels,out)
     negcos = torch.nn.CosineSimilarity(dim=1, eps=1e-08)(labels,-out)
+    import ipdb;ipdb.set_trace()
     return torch.max(cos, negcos) # mirror-symmetric loss
 
 def train(model, args):
