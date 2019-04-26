@@ -8,14 +8,14 @@ device = torch.device("cpu")
 # device = torch.device("cuda:0") # Uncomment this to run on GPU
 
 ########## BASIC CASE
-N, D_in, D_out = 1, 6, 6
+N, D_in, D_out = 1, 5, 5
 
 # Initialize input and output
 x = torch.tensor(np.ones((1,D_in)), dtype=dtype, requires_grad=True)
-y = torch.tensor(np.zeros((1,D_in)), dtype=dtype, requires_grad=True)
+y = torch.tensor(np.zeros((1,D_out)), dtype=dtype, requires_grad=True)
 
 # Initialize weights: unit basis vectors except for d2, d3
-weight = torch.zeros(6, 6, dtype=dtype)
+weight = torch.zeros(D_in, D_out, dtype=dtype)
 weight[0,0] = 2
 weight[1,1] = 1
 weight[2,2] = 0.5
@@ -50,26 +50,23 @@ for iter in range(num_iters):
         x.grad.zero_()
         y.grad.zero_()
 
-plt.subplot(3,6,1);plt.plot(range(num_iters), [yt[0,0] for yt in y_history]);plt.ylim(-1,1)
-plt.subplot(3,6,2);plt.plot(range(num_iters), [yt[0,1] for yt in y_history]);plt.ylim(-1,1)
-plt.subplot(3,6,3);plt.plot(range(num_iters), [yt[0,2] for yt in y_history]);plt.ylim(-1,1)
-plt.subplot(3,6,4);plt.plot(range(num_iters), [yt[0,3] for yt in y_history]);plt.ylim(-1,1)
-plt.subplot(3,6,5);plt.plot(range(num_iters), [yt[0,4] for yt in y_history]);plt.ylim(-1,1)
-plt.subplot(3,6,6);plt.plot(range(num_iters), [yt[0,5] for yt in y_history]);plt.ylim(-1,1)
+plt.subplot(3,5,1);plt.plot(range(num_iters), [yt[0,0] for yt in y_history]);plt.ylim(-1,1)
+plt.subplot(3,5,2);plt.plot(range(num_iters), [yt[0,1] for yt in y_history]);plt.ylim(-1,1)
+plt.subplot(3,5,3);plt.plot(range(num_iters), [yt[0,2] for yt in y_history]);plt.ylim(-1,1)
+plt.subplot(3,5,4);plt.plot(range(num_iters), [yt[0,3] for yt in y_history]);plt.ylim(-1,1)
+plt.subplot(3,5,5);plt.plot(range(num_iters), [yt[0,4] for yt in y_history]);plt.ylim(-1,1)
 
-plt.subplot(3,6,7);plt.plot(range(num_iters), [et[0,0] for et in e_history]);plt.ylim(-1,1)
-plt.subplot(3,6,8);plt.plot(range(num_iters), [et[0,1] for et in e_history]);plt.ylim(-1,1)
-plt.subplot(3,6,9);plt.plot(range(num_iters), [et[0,2] for et in e_history]);plt.ylim(-1,1)
-plt.subplot(3,6,10);plt.plot(range(num_iters), [et[0,3] for et in e_history]);plt.ylim(-1,1)
-plt.subplot(3,6,11);plt.plot(range(num_iters), [et[0,4] for et in e_history]);plt.ylim(-1,1)
-plt.subplot(3,6,12);plt.plot(range(num_iters), [et[0,5] for et in e_history]);plt.ylim(-1,1)
+plt.subplot(3,5,6);plt.plot(range(num_iters), [et[0,0] for et in e_history]);plt.ylim(-1,1)
+plt.subplot(3,5,7);plt.plot(range(num_iters), [et[0,1] for et in e_history]);plt.ylim(-1,1)
+plt.subplot(3,5,8);plt.plot(range(num_iters), [et[0,2] for et in e_history]);plt.ylim(-1,1)
+plt.subplot(3,5,9);plt.plot(range(num_iters), [et[0,3] for et in e_history]);plt.ylim(-1,1)
+plt.subplot(3,5,10);plt.plot(range(num_iters), [et[0,4] for et in e_history]);plt.ylim(-1,1)
 
-plt.subplot(3,6,13);plt.plot(range(num_iters), [xt[0,0] for xt in x_history]);plt.ylim(-1,1)
-plt.subplot(3,6,14);plt.plot(range(num_iters), [xt[0,1] for xt in x_history]);plt.ylim(-1,1)
-plt.subplot(3,6,15);plt.plot(range(num_iters), [xt[0,2] for xt in x_history]);plt.ylim(-1,1)
-plt.subplot(3,6,16);plt.plot(range(num_iters), [xt[0,3] for xt in x_history]);plt.ylim(-1,1)
-plt.subplot(3,6,17);plt.plot(range(num_iters), [xt[0,4] for xt in x_history]);plt.ylim(-1,1)
-plt.subplot(3,6,18);plt.plot(range(num_iters), [xt[0,5] for xt in x_history]);plt.ylim(-1,1)
+plt.subplot(3,5,11);plt.plot(range(num_iters), [xt[0,0] for xt in x_history]);plt.ylim(-1,1)
+plt.subplot(3,5,12);plt.plot(range(num_iters), [xt[0,1] for xt in x_history]);plt.ylim(-1,1)
+plt.subplot(3,5,13);plt.plot(range(num_iters), [xt[0,2] for xt in x_history]);plt.ylim(-1,1)
+plt.subplot(3,5,14);plt.plot(range(num_iters), [xt[0,3] for xt in x_history]);plt.ylim(-1,1)
+plt.subplot(3,5,15);plt.plot(range(num_iters), [xt[0,4] for xt in x_history]);plt.ylim(-1,1)
 
 plt.show()
 
