@@ -29,13 +29,13 @@ x_rate = 0.01
 y_rate = 0.01
 
 for iter in range(num_iters):
-    x_history.append(x.numpy().copy())
-    y_history.append(y.numpy().copy())
+    x_history.append(x.detach().numpy().copy())
+    y_history.append(y.detach().numpy().copy())
 
     # Forward prediction
     pred = np.dot(np.transpose(weight), y)
     err = x - pred
-    e_history.append(err.numpy().copy())
+    e_history.append(err.detach().numpy().copy())
     loss = err.pow(2).sum()
 
     # Update input/output (GD)
