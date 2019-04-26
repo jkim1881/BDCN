@@ -143,7 +143,10 @@ if schedule[2]:
     N, D_in, D_out = 1, 3, 3
 
     # Initialize input and output
-    x = torch.tensor(np.ones((1, D_in)), dtype=dtype, requires_grad=True)
+    x_pre = np.ones((1, D_in))
+    x_pre[0, 1] = 2.1
+    x_pre[0, 2] = -1
+    x = torch.tensor(x_pre, dtype=dtype, requires_grad=True)
     y = torch.tensor(np.zeros((1, 1)), dtype=dtype, requires_grad=True)
 
     # Initialize weights: unit basis vectors except for d2, d3
@@ -151,8 +154,7 @@ if schedule[2]:
     weight[0, 0] = 2
     weight[1, 1] = 1
     weight[2, 2] = -2
-    # x[0, 1] = 2.1
-    # x[0, 2] = -1
+
 
     e_history = []
     x_history = []
@@ -183,9 +185,7 @@ if schedule[2]:
             x.grad.zero_()
             y.grad.zero_()
 
-    plt.subplot(3, 3, 1);plt.plot(range(num_iters), [yt[0, 0] for yt in y_history]);plt.ylim(-1, 1)
-    plt.subplot(3, 3, 2);plt.plot(range(num_iters), [yt[0, 1] for yt in y_history]);plt.ylim(-1, 1)
-    plt.subplot(3, 3, 3);plt.plot(range(num_iters), [yt[0, 2] for yt in y_history]);plt.ylim(-1, 1)
+    plt.subplot(3, 3, 2);plt.plot(range(num_iters), [yt[0, 0] for yt in y_history]);plt.ylim(-1, 1)
 
     plt.subplot(3, 3, 4);plt.plot(range(num_iters), [et[0, 0] for et in e_history]);plt.ylim(-1, 1)
     plt.subplot(3, 3, 5);plt.plot(range(num_iters), [et[0, 1] for et in e_history]);plt.ylim(-1, 1)
