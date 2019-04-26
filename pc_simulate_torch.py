@@ -186,7 +186,7 @@ if schedule[2]:
             x.grad.zero_()
             y.grad.zero_()
 
-    plt.subplot(3, 3, 2);plt.plot(range(num_iters), [yt[0, 0] for yt in y_history]);plt.ylim(-1, 1)
+    plt.subplot(3, 3, 2);plt.plot(range(num_iters), [yt[0, 0] for yt in y_history]);plt.ylim(-2, 2)
 
     plt.subplot(3, 3, 4);plt.plot(range(num_iters), [pt[0, 0] for pt in pred_history]);plt.ylim(-1, 1)
     plt.subplot(3, 3, 5);plt.plot(range(num_iters), [pt[0, 1] for pt in pred_history]);plt.ylim(-1, 1)
