@@ -45,8 +45,6 @@ for iter in range(num_iters):
     with torch.no_grad():
         x -= x_rate * x.grad
         y -= y_rate * y.grad
-        import ipdb;
-        ipdb.set_trace()
 
         # Manually zero the gradients after updating weights
         x.grad.zero_()
