@@ -151,8 +151,8 @@ if schedule[2]:
     weight[0, 0] = 2
     weight[1, 1] = 1
     weight[2, 2] = -2
-    x[0, 1] = 2.1
-    x[0, 2] = -1
+    # x[0, 1] = 2.1
+    # x[0, 2] = -1
 
     e_history = []
     x_history = []
@@ -169,7 +169,6 @@ if schedule[2]:
 
         # Forward prediction
         pred = x.mm(weight)
-        import ipdb;ipdb.set_trace()
         err = y - torch.max(pred)
         e_history.append(err.detach().numpy().copy())
         loss = err.pow(2).sum()
