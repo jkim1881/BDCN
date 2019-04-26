@@ -7,7 +7,7 @@ dtype = torch.float
 device = torch.device("cpu")
 # device = torch.device("cuda:0") # Uncomment this to run on GPU
 
-schedule = [False, False, True]
+schedule = [True, True, True]
 
 ########## Basic (FB prediction)
 if schedule[0]:
