@@ -7,7 +7,7 @@ dtype = torch.float
 device = torch.device("cpu")
 # device = torch.device("cuda:0") # Uncomment this to run on GPU
 
-schedule = [True, True, True]
+schedule = [False, False, True]
 
 ########## Basic (FB prediction)
 if schedule[0]:
@@ -169,6 +169,7 @@ if schedule[2]:
 
         # Forward prediction
         pred = x.mm(weight)
+        import ipdb;ipdb.set_trace()
         err = y - torch.max(pred)
         e_history.append(err.detach().numpy().copy())
         loss = err.pow(2).sum()
