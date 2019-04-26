@@ -43,7 +43,7 @@ for iter in range(num_iters):
     # Update input/output (GD)
     loss.backward()
     with torch.no_grad():
-        # x -= x_rate * x.grad
+        x -= x_rate * x.grad
         y -= y_rate * y.grad
 
         # Manually zero the gradients after updating weights
@@ -107,7 +107,7 @@ for iter in range(num_iters):
     # Update input/output (GD)
     loss.backward()
     with torch.no_grad():
-        # x -= x_rate * x.grad
+        x -= x_rate * x.grad
         y -= y_rate * y.grad
 
         # Manually zero the gradients after updating weights
