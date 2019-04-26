@@ -151,8 +151,8 @@ if schedule[2]:
     weight[0, 0] = 2
     weight[1, 1] = 1
     weight[2, 2] = -2
-    x[1] = 2.1
-    x[2] = -1
+    x[0, 1] = 2.1
+    x[0, 2] = -1
 
     e_history = []
     x_history = []
