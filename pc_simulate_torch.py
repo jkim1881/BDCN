@@ -41,9 +41,13 @@ for iter in range(num_iters):
     # Update input/output (GD)
     loss.backward()
     with torch.no_grad():
-        import ipdb;ipdb.set_trace()
-        x -= x_rate * x.grad
-        y -= y_rate * y.grad
+
+        try:
+            x -= x_rate * x.grad
+            y -= y_rate * y.grad
+        except:
+            import ipdb;
+            ipdb.set_trace()
 
         # Manually zero the gradients after updating weights
         x.grad.zero_()
