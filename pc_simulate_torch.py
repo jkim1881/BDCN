@@ -11,8 +11,8 @@ device = torch.device("cpu")
 N, D_in, D_out = 1, 6, 6
 
 # Initialize input and output
-x = torch.tensor(np.ones((D_in,1)), dtype=dtype, requires_grad=True)
-y = torch.tensor(np.ones((D_in,1)), dtype=dtype, requires_grad=True)
+x = torch.tensor(np.ones((1,D_in)), dtype=dtype, requires_grad=True)
+y = torch.tensor(np.ones((1,D_in)), dtype=dtype, requires_grad=True)
 
 # Initialize weights: unit basis vectors except for d2, d3
 weight = torch.zeros(6, 6, dtype=dtype)
