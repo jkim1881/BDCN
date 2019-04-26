@@ -155,8 +155,8 @@ if schedule[2]:
     weight[1, 1] = 1
     weight[2, 2] = -2
 
-
     e_history = []
+    pred_history = []
     x_history = []
     y_history = []
     num_iters = 250
@@ -171,6 +171,7 @@ if schedule[2]:
 
         # Forward prediction
         pred = x.mm(weight)
+        pred_history.append(pred)
         err = y - torch.max(pred)
         e_history.append(err.detach().numpy().copy())
         loss = err.pow(2).sum()
@@ -187,9 +188,9 @@ if schedule[2]:
 
     plt.subplot(3, 3, 2);plt.plot(range(num_iters), [yt[0, 0] for yt in y_history]);plt.ylim(-1, 1)
 
-    plt.subplot(3, 3, 4);plt.plot(range(num_iters), [et[0, 0] for et in e_history]);plt.ylim(-1, 1)
-    plt.subplot(3, 3, 5);plt.plot(range(num_iters), [et[0, 1] for et in e_history]);plt.ylim(-1, 1)
-    plt.subplot(3, 3, 6);plt.plot(range(num_iters), [et[0, 2] for et in e_history]);plt.ylim(-1, 1)
+    plt.subplot(3, 3, 4);plt.plot(range(num_iters), [pt[0, 0] for pt in pred_history]);plt.ylim(-1, 1)
+    plt.subplot(3, 3, 5);plt.plot(range(num_iters), [pt[0, 1] for pt in pred_history]);plt.ylim(-1, 1)
+    plt.subplot(3, 3, 6);plt.plot(range(num_iters), [pt[0, 2] for pt in pred_history]);plt.ylim(-1, 1)
 
     plt.subplot(3, 3, 7);plt.plot(range(num_iters), [xt[0, 0] for xt in x_history]);plt.ylim(-1, 1)
     plt.subplot(3, 3, 8);plt.plot(range(num_iters), [xt[0, 1] for xt in x_history]);plt.ylim(-1, 1)
