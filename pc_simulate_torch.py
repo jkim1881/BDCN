@@ -33,7 +33,7 @@ for iter in range(num_iters):
     y_history.append(y.detach().numpy().copy())
 
     # Forward prediction
-    pred = np.dot(np.transpose(weight), y)
+    pred = x.mm(weight)
     err = x - pred
     e_history.append(err.detach().numpy().copy())
     loss = err.pow(2).sum()
