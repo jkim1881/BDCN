@@ -50,7 +50,6 @@ for iter in range(num_iters):
         x.grad.zero_()
         y.grad.zero_()
 
-import ipdb;ipdb.set_trace()
 plt.subplot(3,6,1);plt.plot(range(num_iters), [yt[0,0] for yt in y_history]);plt.ylim(0,1)
 plt.subplot(3,6,2);plt.plot(range(num_iters), [yt[0,1] for yt in y_history]);plt.ylim(0,1)
 plt.subplot(3,6,3);plt.plot(range(num_iters), [yt[0,2] for yt in y_history]);plt.ylim(0,1)
