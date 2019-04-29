@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ea4384bc-3848-4698-b672-58beea586834" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bdcn_decoder.py" afterPath="$PROJECT_DIR$/bdcn_decoder.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datasets/prebake_multicue_crops.py" afterPath="$PROJECT_DIR$/datasets/prebake_multicue_crops.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pc_simulate_torch.py" afterPath="$PROJECT_DIR$/pc_simulate_torch.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_tiltillusion.py" afterPath="$PROJECT_DIR$/test_tiltillusion.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/train_tiltillusion.py" afterPath="$PROJECT_DIR$/train_tiltillusion.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,11 +26,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prebake_multicue_crops.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="prebake_multicue_crops.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/datasets/prebake_multicue_crops.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="101" column="104" lean-forward="true" selection-start-line="101" selection-start-column="104" selection-end-line="101" selection-end-column="104" />
+            <state relative-caret-position="312">
+              <caret line="38" column="67" lean-forward="true" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="67" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="prebake_bsds_crops.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/datasets/prebake_bsds_crops.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="24" column="52" lean-forward="false" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -109,18 +114,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pc_simulate.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pc_simulate.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="pc_simulate_torch.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pc_simulate_torch.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -185,7 +178,6 @@
         <option value="$PROJECT_DIR$/train_jk.py" />
         <option value="$PROJECT_DIR$/train_bsdscrops.py" />
         <option value="$PROJECT_DIR$/datasets/__init__.py" />
-        <option value="$PROJECT_DIR$/datasets/prebake_bsds_crops.py" />
         <option value="$PROJECT_DIR$/train.py" />
         <option value="$PROJECT_DIR$/train_smallstrain.py" />
         <option value="$PROJECT_DIR$/cfg.py" />
@@ -197,6 +189,7 @@
         <option value="$PROJECT_DIR$/test_tiltillusion.py" />
         <option value="$PROJECT_DIR$/train_tiltillusion.py" />
         <option value="$PROJECT_DIR$/datasets/prebake_multicue_crops.py" />
+        <option value="$PROJECT_DIR$/datasets/prebake_bsds_crops.py" />
       </list>
     </option>
   </component>
@@ -542,6 +535,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="795">
           <caret line="56" column="38" lean-forward="true" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -656,13 +650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
           <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datasets/prebake_bsds_crops.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="56" column="38" lean-forward="false" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -802,8 +789,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/datasets/prebake_multicue_crops.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="101" column="104" lean-forward="true" selection-start-line="101" selection-start-column="104" selection-end-line="101" selection-end-column="104" />
+        <state relative-caret-position="312">
+          <caret line="38" column="67" lean-forward="true" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets/prebake_bsds_crops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="24" column="52" lean-forward="false" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
           <folding />
         </state>
       </provider>

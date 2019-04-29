@@ -77,7 +77,7 @@ for train_val in ['test_nocrop']: # ['train','test','test_nocrop']:
 
 
         ### CROP AND SAVE
-        if train_val == 'test_nocrop':
+        if train_val is 'test_nocrop':
             scipy.misc.imsave(os.path.join(out_datset, 'data', 'images', train_val, fn + '.jpg'),
                               img)
             np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val,

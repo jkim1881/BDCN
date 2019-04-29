@@ -11,8 +11,8 @@ crop_size = 320
 
 for train_val in ['test_nocrop']: # ['train','test','test_nocrop']:
     # get list of images and gts from a specified path
-    image_dir = os.path.join(in_dataset, 'data', 'images', 'test' if train_val=='test_nocrop' else train_val)
-    gt_dir = os.path.join(in_dataset, 'data', 'groundTruth', 'test' if train_val=='test_nocrop' else train_val)
+    image_dir = os.path.join(in_dataset, 'data', 'images', 'test' if train_val is 'test_nocrop' else train_val)
+    gt_dir = os.path.join(in_dataset, 'data', 'groundTruth', 'test' if train_val is 'test_nocrop' else train_val)
     image_list = os.listdir(image_dir)
     gt_list = os.listdir(gt_dir)
     image_filenames_int = [file.split('.')[0] for file in image_list if '.jpg' in file]
@@ -43,7 +43,7 @@ for train_val in ['test_nocrop']: # ['train','test','test_nocrop']:
             gt_mean = gt_mean[:, :, 0]
 
         ### CROP AND SAVE
-        if train_val == 'test_nocrop':
+        if train_val is 'test_nocrop':
             scipy.misc.imsave(os.path.join(out_datset, 'data', 'images', train_val, fn + '.jpg'),
                               img)
             np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val, fn + '.npy'),
