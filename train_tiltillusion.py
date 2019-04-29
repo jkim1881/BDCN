@@ -9,7 +9,7 @@ import time
 import re
 import os
 import sys
-import bdcn
+import bdcn, bdcn_decoder
 from datasets.dataset import BSDS_crops, Multicue_crops, Tilt_illusion
 import cfg
 import log
@@ -277,6 +277,7 @@ def main():
         os.mkdir(args.param_dir)
     torch.manual_seed(long(time.time()))
     model = bdcn.BDCN_ti(pretrain=args.pretrain, logger=logger)
+    # model = bdcn_decoder.Decoder(pretrain=None, logger=logger, in_dim=XXXXX)
     if args.complete_pretrain:
         model.load_state_dict(torch.load(args.complete_pretrain))
     model.initialize_ti_weights()

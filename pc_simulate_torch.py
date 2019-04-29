@@ -138,7 +138,7 @@ if schedule[1]:
 
     plt.show()
 
-########## FF prediction with pooling
+########## FF prediction with pooling (conclusion: pooling does NOT work. behaves like an average layer)
 if schedule[2]:
     N, D_in, D_out = 1, 3, 3
 

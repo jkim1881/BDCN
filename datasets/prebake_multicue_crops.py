@@ -32,10 +32,11 @@ if not ((image_filenames_int == gt_boundaries_filenames_int)
     raise ValueError('image_filenames and gt_boundaries/edges_filenames do not match.')
 else:
     image_fn_int_dict = {'train': image_filenames_int[:int(0.8*len(image_filenames_int))],
-                         'test': image_filenames_int[int(0.8*len(image_filenames_int)):]}
+                         'test': image_filenames_int[int(0.8*len(image_filenames_int)):],
+                         'test_nocrop': image_filenames_int[int(0.8 * len(image_filenames_int)):]}
 
 # loop over examples and apply crops
-for train_val in ['train','test']:
+for train_val in ['test_nocrop']: # ['train','test','test_nocrop']:
     os.makedirs(os.path.join(out_datset, 'data', 'images', train_val))
     os.makedirs(os.path.join(out_datset, 'data', 'groundTruth', train_val))
     for fn in image_fn_int_dict[train_val]:
@@ -76,16 +77,25 @@ for train_val in ['train','test']:
 
 
         ### CROP AND SAVE
-        for i_th_crop in range(10):
-            offset = [np.random.randint(low=0, high=img.shape[0]-crop_size), np.random.randint(low=0, high=img.shape[1]-crop_size)]
-            im_crop = img[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size,:]
-            gt_boundaries_crop = gt_mean_boundaries[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size]
-            gt_edges_crop = gt_mean_edges[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size]
+        if train_val == 'test_nocrop':
+            scipy.misc.imsave(os.path.join(out_datset, 'data', 'images', train_val, fn + '.jpg'),
+                              img)
+            np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val,
+                                 fn + '.boundaries.npy'),
+                    gt_mean_boundaries)
+            np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val, fn + '.edges.npy'),
+                    gt_mean_edges)
+        else:
+            for i_th_crop in range(10):
+                offset = [np.random.randint(low=0, high=img.shape[0]-crop_size), np.random.randint(low=0, high=img.shape[1]-crop_size)]
+                im_crop = img[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size,:]
+                gt_boundaries_crop = gt_mean_boundaries[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size]
+                gt_edges_crop = gt_mean_edges[offset[0]:offset[0]+crop_size, offset[1]:offset[1]+crop_size]
 
-            scipy.misc.imsave(os.path.join(out_datset, 'data', 'images', train_val, fn + '_' + str(i_th_crop) + '.jpg'),
-                              im_crop)
-            np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val, fn + '_' + str(i_th_crop) + '.boundaries.npy'),
-                                gt_boundaries_crop)
-            np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val, fn + '_' + str(i_th_crop) + '.edges.npy'),
-                                gt_edges_crop)
+                scipy.misc.imsave(os.path.join(out_datset, 'data', 'images', train_val, fn + '_' + str(i_th_crop) + '.jpg'),
+                                  im_crop)
+                np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val, fn + '_' + str(i_th_crop) + '.boundaries.npy'),
+                                    gt_boundaries_crop)
+                np.save(os.path.join(out_datset, 'data', 'groundTruth', train_val, fn + '_' + str(i_th_crop) + '.edges.npy'),
+                                    gt_edges_crop)
     print('FIN')

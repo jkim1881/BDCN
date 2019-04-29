@@ -9,7 +9,7 @@ import time
 import re
 import os
 import sys
-import bdcn
+import bdcn, bdcn_decoder
 from datasets.dataset import BSDS_crops, Multicue_crops, Tilt_illusion
 import cfg
 import log
@@ -116,8 +116,8 @@ def train(model, args):
             pos = (pos + 1) % args.average_loss
         if step % args.display == 0:
             tm = time.time() - start_time
-            logger.info('iter: %d, loss: %f, time using: %f(%fs/batch)' % (step,
-               np.mean(mean_loss), tm, tm/(args.iter_size*args.display)))
+            logger.info('iter: %d, loss: %f, time using: %f(%fs/batch)' %
+                        (step, np.mean(mean_loss), tm, tm/(args.iter_size*args.display)))
             start_time = time.time()
 
     # plot
@@ -144,6 +144,7 @@ def main():
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
     torch.manual_seed(long(time.time()))
     model = bdcn.BDCN_ti(pretrain=None, logger=logger)
+    # model = bdcn_decoder.Decoder(pretrain=None, logger=logger, in_dim=XXXXX)
     model.initialize_ti_weights()
     if args.complete_pretrain:
         model.load_state_dict(torch.load(args.complete_pretrain))
