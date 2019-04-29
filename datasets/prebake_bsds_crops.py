@@ -31,8 +31,8 @@ for train_val in ['test_nocrop']: # ['train','test','test_nocrop']:
     os.makedirs(os.path.join(out_datset, 'data', 'groundTruth', train_val))
     for fn in files:
         print('filename: ' + fn)
-        img = scipy.misc.imread(os.path.join(in_dataset, 'data', 'images', train_val, fn + '.jpg'))
-        gt = scipy.io.loadmat(os.path.join(in_dataset, 'data', 'groundTruth', train_val, fn + '.mat'))['groundTruth'].reshape(-1)
+        img = scipy.misc.imread(os.path.join(in_dataset, 'data', 'images', 'test' if train_val is 'test_nocrop' else train_val, fn + '.jpg'))
+        gt = scipy.io.loadmat(os.path.join(in_dataset, 'data', 'groundTruth', 'test' if train_val is 'test_nocrop' else train_val, fn + '.mat'))['groundTruth'].reshape(-1)
 
         ### PREPROC GT
         gt_arr = []
