@@ -24,25 +24,22 @@ def test(model, args):
     if 'bsds' in args.dataset:
         data_root = '/media/data_cifs/pytorch_projects/datasets/BSDS500_crops'
         mean_bgr = np.array([104.00699, 116.66877, 122.67892])
-        yita = args.yita if args.yita else 0.5
         # Construct data loader
         test_img = BSDS_crops(data_root, type='test_nocrop',
-                               yita=yita, mean_bgr=mean_bgr, crop_size=None,
+                               mean_bgr=mean_bgr, crop_size=None,
                                max_examples=None, random_sample=False, return_filename=True)
         testloader = torch.utils.data.DataLoader(test_img,
                                                  batch_size=args.batch_size, shuffle=True, num_workers=5)
     if 'Multicue' in args.dataset:
         if 'Edges' in args.dataset:
             task = 'edges'
-            yita = args.yita if args.yita else 0.3
         if 'Boundaries' in args.dataset:
             task = 'boundaries'
-            yita = args.yita if args.yita else 0.4
         data_root = '/media/data_cifs/pytorch_projects/datasets/Multicue_crops'
         mean_bgr = np.array([104.00699, 116.66877, 122.67892])
         # Construct data loader
         test_img = Multicue_crops(data_root, type='test_nocrop', task=task,
-                                   yita=yita, mean_bgr=mean_bgr, crop_size=None,
+                                   mean_bgr=mean_bgr, crop_size=None,
                                    max_examples=None, random_sample=False, return_filename=True)
         testloader = torch.utils.data.DataLoader(test_img,
                                                  batch_size=args.batch_size, shuffle=True, num_workers=5)
