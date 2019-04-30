@@ -55,6 +55,7 @@ def test(model, args):
     start_time = time.time()
     all_t = 0
     for i, ((data, _), filename) in enumerate(testloader):
+        import ipdb;ipdb.set_trace()
         if args.cuda:
             data = data.cuda()
         data = Variable(data, volatile=True)
