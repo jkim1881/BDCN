@@ -29,7 +29,7 @@ def test(model, args):
                                mean_bgr=mean_bgr, crop_size=None,
                                max_examples=None, random_sample=False, return_filename=True)
         testloader = torch.utils.data.DataLoader(test_img,
-                                                 batch_size=args.batch_size, shuffle=True, num_workers=5)
+                                                 batch_size=1, shuffle=True, num_workers=5)
     if 'Multicue' in args.dataset:
         if 'Edges' in args.dataset:
             task = 'edges'
@@ -42,7 +42,7 @@ def test(model, args):
                                    mean_bgr=mean_bgr, crop_size=None,
                                    max_examples=None, random_sample=False, return_filename=True)
         testloader = torch.utils.data.DataLoader(test_img,
-                                                 batch_size=args.batch_size, shuffle=True, num_workers=5)
+                                                 batch_size=1, shuffle=True, num_workers=5)
 
     print('Num of test examples: ' + str(len(testloader)))
 
