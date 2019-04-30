@@ -187,7 +187,7 @@ class BSDS_crops(data.Dataset):
 	def __init__(self, root, type, yita=0.5,
 		mean_bgr = np.array([104.00699, 116.66877, 122.67892]),
 		crop_size=None, rgb=True, scale=None,
-		max_examples=None, random_sample=False):
+		max_examples=None, random_sample=False, return_filename=False):
 		self.mean_bgr = mean_bgr
 		self.root = root
 		self.type = type
@@ -196,6 +196,7 @@ class BSDS_crops(data.Dataset):
 		self.rgb = rgb
 		self.max_examples = max_examples
 		self.random_sample = random_sample
+		self.return_filename=return_filename
 		self.scale = scale
 		self.cache = {}
 
@@ -234,7 +235,10 @@ class BSDS_crops(data.Dataset):
 		# load gt image
 		gt_file = os.path.join(self.root, 'data', 'groundTruth', self.type, self.files[index] + self.gt_ext)
 		gt = load_image_with_cache_bsds_crops(gt_file, cache=None, npy=True) #self.cache, matfile=True)
-		return self.transform(img, gt)
+		if not self.return_filename
+			return self.transform(img, gt)
+		else:
+			return self.transform(img, gt), self.files[index] + self.img_ext
 
 	def transform(self, img, gt):
 		if len(gt.shape) == 3:
@@ -285,7 +289,7 @@ class Multicue_crops(data.Dataset):
 	def __init__(self, root, type, task, yita=0.5,
 		mean_bgr = np.array([104.00699, 116.66877, 122.67892]),
 		crop_size=None, rgb=True, scale=None,
-		max_examples=None, random_sample=False):
+		max_examples=None, random_sample=False, return_filename=False):
 		self.mean_bgr = mean_bgr
 		self.root = root
 		self.type = type # train or test
@@ -295,6 +299,7 @@ class Multicue_crops(data.Dataset):
 		self.rgb = rgb
 		self.max_examples = max_examples
 		self.random_sample = random_sample
+		self.return_filename = return_filename
 		self.scale = scale
 		self.cache = {}
 		if not (self.task=='edges' or self.task=='boundaries'):
@@ -335,7 +340,10 @@ class Multicue_crops(data.Dataset):
 		# load gt image
 		gt_file = os.path.join(self.root, 'data', 'groundTruth', self.type, self.files[index] + '.' + self.task + self.gt_ext)
 		gt = load_image_with_cache_multicue_crops(gt_file, cache=None, npy=True) #self.cache, matfile=True)
-		return self.transform(img, gt)
+		if not self.return_filename
+			return self.transform(img, gt)
+		else:
+			return self.transform(img, gt), self.files[index] + self.img_ext
 
 	def transform(self, img, gt):
 		if len(gt.shape) == 3:

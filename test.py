@@ -10,7 +10,7 @@ import os
 import sys
 import cv2
 import bdcn
-from datasets.dataset import Data
+from datasets.dataset import BSDS_crops, Multicue_crops
 import argparse
 import cfg
 from matplotlib import pyplot as plt
@@ -18,34 +18,46 @@ from matplotlib import pyplot as plt
 def sigmoid(x):
     return 1./(1+np.exp(np.array(-1.*x)))
 
-
 def test(model, args):
-    test_root = cfg.config_test[args.dataset]['data_root']
-    test_lst = cfg.config_test[args.dataset]['data_lst']
-    test_name_lst = os.path.join(test_root, 'voc_valtest.txt')
-    # test_name_lst = os.path.join(test_root, 'test_id.txt')
+
+    print(args.dataset)
+    if 'bsds' in args.dataset:
+        data_root = '/media/data_cifs/pytorch_projects/datasets/BSDS500_crops'
+        mean_bgr = np.array([104.00699, 116.66877, 122.67892])
+        yita = args.yita if args.yita else 0.5
+        # Construct data loader
+        test_img = BSDS_crops(data_root, type='test_nocrop',
+                               yita=yita, mean_bgr=mean_bgr, crop_size=None,
+                               max_examples=None, random_sample=False, return_filename=True)
+        testloader = torch.utils.data.DataLoader(test_img,
+                                                 batch_size=args.batch_size, shuffle=True, num_workers=5)
     if 'Multicue' in args.dataset:
-        test_lst = test_lst % args.k
-        test_name_lst = os.path.join(test_root, 'test%d_id.txt'%args.k)
-    mean_bgr = np.array(cfg.config_test[args.dataset]['mean_bgr'])
-    test_img = Data(test_root, test_lst, mean_bgr=mean_bgr)
-    testloader = torch.utils.data.DataLoader(
-        test_img, batch_size=1, shuffle=False, num_workers=8)
-    nm = np.loadtxt(test_name_lst, dtype=str)
-    print(len(testloader), len(nm))
-    assert len(testloader) == len(nm)
-    save_res = True
+        if 'Edges' in args.dataset:
+            task = 'edges'
+            yita = args.yita if args.yita else 0.3
+        if 'Boundaries' in args.dataset:
+            task = 'boundaries'
+            yita = args.yita if args.yita else 0.4
+        data_root = '/media/data_cifs/pytorch_projects/datasets/Multicue_crops'
+        mean_bgr = np.array([104.00699, 116.66877, 122.67892])
+        # Construct data loader
+        test_img = Multicue_crops(data_root, type='test_nocrop', task=task,
+                                   yita=yita, mean_bgr=mean_bgr, crop_size=None,
+                                   max_examples=None, random_sample=False, return_filename=True)
+        testloader = torch.utils.data.DataLoader(test_img,
+                                                 batch_size=args.batch_size, shuffle=True, num_workers=5)
+
+    print('Num of test examples: ' + str(len(testloader)))
+
     save_dir = args.res_dir
     if not os.path.exists(save_dir):
         os.mkdir(save_dir)
     if args.cuda:
         model.cuda()
     model.eval()
-    data_iter = iter(testloader)
-    iter_per_epoch = len(testloader)
     start_time = time.time()
     all_t = 0
-    for i, (data, _) in enumerate(testloader):
+    for i, ((data, _), filename) in enumerate(testloader):
         if args.cuda:
             data = data.cuda()
         data = Variable(data, volatile=True)
@@ -54,7 +66,7 @@ def test(model, args):
         fuse = F.sigmoid(out[-1]).cpu().data.numpy()[0, 0, :, :]
         if not os.path.exists(os.path.join(save_dir, 'fuse')):
             os.mkdir(os.path.join(save_dir, 'fuse'))
-        cv2.imwrite(os.path.join(save_dir, 'fuse', '%s.png'%nm[i]), 255-fuse*255)
+        cv2.imwrite(os.path.join(save_dir, 'fuse', filename), 255 - fuse*255)
         all_t += time.time() - tm
     print all_t
     print 'Overall Time use: ', time.time() - start_time
