@@ -64,7 +64,7 @@ def test(model, args):
         fuse = F.sigmoid(out[-1]).cpu().data.numpy()[0, 0, :, :]
         if not os.path.exists(os.path.join(save_dir, 'fuse')):
             os.mkdir(os.path.join(save_dir, 'fuse'))
-        cv2.imwrite(os.path.join(save_dir, 'fuse', filename), 255 - fuse*255)
+        cv2.imwrite(os.path.join(save_dir, 'fuse', filename[0]), 255 - fuse*255)
         all_t += time.time() - tm
     print all_t
     print 'Overall Time use: ', time.time() - start_time
