@@ -235,7 +235,7 @@ class BSDS_crops(data.Dataset):
 		# load gt image
 		gt_file = os.path.join(self.root, 'data', 'groundTruth', self.type, self.files[index] + self.gt_ext)
 		gt = load_image_with_cache_bsds_crops(gt_file, cache=None, npy=True) #self.cache, matfile=True)
-		if not self.return_filename
+		if not self.return_filename:
 			return self.transform(img, gt)
 		else:
 			return self.transform(img, gt), self.files[index] + self.img_ext
@@ -340,7 +340,7 @@ class Multicue_crops(data.Dataset):
 		# load gt image
 		gt_file = os.path.join(self.root, 'data', 'groundTruth', self.type, self.files[index] + '.' + self.task + self.gt_ext)
 		gt = load_image_with_cache_multicue_crops(gt_file, cache=None, npy=True) #self.cache, matfile=True)
-		if not self.return_filename
+		if not self.return_filename:
 			return self.transform(img, gt)
 		else:
 			return self.transform(img, gt), self.files[index] + self.img_ext
