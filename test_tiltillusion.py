@@ -82,6 +82,25 @@ def collapse_points(cs_diff, out_gt_diff):
     return cs_diff_collapsed, out_gt_diff_collapsed
 
 
+def screen(r1, lambda1, theta, r1min=None, r1max=None, lambda1min=None, lambda1max=None, thetamin=None, thetamax=None):
+    if np.array(r1).size > 1:
+        cond = np.ones_like(r1).astype(np.bool)
+    else:
+        cond = True
+    if r1min is not None:
+        cond = cond * (r1 > r1min)
+    if r1max is not None:
+        cond = cond * (r1 < r1max)
+    if lambda1min is not None:
+        cond = cond * (lambda1 > lambda1min)
+    if lambda1max is not None:
+        cond = cond * (lambda1 < lambda1max)
+    if thetamin is not None:
+        cond = cond * ((theta > thetamin) | (theta > thetamin+180))
+    if thetamax is not None:
+        cond = cond * (theta < thetamax)
+    return cond
+
 def train(model, args):
     # Configure datasets
     # import ipdb;
@@ -141,7 +160,13 @@ def train(model, args):
                                       np.expand_dims(meta_arr[:, 3], axis=1),
                                       np.expand_dims(meta_arr[:, 7], axis=1)),
                                       axis=1)
-            accumulator = np.concatenate((accumulator, results), axis=0)
+
+            for i in results.shape[0]:
+                cond = screen(meta_arr[i, 3].astype(np.float), meta_arr[i, 5].astype(np.float), meta_arr[i, 4].astype(np.float),
+                              r1min=100, r1max=100 + 20, lambda1min=None, lambda1max=None,
+                              thetamin=22.5, thetamax=22.5 + 45)
+                if cond:
+                    accumulator = np.concatenate((accumulator, results[i,:]), axis=0)
 
             # cdegree (theta1), sdegree (theta2), ydegree, r1, lambda1, shift1, shift2
             # theta1_estimated =
