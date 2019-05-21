@@ -166,7 +166,6 @@ def train(model, args):
                               r1min=100, r1max=100 + 20, lambda1min=None, lambda1max=None,
                               thetamin=22.5, thetamax=22.5 + 45)
                 print(cond)
-                import ipdb;ipdb.set_trace()
                 if cond:
                     accumulator = np.concatenate((accumulator, results[i,:]), axis=0)
 
