@@ -162,16 +162,13 @@ def train(model, args):
                                       axis=1)
 
             for i in range(results.shape[0]):
-                cond = screen(meta_arr[i, 3].astype(np.float), meta_arr[i, 5].astype(np.float), meta_arr[i, 4].astype(np.float),
+                cond = screen(meta_arr[i, 0].astype(np.float), meta_arr[i, 2].astype(np.float), meta_arr[i, 1].astype(np.float),
                               r1min=100, r1max=100 + 20, lambda1min=None, lambda1max=None,
                               thetamin=22.5, thetamax=22.5 + 45)
                 print(cond)
                 import ipdb;ipdb.set_trace()
                 if cond:
                     accumulator = np.concatenate((accumulator, results[i,:]), axis=0)
-
-            # cdegree (theta1), sdegree (theta2), ydegree, r1, lambda1, shift1, shift2
-            # theta1_estimated =
 
             loss = l2_loss(out, labels)
 
