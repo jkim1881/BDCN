@@ -181,8 +181,8 @@ def train(model, args):
             start_time = time.time()
 
     # FIGURE
-    f = plt.figure(figsize=(4, 4))
-    axarr = f.subplots(4, 4)  # (4, 4)
+    plt.figure(figsize=(4, 4))
+    axarr = plt.subplots(4, 4)  # (4, 4)
     for ir, rmin in enumerate([40, 60, 80, 100]):
         for ith, thetamin in enumerate([-22.5, 22.5, 67.5, 112.5]):
             center_gt = []
