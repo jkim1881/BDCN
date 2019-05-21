@@ -165,7 +165,7 @@ def train(model, args):
 
     # plot
     import matplotlib.pyplot as plt
-    plt.figure(figsize=(16,4))
+    plt.figure(figsize=(16,3))
     plt.subplot(141)
     plt.scatter(accumulator[:, 0], accumulator[:,2], s=10, vmin=0, vmax=180)
 
