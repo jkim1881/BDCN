@@ -204,7 +204,7 @@ def train(model, args):
 
     f = plt.figure(figsize=(4,4))
     axarr = f.subplots(1,1) #(4, 4)
-    coefs = poly.polyfit(cs_diff_collapsed, out_gt_diff_collapsed, 3)
+    coefs = poly.polyfit(cs_diff_collapsed, out_gt_diff_collapsed, 4)
     ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
     axarr.scatter(cs_diff_collapsed, out_gt_diff_collapsed, s=40, alpha=0.25, vmin=0, vmax=180)
     # coefs = poly.polyfit(cs_diff, out_gt_diff, 5)

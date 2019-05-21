@@ -136,7 +136,7 @@ def main():
                     cs_diff = orientation_diff(center_gt, surround_gt) #center - surround in x axis
                     out_gt_diff = orientation_diff(predictions, center_gt) #pred - gt in y axis
                     cs_diff_collapsed, out_gt_diff_collapsed = collapse_points(cs_diff, out_gt_diff)
-                    coefs = poly.polyfit(cs_diff_collapsed, out_gt_diff_collapsed, 3)
+                    coefs = poly.polyfit(cs_diff_collapsed, out_gt_diff_collapsed, 5)
                     ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
                     axarr[ir,ith].scatter(cs_diff_collapsed, out_gt_diff_collapsed, s=40, alpha=0.25, vmin=0, vmax=180)
                     # coefs = poly.polyfit(cs_diff, out_gt_diff, 5)
