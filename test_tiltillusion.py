@@ -130,6 +130,7 @@ def train(model, args):
         model.cuda()
     model.eval() # same as model.train(mode=False)
 
+    # EVAL
     import matplotlib.pyplot as plt
     accumulator = np.zeros((0,7))
     for step in xrange(start_step, args.max_test_examples/(args.iter_size * args.batch_size) + 1):
@@ -160,12 +161,7 @@ def train(model, args):
                                       np.expand_dims(meta_arr[:, 7], axis=1)),
                                       axis=1)
 
-            for i in range(results.shape[0]):
-                cond = screen(meta_arr[i, 0].astype(np.float), meta_arr[i, 2].astype(np.float), meta_arr[i, 1].astype(np.float),
-                              r1min=100, r1max=100 + 20, lambda1min=None, lambda1max=None,
-                              thetamin=22.5, thetamax=22.5 + 45)
-                if cond:
-                    accumulator = np.concatenate((accumulator, np.expand_dims(results[i,:],axis=0)), axis=0)
+            accumulator = np.concatenate((accumulator, results), axis=0)
 
             loss = l2_loss(out, labels)
 
@@ -183,6 +179,80 @@ def train(model, args):
             logger.info('iter: %d, loss: %f, time using: %f(%fs/batch)' %
                         (step, np.mean(mean_loss), tm, tm/(args.iter_size*args.display)))
             start_time = time.time()
+
+    # FIGURE
+    f = plt.figure(figsize=(4, 4))
+    axarr = f.subplots(4, 4)  # (4, 4)
+    for ir, rmin in enumerate([40, 60, 80, 100]):
+        for ith, thetamin in enumerate([-22.5, 22.5, 67.5, 112.5]):
+            center_gt = []
+            surround_gt = []
+            predictions = []
+            cond = screen(meta_arr[:, 3].astype(np.float), meta_arr[:, 5].astype(np.float),
+                          meta_arr[:, 4].astype(np.float),
+                          r1min=rmin, r1max=rmin + 20, lambda1min=None, lambda1max=None, thetamin=thetamin,
+                          thetamax=thetamin + 45)
+            for i in xrange(accumulator.shape[0]):
+
+                if cond[i]:
+                    center_gt.append(accumulator[i, 0].astype(np.float))
+                    surround_gt.append(accumulator[i, 1].astype(np.float))
+                    predictions.append(accumulator[i, 2])
+
+            if len(center_gt) > 0:
+                # # plot
+                # print('filtered ' + str(len(predictions)) + ' data')
+                # import matplotlib.pyplot as plt
+                # plt.figure(figsize=(16, 4))
+                # plt.subplot(141)
+                # plt.scatter(center_gt, np.array(predictions), s=10, vmin=0, vmax=180)
+                #
+                import numpy.polynomial.polynomial as poly
+                # plt.subplot(142)
+                cs_diff = orientation_diff(center_gt, surround_gt)  # center - surround in x axis
+                out_gt_diff = orientation_diff(predictions, center_gt)  # pred - gt in y axis
+                cs_diff_collapsed, out_gt_diff_collapsed = collapse_points(cs_diff, out_gt_diff)
+                coefs = poly.polyfit(cs_diff_collapsed, out_gt_diff_collapsed, 5)
+                ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
+                axarr[ir, ith].scatter(cs_diff_collapsed, out_gt_diff_collapsed, s=40, alpha=0.25, vmin=0, vmax=180)
+                # coefs = poly.polyfit(cs_diff, out_gt_diff, 5)
+                # ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
+                # axarr[ir, ith].scatter(cs_diff, out_gt_diff, s=15, alpha=0.3, vmin=0, vmax=180)
+                axarr[ir, ith].plot(np.arange(-90, 90, 1), ffit, linewidth=3, alpha=0.5, color='black')
+                axarr[ir, ith].plot(np.arange(-90, 90, 1), [0] * np.arange(-90, 90, 1).size, color='black')
+                axarr[ir, ith].set_xlim(0, 87)
+                axarr[ir, ith].set_ylim(-20, 40)
+                axarr[ir, ith].set_title(
+                    'r in ' + str([rmin, rmin + 20]) + ', tht in ' + str([thetamin, thetamin + 45]))
+
+                import numpy.polynomial.polynomial as poly
+                ff = plt.figure(figsize=(4, 4))
+                axr = ff.subplots(1, 1)  # (4, 4)
+                cs_diff = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
+                out_gt_diff = [-0.18281291942873512,
+                               1.8150305059760774,
+                               2.6838843821231793,
+                               1.997825226463081,
+                               0.48926489924610905,
+                               -0.3967642281601318,
+                               -0.3215298030419529,
+                               -0.6945125640943974,
+                               -0.5774387719354115,
+                               -0.4699194241854827]
+                cs_diff_collapsed, out_gt_diff_collapsed = collapse_points(cs_diff, out_gt_diff)
+                coefs = poly.polyfit(cs_diff_collapsed, out_gt_diff_collapsed, 5)
+                ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
+                axr.scatter(cs_diff_collapsed, out_gt_diff_collapsed, s=40, alpha=0.45, vmin=0, vmax=180)
+                # coefs = poly.polyfit(cs_diff, out_gt_diff, 5)
+                # ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
+                # axarr[ir, ith].scatter(cs_diff, out_gt_diff, s=15, alpha=0.3, vmin=0, vmax=180)
+                axr.plot(np.arange(-90, 90, 1), ffit, linewidth=3, alpha=0.5, color='black')
+                axr.plot(np.arange(-90, 90, 1), [0] * np.arange(-90, 90, 1).size, color='black')
+                axr.set_xlim(0, 87)
+                axr.set_ylim(-2, 4)
+                ff.show()
+
+
 
     # plot
     import matplotlib.pyplot as plt
