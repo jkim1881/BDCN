@@ -165,6 +165,7 @@ def train(model, args):
                 cond = screen(meta_arr[i, 3].astype(np.float), meta_arr[i, 5].astype(np.float), meta_arr[i, 4].astype(np.float),
                               r1min=100, r1max=100 + 20, lambda1min=None, lambda1max=None,
                               thetamin=22.5, thetamax=22.5 + 45)
+                print(cond)
                 if cond:
                     accumulator = np.concatenate((accumulator, results[i,:]), axis=0)
 
