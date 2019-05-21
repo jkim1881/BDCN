@@ -223,7 +223,7 @@ def train(model, args):
                 axarr[ir, ith].set_xlim(0, 87)
                 axarr[ir, ith].set_ylim(-20, 40)
                 axarr[ir, ith].set_title('r in ' + str([rmin, rmin + 20]) + ', tht in ' + str([thetamin, thetamin + 45]))
-    f.show()
+    plt.show()
 
 
 def main():
