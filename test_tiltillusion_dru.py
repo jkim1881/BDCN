@@ -149,6 +149,31 @@ def main():
                     axarr[ir,ith].set_title('r in ' + str([rmin, rmin+20]) + ', tht in ' + str([thetamin, thetamin+45]))
 
 
+                    import numpy.polynomial.polynomial as poly
+                    cs_diff = [0,10,20,30,40,50,60,70,80,90]
+                    out_gt_diff = [-0.18281291942873512,
+                                   1.8150305059760774,
+                                   2.6838843821231793,
+                                   1.997825226463081,
+                                   0.48926489924610905,
+                                   -0.3967642281601318,
+                                   -0.3215298030419529,
+                                   -0.6945125640943974,
+                                   -0.5774387719354115,
+                                   -0.4699194241854827]
+                    cs_diff_collapsed, out_gt_diff_collapsed = collapse_points(cs_diff, out_gt_diff)
+                    coefs = poly.polyfit(cs_diff_collapsed, out_gt_diff_collapsed, 5)
+                    ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
+                    axarr[ir,ith].scatter(cs_diff_collapsed, out_gt_diff_collapsed, s=40, alpha=0.25, vmin=0, vmax=180)
+                    # coefs = poly.polyfit(cs_diff, out_gt_diff, 5)
+                    # ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
+                    # axarr[ir, ith].scatter(cs_diff, out_gt_diff, s=15, alpha=0.3, vmin=0, vmax=180)
+                    axarr[ir,ith].plot(np.arange(-90, 90, 1), ffit, linewidth=3, alpha=0.5, color='black')
+                    axarr[ir,ith].plot(np.arange(-90, 90, 1), [0] * np.arange(-90, 90, 1).size, color='black')
+                    axarr[ir,ith].set_xlim(0, 87)
+                    axarr[ir,ith].set_ylim(-20, 40)
+                    axarr[ir,ith].set_title('r in ' + str([rmin, rmin+20]) + ', tht in ' + str([thetamin, thetamin+45]))
+
                     #
                     # plt.subplot(143)
                     # x_list, y_mu, y_25, y_75 = cluster_points(cs_diff, out_gt_diff, 10)

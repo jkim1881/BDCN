@@ -131,9 +131,8 @@ def train(model, args):
     model.eval() # same as model.train(mode=False)
 
     import matplotlib.pyplot as plt
-
     accumulator = np.zeros((0,7))
-    for step in xrange(start_step, args.max_test_examples/(args.iter_size*args.batch_size) + 1):
+    for step in xrange(start_step, args.max_test_examples/(args.iter_size * args.batch_size) + 1):
         batch_loss = 0
         for i in xrange(args.iter_size):
             if cur == iter_per_epoch:
@@ -154,7 +153,7 @@ def train(model, args):
 
             results = np.concatenate((np.expand_dims(meta_arr[:, 1], axis=1),
                                       np.expand_dims(meta_arr[:, 5], axis=1),
-                                      np.expand_dims(out_deg,    axis=1),
+                                      np.expand_dims(out_deg, axis=1),
                                       np.expand_dims(meta_arr[:, 0], axis=1),
                                       np.expand_dims(meta_arr[:, 2], axis=1),
                                       np.expand_dims(meta_arr[:, 3], axis=1),
