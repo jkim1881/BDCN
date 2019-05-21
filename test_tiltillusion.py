@@ -188,12 +188,12 @@ def train(model, args):
             center_gt = []
             surround_gt = []
             predictions = []
-            cond = screen(meta_arr[:, 3].astype(np.float), meta_arr[:, 5].astype(np.float),
-                          meta_arr[:, 4].astype(np.float),
-                          r1min=rmin, r1max=rmin + 20, lambda1min=None, lambda1max=None, thetamin=thetamin,
-                          thetamax=thetamin + 45)
-            for i in xrange(accumulator.shape[0]):
 
+            for i in xrange(accumulator.shape[0]):
+                cond = screen(meta_arr[:, 0].astype(np.float), meta_arr[:, 2].astype(np.float),
+                              meta_arr[:, 1].astype(np.float),
+                              r1min=rmin, r1max=rmin + 20, lambda1min=None, lambda1max=None, thetamin=thetamin,
+                              thetamax=thetamin + 45)
                 if cond[i]:
                     center_gt.append(accumulator[i, 0].astype(np.float))
                     surround_gt.append(accumulator[i, 1].astype(np.float))
