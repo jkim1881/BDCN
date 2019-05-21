@@ -182,7 +182,7 @@ def train(model, args):
 
     # FIGURE
     plt.figure(figsize=(4, 4))
-    axarr = plt.subplots(4, 4)  # (4, 4)
+    f, axarr = plt.subplots(4, 4)  # (4, 4)
     for ir, rmin in enumerate([40, 60, 80, 100]):
         for ith, thetamin in enumerate([-22.5, 22.5, 67.5, 112.5]):
             center_gt = []
