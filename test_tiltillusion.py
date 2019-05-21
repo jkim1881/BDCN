@@ -214,7 +214,7 @@ def train(model, args):
     axarr.plot(np.arange(-90, 90, 1), [0] * np.arange(-90, 90, 1).size, color='black')
     axarr.set_xlim(0, 87)
     axarr.set_ylim(-20, 40)
-
+    plt.show()
 
 def main():
     args = parse_args()
