@@ -165,9 +165,11 @@ def train(model, args):
                 cond = screen(meta_arr[i, 0].astype(np.float), meta_arr[i, 2].astype(np.float), meta_arr[i, 1].astype(np.float),
                               r1min=100, r1max=100 + 20, lambda1min=None, lambda1max=None,
                               thetamin=22.5, thetamax=22.5 + 45)
-                import ipdb;ipdb.set_trace()
                 if cond:
-                    accumulator = np.concatenate((accumulator, results[i,:]), axis=0)
+                    try:
+                        accumulator = np.concatenate((accumulator, results[i,:]), axis=0)
+                    except:
+                        import ipdb;ipdb.set_trace()
 
             loss = l2_loss(out, labels)
 
