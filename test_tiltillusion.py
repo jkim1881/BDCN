@@ -165,20 +165,9 @@ def train(model, args):
 
     # plot
     import matplotlib.pyplot as plt
-    plt.subplot(121)
+    plt.figure(figsize=(16,4))
+    plt.subplot(141)
     plt.scatter(accumulator[:, 0], accumulator[:,2], s=10, vmin=0, vmax=180)
-
-    import numpy.polynomial.polynomial as poly
-    plt.subplot(122)
-    cs_diff = orientation_diff(accumulator[:, 0], accumulator[:, 1]) #center - surround in x axis
-    out_gt_diff = orientation_diff(accumulator[:, 2], accumulator[:, 0]) #pred - gt in y axis
-    coefs = poly.polyfit(cs_diff, out_gt_diff, 3)
-    ffit = poly.polyval(np.arange(-90,90,1), coefs)
-    plt.scatter(cs_diff, out_gt_diff, s=15, alpha=0.3, vmin=0, vmax=180)
-    plt.plot(np.arange(-90,90,1), ffit, linewidth=3, alpha=0.5, color='black')
-    plt.xlim(0, 90)
-    plt.ylim(-30,30)
-    plt.show()
 
     import numpy.polynomial.polynomial as poly
     plt.subplot(142)

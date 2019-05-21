@@ -95,6 +95,7 @@ def main():
     # plot
     print('filtered ' + str(len(predictions)) + ' data')
     import matplotlib.pyplot as plt
+    plt.figure(figsize=(16, 4))
     plt.subplot(141)
     plt.scatter(center_gt, np.array(predictions), s=10, vmin=0, vmax=180)
 
