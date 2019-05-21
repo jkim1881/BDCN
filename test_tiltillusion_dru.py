@@ -56,12 +56,13 @@ def main():
 
     import numpy.polynomial.polynomial as poly
     plt.subplot(122)
-    cs_diff = orientation_diff(surround_gt, center_gt)
-    out_gt_diff = orientation_diff(predictions, center_gt)
+    cs_diff = orientation_diff(center_gt, surround_gt) #center - surround in x axis
+    out_gt_diff = orientation_diff(predictions, center_gt) #pred - gt in y axis
     coefs = poly.polyfit(cs_diff, out_gt_diff, 3)
     ffit = poly.polyval(np.arange(-90,90,1), coefs)
     plt.scatter(cs_diff, out_gt_diff, s=15, alpha=0.3, vmin=0, vmax=180)
     plt.plot(np.arange(-90,90,1), ffit, linewidth=3, alpha=0.5, color='black')
+    plt.xlim(0, 90)
     plt.ylim(-30,30)
     plt.show()
 
