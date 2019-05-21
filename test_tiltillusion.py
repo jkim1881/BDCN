@@ -159,7 +159,7 @@ def train(model, args):
                                       np.expand_dims(meta_arr[:, 2], axis=1),
                                       np.expand_dims(meta_arr[:, 3], axis=1),
                                       np.expand_dims(meta_arr[:, 7], axis=1)),
-                                      axis=1)
+                                      axis=0)
 
             accumulator = np.concatenate((accumulator, results), axis=0)
 
@@ -190,11 +190,11 @@ def train(model, args):
             predictions = []
 
             for i in xrange(accumulator.shape[0]):
-                cond = screen(meta_arr[:, 0].astype(np.float), meta_arr[:, 2].astype(np.float),
-                              meta_arr[:, 1].astype(np.float),
+                cond = screen(accumulator[i, 3].astype(np.float), accumulator[i, 4].astype(np.float),
+                              accumulator[i, 0].astype(np.float),
                               r1min=rmin, r1max=rmin + 20, lambda1min=None, lambda1max=None, thetamin=thetamin,
                               thetamax=thetamin + 45)
-                if cond[i]:
+                if cond:
                     center_gt.append(accumulator[i, 0].astype(np.float))
                     surround_gt.append(accumulator[i, 1].astype(np.float))
                     predictions.append(accumulator[i, 2])
