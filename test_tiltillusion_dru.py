@@ -4,17 +4,61 @@ import os
 import sys
 import cv2
 
+
 def orientation_diff(array1, array2):
     concat = np.concatenate((np.expand_dims(array1, axis=1),
                              np.expand_dims(array2, axis=1)), axis=1)
     diffs = np.concatenate((np.expand_dims(concat[:,0] - concat[:,1], axis=1),
                             np.expand_dims(concat[:,0] - concat[:,1] - 180, axis=1),
                             np.expand_dims(concat[:,0] - concat[:,1] + 180, axis=1)), axis=1)
-    diffs_argmin = np.argmin(np.abs(diffs),axis=1)
+    diffs_argmin = np.argmin(np.abs(diffs), axis=1)
     return [idiff[argmin] for idiff, argmin in zip(diffs, diffs_argmin)]
 
-def main():
 
+def cluster_points(xs, ys, stepsize):
+    xss = list(xs)
+    sort_args = np.array(xss).argsort()
+    xss.sort()
+    ys_sorted = np.array(ys)[sort_args]
+
+    x_accumulator = []
+    y_mu = []
+    y_25 = []
+    y_75 = []
+    x_perbin = []
+    y_perbin = []
+    icut = -90 + stepsize
+
+    for ix, iy in zip(xss, ys_sorted):
+        if ix < icut:
+            x_perbin.append(ix)
+            y_perbin.append(iy)
+        else:
+            if len(y_perbin) > 0:
+                x_accumulator.append(icut - stepsize / 2)
+                y_mu.append(np.median(y_perbin))
+                y_25.append(np.percentile(y_perbin, 25))
+                y_75.append(np.percentile(y_perbin, 75))
+            icut += stepsize
+            x_perbin = []
+            y_perbin = []
+    return x_accumulator, y_mu, y_25, y_75
+
+
+def collapse_points(cs_diff, out_gt_diff):
+    cs_diff_collapsed =[]
+    out_gt_diff_collapsed = []
+    for ix, iy in zip(cs_diff, out_gt_diff):
+        if ix < -10:
+            cs_diff_collapsed.append(-ix)
+            out_gt_diff_collapsed.append(-iy)
+        else:
+            cs_diff_collapsed.append(ix)
+            out_gt_diff_collapsed.append(iy)
+    return cs_diff_collapsed, out_gt_diff_collapsed
+
+
+def main():
     ### ASSUME OUTPUT FILE AND META ARE CO-ALIGNED
     center_gt = []
     surround_gt = []
@@ -51,19 +95,39 @@ def main():
     # plot
     print('filtered ' + str(len(predictions)) + ' data')
     import matplotlib.pyplot as plt
-    plt.subplot(121)
+    plt.subplot(141)
     plt.scatter(center_gt, np.array(predictions), s=10, vmin=0, vmax=180)
 
     import numpy.polynomial.polynomial as poly
-    plt.subplot(122)
+    plt.subplot(142)
     cs_diff = orientation_diff(center_gt, surround_gt) #center - surround in x axis
     out_gt_diff = orientation_diff(predictions, center_gt) #pred - gt in y axis
-    coefs = poly.polyfit(cs_diff, out_gt_diff, 3)
-    ffit = poly.polyval(np.arange(-90,90,1), coefs)
+    coefs = poly.polyfit(cs_diff, out_gt_diff, 5)
+    ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
     plt.scatter(cs_diff, out_gt_diff, s=15, alpha=0.3, vmin=0, vmax=180)
-    plt.plot(np.arange(-90,90,1), ffit, linewidth=3, alpha=0.5, color='black')
+    plt.plot(np.arange(-90, 90, 1), ffit, linewidth=3, alpha=0.5, color='black')
     plt.xlim(0, 90)
-    plt.ylim(-30,30)
+    plt.ylim(-60, 60)
+
+    plt.subplot(143)
+    x_list, y_mu, y_25, y_75 = cluster_points(cs_diff, out_gt_diff, 10)
+    plt.scatter(cs_diff, out_gt_diff, s=25, alpha=0.1, vmin=0, vmax=180, color='black')
+    plt.plot(np.arange(-90, 90, 1), [0]*np.arange(-90, 90, 1).size, color='black')
+    plt.fill_between(x_list, y_25, y_75, alpha=0.5)
+    plt.plot(x_list, y_mu, linewidth=3, alpha=0.5, color='red')
+    plt.xlim(-90, 90)
+    plt.ylim(-25, 25)
+
+    plt.subplot(144)
+    cs_diff_collapsed, out_gt_diff_collapsed = collapse_points(cs_diff, out_gt_diff)
+    x_list, y_mu, y_25, y_75 = cluster_points(cs_diff_collapsed, out_gt_diff_collapsed, 10)
+    plt.scatter(cs_diff_collapsed, out_gt_diff_collapsed, s=25, alpha=0.1, vmin=0, vmax=180, color='black')
+    plt.plot(np.arange(-90, 90, 1), [0]*np.arange(-90, 90, 1).size, color='black')
+    plt.fill_between(x_list, y_25, y_75, alpha=0.5)
+    plt.plot(x_list, y_mu, linewidth=3, alpha=0.5, color='red')
+    plt.xlim(0, 90)
+    plt.ylim(-20, 50)
+
     plt.show()
 
 
