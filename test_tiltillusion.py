@@ -224,66 +224,8 @@ def train(model, args):
                 axarr[ir, ith].set_ylim(-20, 40)
                 axarr[ir, ith].set_title(
                     'r in ' + str([rmin, rmin + 20]) + ', tht in ' + str([thetamin, thetamin + 45]))
+    f.show()
 
-                import numpy.polynomial.polynomial as poly
-                ff = plt.figure(figsize=(4, 4))
-                axr = ff.subplots(1, 1)  # (4, 4)
-                cs_diff = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
-                out_gt_diff = [-0.18281291942873512,
-                               1.8150305059760774,
-                               2.6838843821231793,
-                               1.997825226463081,
-                               0.48926489924610905,
-                               -0.3967642281601318,
-                               -0.3215298030419529,
-                               -0.6945125640943974,
-                               -0.5774387719354115,
-                               -0.4699194241854827]
-                cs_diff_collapsed, out_gt_diff_collapsed = collapse_points(cs_diff, out_gt_diff)
-                coefs = poly.polyfit(cs_diff_collapsed, out_gt_diff_collapsed, 5)
-                ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
-                axr.scatter(cs_diff_collapsed, out_gt_diff_collapsed, s=40, alpha=0.45, vmin=0, vmax=180)
-                # coefs = poly.polyfit(cs_diff, out_gt_diff, 5)
-                # ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
-                # axarr[ir, ith].scatter(cs_diff, out_gt_diff, s=15, alpha=0.3, vmin=0, vmax=180)
-                axr.plot(np.arange(-90, 90, 1), ffit, linewidth=3, alpha=0.5, color='black')
-                axr.plot(np.arange(-90, 90, 1), [0] * np.arange(-90, 90, 1).size, color='black')
-                axr.set_xlim(0, 87)
-                axr.set_ylim(-2, 4)
-                ff.show()
-
-
-
-    # plot
-    import matplotlib.pyplot as plt
-    import numpy.polynomial.polynomial as poly
-
-
-    cs_diff = orientation_diff(accumulator[:, 0], accumulator[:, 1]) # center - surround in x axis
-    out_gt_diff = orientation_diff(accumulator[:, 2], accumulator[:, 0]) # pred - gt in y axis
-    cs_diff_collapsed, out_gt_diff_collapsed = collapse_points(cs_diff, out_gt_diff)
-    x_list, y_mu, y_25, y_75 = cluster_points(cs_diff_collapsed, out_gt_diff_collapsed, 10)
-    plt.scatter(cs_diff_collapsed, out_gt_diff_collapsed, s=25, alpha=0.1, vmin=0, vmax=180, color='black')
-    plt.plot(np.arange(-90, 90, 1), [0]*np.arange(-90, 90, 1).size, color='black')
-    plt.fill_between(x_list, y_25, y_75, alpha=0.5)
-    plt.plot(x_list, y_mu, linewidth=3, alpha=0.5, color='red')
-    plt.xlim(0, 90)
-    plt.ylim(-20, 50)
-    plt.show()
-
-    f = plt.figure(figsize=(4,4))
-    axarr = f.subplots(1,1) #(4, 4)
-    coefs = poly.polyfit(cs_diff_collapsed, out_gt_diff_collapsed, 4)
-    ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
-    axarr.scatter(cs_diff_collapsed, out_gt_diff_collapsed, s=40, alpha=0.25, vmin=0, vmax=180)
-    # coefs = poly.polyfit(cs_diff, out_gt_diff, 5)
-    # ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
-    # axarr[ir, ith].scatter(cs_diff, out_gt_diff, s=15, alpha=0.3, vmin=0, vmax=180)
-    axarr.plot(np.arange(-90, 90, 1), ffit, linewidth=3, alpha=0.5, color='black')
-    axarr.plot(np.arange(-90, 90, 1), [0] * np.arange(-90, 90, 1).size, color='black')
-    axarr.set_xlim(0, 87)
-    axarr.set_ylim(-20, 40)
-    plt.show()
 
 def main():
     args = parse_args()
