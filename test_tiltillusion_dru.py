@@ -87,7 +87,7 @@ def main():
         # [im_sub_path, im_fn, iimg, r1, theta1, lambda1, shift1, r2, theta2, lambda2, shift2]
         # if float(meta_arr[i, 3]) < float(meta_arr[i, 5])*1.5: #radius smaller than 1.5x lambda
         # if float(meta_arr[i, 5]) > 50:  # lambda-based filtering
-        if float(meta_arr[i, 4]) < 100 or float(meta_arr[i, 4]) > 80:  # lambda-based filtering
+        if True: #float(meta_arr[i, 4]) < 100 or float(meta_arr[i, 4]) > 80:  # lambda-based filtering
             center_gt.append(meta_arr[i, 4].astype(np.float))
             surround_gt.append(meta_arr[i, 8].astype(np.float))
             predictions.append(out_deg)

@@ -171,8 +171,8 @@ def train(model, args):
 
     import numpy.polynomial.polynomial as poly
     plt.subplot(142)
-    cs_diff = orientation_diff(accumulator[:, 0], accumulator[:, 1]) #center - surround in x axis
-    out_gt_diff = orientation_diff(accumulator[:, 2], accumulator[:, 0]) #pred - gt in y axis
+    cs_diff = orientation_diff(accumulator[:, 0], accumulator[:, 1]) # center - surround in x axis
+    out_gt_diff = orientation_diff(accumulator[:, 2], accumulator[:, 0]) # pred - gt in y axis
     coefs = poly.polyfit(cs_diff, out_gt_diff, 5)
     ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
     plt.scatter(cs_diff, out_gt_diff, s=15, alpha=0.3, vmin=0, vmax=180)
