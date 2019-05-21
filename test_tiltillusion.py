@@ -159,7 +159,7 @@ def train(model, args):
                                       np.expand_dims(meta_arr[:, 2], axis=1),
                                       np.expand_dims(meta_arr[:, 3], axis=1),
                                       np.expand_dims(meta_arr[:, 7], axis=1)),
-                                      axis=0)
+                                      axis=1)
 
             accumulator = np.concatenate((accumulator, results), axis=0)
 
