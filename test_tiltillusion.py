@@ -161,7 +161,7 @@ def train(model, args):
                                       np.expand_dims(meta_arr[:, 7], axis=1)),
                                       axis=1)
 
-            for i in results.shape[0]:
+            for i in range(results.shape[0]):
                 cond = screen(meta_arr[i, 3].astype(np.float), meta_arr[i, 5].astype(np.float), meta_arr[i, 4].astype(np.float),
                               r1min=100, r1max=100 + 20, lambda1min=None, lambda1max=None,
                               thetamin=22.5, thetamax=22.5 + 45)
@@ -190,31 +190,11 @@ def train(model, args):
 
     # plot
     import matplotlib.pyplot as plt
-    plt.figure(figsize=(16,3))
-    plt.subplot(141)
-    plt.scatter(accumulator[:, 0], accumulator[:,2], s=10, vmin=0, vmax=180)
-
     import numpy.polynomial.polynomial as poly
-    plt.subplot(142)
+
+
     cs_diff = orientation_diff(accumulator[:, 0], accumulator[:, 1]) # center - surround in x axis
     out_gt_diff = orientation_diff(accumulator[:, 2], accumulator[:, 0]) # pred - gt in y axis
-    coefs = poly.polyfit(cs_diff, out_gt_diff, 5)
-    ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
-    plt.scatter(cs_diff, out_gt_diff, s=15, alpha=0.3, vmin=0, vmax=180)
-    plt.plot(np.arange(-90, 90, 1), ffit, linewidth=3, alpha=0.5, color='black')
-    plt.xlim(0, 90)
-    plt.ylim(-60, 60)
-
-    plt.subplot(143)
-    x_list, y_mu, y_25, y_75 = cluster_points(cs_diff, out_gt_diff, 10)
-    plt.scatter(cs_diff, out_gt_diff, s=25, alpha=0.1, vmin=0, vmax=180, color='black')
-    plt.plot(np.arange(-90, 90, 1), [0]*np.arange(-90, 90, 1).size, color='black')
-    plt.fill_between(x_list, y_25, y_75, alpha=0.5)
-    plt.plot(x_list, y_mu, linewidth=3, alpha=0.5, color='red')
-    plt.xlim(-90, 90)
-    plt.ylim(-25, 25)
-
-    plt.subplot(144)
     cs_diff_collapsed, out_gt_diff_collapsed = collapse_points(cs_diff, out_gt_diff)
     x_list, y_mu, y_25, y_75 = cluster_points(cs_diff_collapsed, out_gt_diff_collapsed, 10)
     plt.scatter(cs_diff_collapsed, out_gt_diff_collapsed, s=25, alpha=0.1, vmin=0, vmax=180, color='black')
@@ -223,8 +203,21 @@ def train(model, args):
     plt.plot(x_list, y_mu, linewidth=3, alpha=0.5, color='red')
     plt.xlim(0, 90)
     plt.ylim(-20, 50)
-
     plt.show()
+
+    f = plt.figure(figsize=(4,4))
+    axarr = f.subplots(4,4) #(4, 4)
+    coefs = poly.polyfit(cs_diff_collapsed, out_gt_diff_collapsed, 5)
+    ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
+    axarr.scatter(cs_diff_collapsed, out_gt_diff_collapsed, s=40, alpha=0.25, vmin=0, vmax=180)
+    # coefs = poly.polyfit(cs_diff, out_gt_diff, 5)
+    # ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
+    # axarr[ir, ith].scatter(cs_diff, out_gt_diff, s=15, alpha=0.3, vmin=0, vmax=180)
+    axarr.plot(np.arange(-90, 90, 1), ffit, linewidth=3, alpha=0.5, color='black')
+    axarr.plot(np.arange(-90, 90, 1), [0] * np.arange(-90, 90, 1).size, color='black')
+    axarr.set_xlim(0, 87)
+    axarr.set_ylim(-20, 40)
+
 
 def main():
     args = parse_args()
