@@ -55,11 +55,15 @@ class MSBlock(nn.Module):
         return out
 
     def _initialize_weights(self):
+        num_params=0
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
                 m.weight.data.normal_(0, 0.01)
+                num_params += np.product(np.array(m.weight.data.size()))
                 if m.bias is not None:
                     m.bias.data.zero_()
+                    num_params += np.product(np.array(m.bias.data.size()))
+        print('NUM TRAINABLE PARAMS: ' + str(num_params))
 
 class BDCN(nn.Module):
     def __init__(self, pretrain=None, logger=None, rate=4):
@@ -186,10 +190,10 @@ class BDCN(nn.Module):
             # elif 'down' in name:
             #     param.zero_()
             elif 'upsample' in name:
+                num_params += np.product(np.array(param.data.size()))
                 if logger:
                     logger.info('init upsamle layer %s ' % name)
                 k = int(name.split('.')[0].split('_')[1])
-                param.copy_(get_upsampling_weight(1, 1, k*2))
             elif 'fuse' in name:
                 num_params += np.product(np.array(param.data.size()))
                 if logger:
