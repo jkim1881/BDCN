@@ -179,6 +179,7 @@ class BDCN(nn.Module):
         return [p1_1, p2_1, p3_1, p4_1, p5_1, p1_2, p2_2, p3_2, p4_2, p5_2, fuse]
 
     def _initialize_weights(self, logger=None):
+        num_params = 0
         for name, param in self.state_dict().items():
             if self.pretrain and 'features' in name:
                 continue
@@ -190,6 +191,7 @@ class BDCN(nn.Module):
                 k = int(name.split('.')[0].split('_')[1])
                 param.copy_(get_upsampling_weight(1, 1, k*2))
             elif 'fuse' in name:
+                num_params += param.size
                 if logger:
                     logger.info('init params %s ' % name)
                 if 'bias' in name:
@@ -197,12 +199,14 @@ class BDCN(nn.Module):
                 else:
                     nn.init.constant(param, 0.080)
             else:
+                num_params += param.size
                 if logger:
                     logger.info('init params %s ' % name)
                 if 'bias' in name:
                     param.zero_()
                 else:
                     param.normal_(0, 0.01)
+        print('NUM TRAINABLE PARAMS: '+ str(num_params))
         # print self.conv1_1_down.weight
 
 
