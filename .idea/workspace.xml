@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea4384bc-3848-4698-b672-58beea586834" name="Default" comment="" />
+    <list default="true" id="ea4384bc-3848-4698-b672-58beea586834" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +50,7 @@
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="423">
-              <caret line="261" column="63" lean-forward="false" selection-start-line="261" selection-start-column="63" selection-end-line="261" selection-end-column="63" />
+              <caret line="261" column="31" lean-forward="true" selection-start-line="261" selection-start-column="31" selection-end-line="261" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -69,8 +71,8 @@
       <file leaf-file-name="bdcn.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bdcn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="923">
-              <caret line="361" column="32" lean-forward="false" selection-start-line="361" selection-start-column="32" selection-end-line="361" selection-end-column="32" />
+            <state relative-caret-position="500">
+              <caret line="245" column="22" lean-forward="true" selection-start-line="245" selection-start-column="22" selection-end-line="245" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -384,6 +386,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="221" y="41" width="1343" height="938" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17448117" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31847134" sideWeight="0.6933824" order="6" side_tool="false" content_ui="tabs" />
@@ -392,7 +395,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32953367" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32624114" sideWeight="0.4573405" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24349882" sideWeight="0.77401996" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24349882" sideWeight="0.77401996" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -823,8 +826,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bdcn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="923">
-          <caret line="361" column="32" lean-forward="false" selection-start-line="361" selection-start-column="32" selection-end-line="361" selection-end-column="32" />
+        <state relative-caret-position="500">
+          <caret line="245" column="22" lean-forward="true" selection-start-line="245" selection-start-column="22" selection-end-line="245" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -832,7 +835,7 @@
     <entry file="file://$PROJECT_DIR$/train.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="423">
-          <caret line="261" column="63" lean-forward="false" selection-start-line="261" selection-start-column="63" selection-end-line="261" selection-end-column="63" />
+          <caret line="261" column="31" lean-forward="true" selection-start-line="261" selection-start-column="31" selection-end-line="261" selection-end-column="31" />
           <folding />
         </state>
       </provider>
