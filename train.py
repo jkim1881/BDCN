@@ -258,6 +258,7 @@ def main():
         os.mkdir(args.param_dir)
     torch.manual_seed(long(time.time()))
     model = bdcn.BDCN(pretrain=args.pretrain, logger=logger)
+    pytorch_total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     if args.complete_pretrain:
         model.load_state_dict(torch.load(args.complete_pretrain))
     logger.info(model)
