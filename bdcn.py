@@ -191,6 +191,7 @@ class BDCN(nn.Module):
                 k = int(name.split('.')[0].split('_')[1])
                 param.copy_(get_upsampling_weight(1, 1, k*2))
             elif 'fuse' in name:
+                import ipdb;ipdb.set_trace()
                 num_params += param.size
                 if logger:
                     logger.info('init params %s ' % name)
