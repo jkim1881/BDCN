@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea4384bc-3848-4698-b672-58beea586834" name="Default" comment="" />
+    <list default="true" id="ea4384bc-3848-4698-b672-58beea586834" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,8 +71,8 @@
       <file leaf-file-name="bdcn.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bdcn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="208" column="55" lean-forward="false" selection-start-line="208" selection-start-column="55" selection-end-line="208" selection-end-column="55" />
+            <state relative-caret-position="231">
+              <caret line="193" column="44" lean-forward="false" selection-start-line="193" selection-start-column="44" selection-end-line="193" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -831,8 +833,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bdcn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="208" column="55" lean-forward="false" selection-start-line="208" selection-start-column="55" selection-end-line="208" selection-end-column="55" />
+        <state relative-caret-position="231">
+          <caret line="193" column="44" lean-forward="false" selection-start-line="193" selection-start-column="44" selection-end-line="193" selection-end-column="44" />
           <folding />
         </state>
       </provider>
