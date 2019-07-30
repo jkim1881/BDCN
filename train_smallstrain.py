@@ -218,7 +218,6 @@ def train(model, args):
             logger.info('iter: %d, lr: %e, loss: %f, time using: %f(%fs/batch)' % (step,
                 optimizer.param_groups[0]['lr'], np.mean(mean_loss), tm, tm/(args.iter_size*args.display)))
             train_mean_loss_tracker.append((step, np.mean(mean_loss)))
-            mean_loss = []
             start_time = time.time()
 
 
@@ -293,7 +292,8 @@ def main():
     train(model, args)
 
 def parse_args():
-    # python train_smallstrain.py --dataset=bsds500 --pretrain=/media/data_cifs/pytorch_projects/pretrained_weights/vgg16.pth --max-training-examples=200 --param-dir=/media/data_cifs/pytorch_projects/model_out_100_1lr --lr=1e-6 --gpu=0
+    # python train_smallstrain.py --dataset=bsds500 --pretrain=/media/data_cifs/pytorch_projects/pretrained_weights/vgg16.pth --max-training-examples=200 --param-dir=/media/data_cifs/pytorch_projects/model_out_1data_1lr --lr=1e-6 --gpu=0
+    # python train_smallstrain.py --dataset=bsds500 --pretrain=/media/data_cifs/pytorch_projects/pretrained_weights/vgg16.pth --max-training-examples=20 --param-dir=/media/data_cifs/pytorch_projects/model_out_01data_10lr --lr=1e-5 --gpu=5
     parser = argparse.ArgumentParser(description='Train BDCN for different args')
     parser.add_argument('-d', '--dataset', type=str, choices=cfg.config.keys(),
         default='bsds500', help='The dataset to train')
@@ -329,8 +329,8 @@ def parse_args():
         help='how many iters to store the params, default is 1000')
     parser.add_argument('--step-size', type=int, default=10000,
         help='the number of iters to decrease the learning rate, default is 10000')
-    parser.add_argument('--display', type=int, default=50,
-        help='how many iters display one time, default is 50')
+    parser.add_argument('--display', type=int, default=10,
+        help='how many iters display one time, default is 10')
     parser.add_argument('-b', '--balance', type=float, default=1.1,
         help='the parameter to balance the neg and pos, default is 1.1')
     parser.add_argument('-l', '--log', type=str, default='log.txt',
