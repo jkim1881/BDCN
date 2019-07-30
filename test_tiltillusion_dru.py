@@ -85,7 +85,7 @@ def main():
     surround_gt = []
     predictions = []
 
-    out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_gratings_test_2019_05_20_15_07_49_616727.npz')
+    out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_gratings_test_2019_06_04_20_38_56_725053.npz')
     out_data_arr = out_data['test_dict'].copy()
     meta_arr = np.reshape(np.load('/Users/junkyungkim/Desktop/1.npy'), [-1, 11])
 
@@ -143,16 +143,17 @@ def main():
                 ff = plt.figure(figsize=(4, 4))
                 axr = ff.subplots(1, 1)  # (4, 4)
                 cs_diff = [0,10,20,30,40,50,60,70,80,90]
-                out_gt_diff = [-0.18281291942873512,
-                               1.8150305059760774,
-                               2.6838843821231793,
-                               1.997825226463081,
-                               0.48926489924610905,
-                               -0.3967642281601318,
-                               -0.3215298030419529,
-                               -0.6945125640943974,
-                               -0.5774387719354115,
-                               -0.4699194241854827]
+                # HUMAN DATA
+                # out_gt_diff = [-0.18281291942873512,
+                #                1.8150305059760774,
+                #                2.6838843821231793,
+                #                1.997825226463081,
+                #                0.48926489924610905,
+                #                -0.3967642281601318,
+                #                -0.3215298030419529,
+                #                -0.6945125640943974,
+                #                -0.5774387719354115,
+                #                -0.4699194241854827] 
                 cs_diff_collapsed, out_gt_diff_collapsed = collapse_points(cs_diff, out_gt_diff)
                 coefs = poly.polyfit(cs_diff_collapsed, out_gt_diff_collapsed, 5)
                 ffit = poly.polyval(np.arange(-90, 90, 1), coefs)

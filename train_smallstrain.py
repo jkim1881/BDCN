@@ -158,8 +158,9 @@ def train(model, args):
     model.train()
     batch_size = args.iter_size * args.batch_size
 
-    import matplotlib.pyplot as plt
-
+    # import matplotlib.pyplot as plt
+    train_mean_loss_tracker = []
+    val_mean_loss_tracker = []
     for step in xrange(start_step, args.max_iter + 1):
         optimizer.zero_grad()
         batch_loss = 0
@@ -182,13 +183,13 @@ def train(model, args):
                 img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
                     img_max - img_min)
                 gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
-                plt.subplot(131);
-                plt.imshow(img_transposed);
-                plt.subplot(132);
-                plt.imshow(gt_transposed);
-                plt.subplot(133);
-                plt.imshow(np.array(out[-1].cpu().detach()[batchid, 0, :, :]));
-                plt.show()
+                # plt.subplot(131);
+                # plt.imshow(img_transposed);
+                # plt.subplot(132);
+                # plt.imshow(gt_transposed);
+                # plt.subplot(133);
+                # plt.imshow(np.array(out[-1].cpu().detach()[batchid, 0, :, :]));
+                # plt.show()
 
             # import ipdb;ipdb.set_trace()
             loss = 0
@@ -216,7 +217,10 @@ def train(model, args):
             tm = time.time() - start_time
             logger.info('iter: %d, lr: %e, loss: %f, time using: %f(%fs/batch)' % (step,
                 optimizer.param_groups[0]['lr'], np.mean(mean_loss), tm, tm/(args.iter_size*args.display)))
+            train_mean_loss_tracker.append((step, np.mean(mean_loss)))
+            mean_loss = []
             start_time = time.time()
+
 
         # (jk) RUN VALIDATION ON SPECIFIED ITERATIONS
         if ((step % args.validation_period) == 0) and (step > 0):
@@ -241,13 +245,13 @@ def train(model, args):
                         img_transposed = (np.transpose(np.array(images.cpu()[batchid, :, :, :]), (1, 2, 0)) - img_min) / (
                         img_max - img_min)
                         gt_transposed = np.array(labels.cpu()[batchid, 0, :, :])
-                        plt.subplot(131);
-                        plt.imshow(img_transposed);
-                        plt.subplot(132);
-                        plt.imshow(gt_transposed);
-                        plt.subplot(133);
-                        plt.imshow(np.array(out[-1].cpu().detach()[batchid, 0, :, :]));
-                        plt.show()
+                        # plt.subplot(131);
+                        # plt.imshow(img_transposed);
+                        # plt.subplot(132);
+                        # plt.imshow(gt_transposed);
+                        # plt.subplot(133);
+                        # plt.imshow(np.array(out[-1].cpu().detach()[batchid, 0, :, :]));
+                        # plt.show()
 
                     loss = 0
                     for k in xrange(10):
@@ -261,7 +265,9 @@ def train(model, args):
             # Report
             logger.info('>>> Val over %d images, loss: %f' % (args.validation_iters*batch_size,
                                                               np.mean(val_mean_loss)))
-
+            val_mean_loss_tracker.append((step, np.mean(val_mean_loss)))
+    # finished training
+    np.save('%s/learning_curves.npy' % (args.param_dir), (train_mean_loss_tracker, val_mean_loss_tracker))
 
 def main():
     args = parse_args()
@@ -287,11 +293,12 @@ def main():
     train(model, args)
 
 def parse_args():
+    # python train_smallstrain.py --dataset=bsds500 --pretrain=/media/data_cifs/pytorch_projects/pretrained_weights/vgg16.pth --max-training-examples=200, 20, 2 --param-dir=/media/data_cifs/pytorch_projects/model_out_100_1lr --lr=1e-6 --gpu=0
     parser = argparse.ArgumentParser(description='Train BDCN for different args')
     parser.add_argument('-d', '--dataset', type=str, choices=cfg.config.keys(),
         default='bsds500', help='The dataset to train')
     parser.add_argument('--max-training-examples', type=int, default=None,
-        help='(jk) max iters to train network, default is None (200 for BSDS)')
+        help='(jk) max examples to train network, default is None (200 for BSDS)')
     parser.add_argument('--param-dir', type=str, default='params',
         help='the directory to store the params')
     parser.add_argument('--lr', dest='base_lr', type=float, default=1e-6,
@@ -307,13 +314,13 @@ def parse_args():
     parser.add_argument('-r', '--resume', type=str, default=None,
         help='whether resume from some, default is None')
     parser.add_argument('-p', '--pretrain', type=str, default=None,
-        help='init net from pretrained model default is None')
+        help='init net from pretrained model (vgg) default is None')
     parser.add_argument('--max-iter', type=int, default=40000,
         help='max iters to train network, default is 40000')
     parser.add_argument('--validation-period', type=int, default=5000,
         help='(jk) validation period, default is 5000')
     parser.add_argument('--validation-iters', type=int, default=50,
-        help='(jk) iterations per val, default is 10 (50*10 = 500 imgs)')
+        help='(jk) iterations per val, default is 50 (50*10 = 500 imgs)')
     parser.add_argument('--iter-size', type=int, default=10,
         help='iter size equal to the batch size, default 10')
     parser.add_argument('--average-loss', type=int, default=50,
@@ -322,8 +329,8 @@ def parse_args():
         help='how many iters to store the params, default is 1000')
     parser.add_argument('--step-size', type=int, default=10000,
         help='the number of iters to decrease the learning rate, default is 10000')
-    parser.add_argument('--display', type=int, default=20,
-        help='how many iters display one time, default is 20')
+    parser.add_argument('--display', type=int, default=50,
+        help='how many iters display one time, default is 50')
     parser.add_argument('-b', '--balance', type=float, default=1.1,
         help='the parameter to balance the neg and pos, default is 1.1')
     parser.add_argument('-l', '--log', type=str, default='log.txt',
@@ -345,7 +352,7 @@ def parse_args():
     parser.add_argument('--gamma', type=float, default=0.1,
         help='the decay of learning rate, default 0.1')
     parser.add_argument('--display_imgs', type=int, default=0,
-        help='(jk) display imgs at 1st and 100th iteration (val on the 100th)')
+        help='(jk) if 1, display imgs at 1st and 100th iteration (val on the 100th)')
     return parser.parse_args()
 
 if __name__ == '__main__':
