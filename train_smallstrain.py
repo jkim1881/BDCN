@@ -148,6 +148,7 @@ def train(model, args):
             logger.info('%s: %s' % (param_group['name'], param_group['lr']))
     start_time = time.time()
     if args.cuda:
+        print('RUNNING MODEL W CUDA <<<<<<<<<<<<<<<<<<<<<<')
         model.cuda()
     if args.resume:
         logger.info('resume from %s' % args.resume)
@@ -193,7 +194,7 @@ def train(model, args):
 
             # import ipdb;ipdb.set_trace()
             loss = 0
-            for k in xrange(10):
+            for k in xrange(10): # 10 loss terms
                 loss += args.side_weight*cross_entropy_loss2d(out[k], labels, args.cuda, args.balance)/batch_size
             loss += args.fuse_weight*cross_entropy_loss2d(out[-1], labels, args.cuda, args.balance)/batch_size
             loss.backward()
@@ -292,8 +293,7 @@ def main():
     train(model, args)
 
 def parse_args():
-    # python train_smallstrain.py --dataset=bsds500 --pretrain=/media/data_cifs/pytorch_projects/pretrained_weights/vgg16.pth --max-training-examples=200 --param-dir=/media/data_cifs/pytorch_projects/model_out_1data_1lr --lr=1e-6 --gpu=0
-    # python train_smallstrain.py --dataset=bsds500 --pretrain=/media/data_cifs/pytorch_projects/pretrained_weights/vgg16.pth --max-training-examples=20 --param-dir=/media/data_cifs/pytorch_projects/model_out_01data_10lr --lr=1e-5 --gpu=5
+    # python train_smallstrain.py --batch-size=10 --iter-size=1 --dataset=bsds500 --pretrain=/media/data_cifs/pytorch_projects/pretrained_weights/vgg16.pth --max-training-examples=200 --param-dir=/media/data_cifs/pytorch_projects/model_out_1data_1lr --lr=1e-6 --gpu=0
     parser = argparse.ArgumentParser(description='Train BDCN for different args')
     parser.add_argument('-d', '--dataset', type=str, choices=cfg.config.keys(),
         default='bsds500', help='The dataset to train')
