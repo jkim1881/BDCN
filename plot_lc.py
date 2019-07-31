@@ -91,7 +91,7 @@ plt.show()
 
 
 
-######################## Rebuttal bsds performance
+######################## Rebuttal bsds performance v bdcn
 bdcn = [0.631, 0.652, 0.699, 0.818]
 gnet = [0.629, 0.700, 0.770, 0.812]
 
@@ -113,5 +113,32 @@ plt.plot([0,1,2,3], [0.803,0.803,0.803,0.803],
          linestyle='--', linewidth=2, alpha=0.7)
 plt.xticks([0,1,2,3], ['1%','10%','100%','A+100%'])
 plt.ylim(0.6,0.85)
+plt.show()
+
+######################## Rebuttal bsds performance v lesions
+gnet = [0.629, 0.700, 0.770]
+gnet_td = [0.547, 0.670, 0.700]
+gnet_1ts = [0.556, 0.593, 0.742]
+
+plt.figure(figsize=(2.5,4.5))
+plt.scatter([0,1,2], [l for l in gnet],
+            c='b', marker='o',
+            s=70, alpha=0.7)
+plt.plot([0,1,2], [l for l in gnet],
+         c='b', marker='',
+         linestyle='-', linewidth=2, alpha=0.7)
+
+plt.scatter([0,1,2], [l for l in gnet_td],
+            c='green', marker='o',
+            s=70, alpha=0.6)
+plt.plot([0,1,2], [l for l in gnet_td],
+         c='black', marker='',
+         linestyle='-', linewidth=2, alpha=0.7)
+
+plt.plot([0,1,2], [0.803,0.803,0.803,0.803],
+         color='green', marker='',
+         linestyle='--', linewidth=2, alpha=0.6)
+plt.xticks([0,1,2,3], ['1%','10%','100%','A+100%'])
+plt.ylim(0.5,0.8)
 plt.show()
 
