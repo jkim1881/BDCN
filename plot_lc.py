@@ -132,8 +132,16 @@ plt.scatter([0,1,2], [l for l in gnet_td],
             c='green', marker='o',
             s=70, alpha=0.6)
 plt.plot([0,1,2], [l for l in gnet_td],
-         c='black', marker='',
+         c='green', marker='',
          linestyle='-', linewidth=2, alpha=0.7)
+
+plt.scatter([0,1,2], [l for l in gnet_td],
+            c='green', marker='x',
+            s=70, alpha=0.6)
+plt.plot([0,1,2], [l for l in gnet_td],
+         c='green', marker='',
+         linestyle='-', linewidth=2, alpha=0.7)
+
 
 plt.xticks([0,1,2], ['1%','10%','100%'])
 plt.ylim(0.5,0.8)
