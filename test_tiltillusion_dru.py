@@ -85,12 +85,12 @@ def main():
     surround_gt = []
     predictions = []
 
-    # out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_gratings_test_2019_06_04_20_38_56_725053.npz') #gnet
+    out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_gratings_test_2019_06_04_20_38_56_725053.npz') #gnet
     # out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_no_h_gratings_test_2019_07_31_13_00_04_162318.npz')  # td-only gnet
-    out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_ts_1_gratings_test_2019_07_31_13_00_06_770050.npz')  # 1ts gnet
+    # out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_ts_1_gratings_test_2019_07_31_13_00_06_770050.npz')  # 1ts gnet
 
     out_data_arr = out_data['test_dict'].copy()
-    import ipdb;ipdb.set_trace()
+    # import ipdb;ipdb.set_trace()
     meta_arr = np.reshape(np.load('/Users/junkyungkim/Desktop/tilt_illusion_gt_meta.npy'), [-1, 11])
 
     f = plt.figure(figsize=(4,4))
@@ -144,7 +144,7 @@ def main():
 
 
                 import numpy.polynomial.polynomial as poly
-                ff = plt.figure(figsize=(4, 4))
+                ff = plt.figure(figsize=(4, 6))
                 axr = ff.subplots(1, 1)  # (4, 4)
                 cs_diff = [0,10,20,30,40,50,60,70,80,90]
                 # HUMAN DATA
@@ -158,9 +158,9 @@ def main():
                 #                -0.6945125640943974,
                 #                -0.5774387719354115,
                 #                -0.4699194241854827] 
-                cs_diff_collapsed, out_gt_diff_collapsed = collapse_points(cs_diff, out_gt_diff)
-                coefs = poly.polyfit(cs_diff_collapsed, out_gt_diff_collapsed, 5)
-                ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
+                # cs_diff_collapsed, out_gt_diff_collapsed = collapse_points(cs_diff, out_gt_diff)
+                # coefs = poly.polyfit(cs_diff_collapsed, out_gt_diff_collapsed, 5)
+                # ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
                 axr.scatter(cs_diff_collapsed, out_gt_diff_collapsed, s=40, alpha=0.45, vmin=0, vmax=180)
                 # coefs = poly.polyfit(cs_diff, out_gt_diff, 5)
                 # ffit = poly.polyval(np.arange(-90, 90, 1), coefs)
@@ -168,7 +168,7 @@ def main():
                 axr.plot(np.arange(-90, 90, 1), ffit, linewidth=3, alpha=0.5, color='black')
                 axr.plot(np.arange(-90, 90, 1), [0] * np.arange(-90, 90, 1).size, color='black')
                 axr.set_xlim(0, 87)
-                axr.set_ylim(-2, 4)
+                axr.set_ylim(-20, 40)
                 ff.show()
                 #
                 # plt.subplot(143)
