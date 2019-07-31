@@ -16,6 +16,8 @@ import matplotlib.pyplot as plt
 ## Summary fig of training/val loss over conditions
 train_loss_1lr = [1771, 1312, 554]
 val_loss_1lr = [16335, 55464, 88482]
+
+plt.figure(figsize=(3,3))
 plt.scatter([0,1,2], [np.log10(l) for l in train_loss_1lr],
             c='b', marker='o',
             s=40, alpha=0.7)
