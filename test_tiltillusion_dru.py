@@ -85,9 +85,13 @@ def main():
     surround_gt = []
     predictions = []
 
-    out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_gratings_test_2019_06_04_20_38_56_725053.npz')
+    # out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_gratings_test_2019_06_04_20_38_56_725053.npz') #gnet
+    # out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_no_h_gratings_test_bsds_2019_07_31_10_16_32_427804.npz')  # td-only gnet
+    out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_ts_1_gratings_test_bsds_2019_07_31_10_21_56_007104.npz')  # td-only gnet
+
     out_data_arr = out_data['test_dict'].copy()
-    meta_arr = np.reshape(np.load('/Users/junkyungkim/Desktop/1.npy'), [-1, 11])
+    import ipdb;ipdb.set_trace()
+    meta_arr = np.reshape(np.load('/Users/junkyungkim/Desktop/tilt_illusion_gt_meta.npy'), [-1, 11])
 
     f = plt.figure(figsize=(4,4))
     axarr = f.subplots(4,4) #(4, 4)
