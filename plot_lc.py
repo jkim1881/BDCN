@@ -15,7 +15,7 @@ plt.plot([pt[0] for pt in train_curve], [np.log10(pt[1]) for pt in train_curve],
          c='b', marker='',linestyle='-', linewidth=1, alpha=0.7)
 plt.plot([pt[0] for pt in val_curve], [np.log10(pt[1]) for pt in val_curve],
          c='r', marker='o',linestyle='-', linewidth=1, alpha=0.7)
-plt.ylim(2.5,5)
+plt.ylim(2.5,5.2)
 plt.yticks([3,4,5], ['10$^3$','10$^4$','10$^5$'])
 plt.show()
 
@@ -36,7 +36,7 @@ plt.scatter([0,1,2], [np.log10(l) for l in val_loss_1lr],
 plt.plot([0,1,2], [np.log10(l) for l in val_loss_1lr],
          c='r', marker='',
          linestyle='-', linewidth=2, alpha=0.7)
-plt.ylim(2.5,5)
+plt.ylim(2.5,5.2)
 plt.yticks([3,4,5], ['10$^3$','10$^4$','10$^5$'])
 plt.xticks([0,1,2], ['1%','10%','100%'])
 plt.show()
@@ -58,7 +58,7 @@ plt.scatter([0,1,2], [np.log10(l) for l in val_loss_1lr],
 plt.plot([0,1,2], [np.log10(l) for l in val_loss_1lr],
          c='r', marker='',
          linestyle='-', linewidth=2, alpha=0.7)
-plt.ylim(2.5,5)
+plt.ylim(2.5,5.2)
 plt.yticks([3,4,5], ['10$^3$','10$^4$','10$^5$'])
 plt.xticks([0,1,2], ['0.1x','1x','10x'])
 plt.show()
