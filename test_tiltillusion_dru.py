@@ -86,8 +86,8 @@ def main():
     predictions = []
 
     # out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_gratings_test_2019_06_04_20_38_56_725053.npz') #gnet
-    # out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_no_h_gratings_test_bsds_2019_07_31_10_16_32_427804.npz')  # td-only gnet
-    out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_ts_1_gratings_test_bsds_2019_07_31_10_21_56_007104.npz')  # td-only gnet
+    # out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_no_h_gratings_test_2019_07_31_13_00_04_162318.npz')  # td-only gnet
+    out_data = np.load('/Users/junkyungkim/Desktop/BSDS_vgg_gratings_simple_ts_1_gratings_test_2019_07_31_13_00_06_770050.npz')  # 1ts gnet
 
     out_data_arr = out_data['test_dict'].copy()
     import ipdb;ipdb.set_trace()
