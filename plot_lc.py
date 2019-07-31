@@ -41,7 +41,7 @@ plt.show()
 
 ## Summary fig of training/val loss over learning rates
 train_loss_1lr = [742, 550, 334]
-val_loss_1lr = [75664, 88482, 100341]
+val_loss_1lr = [82664, 88482, 100341]
 
 plt.figure(figsize=(3,6))
 plt.scatter([0,1,2], [np.log10(l) for l in train_loss_1lr],
