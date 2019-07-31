@@ -135,10 +135,10 @@ plt.plot([0,1,2], [l for l in gnet_td],
          c='green', marker='',
          linestyle='-', linewidth=2, alpha=0.7)
 
-plt.scatter([0,1,2], [l for l in gnet_td],
+plt.scatter([0,1,2], [l for l in gnet_1ts],
             c='green', marker='x',
             s=70, alpha=0.6)
-plt.plot([0,1,2], [l for l in gnet_td],
+plt.plot([0,1,2], [l for l in gnet_1ts],
          c='green', marker='',
          linestyle='-', linewidth=2, alpha=0.7)
 
