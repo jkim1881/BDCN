@@ -11,8 +11,10 @@ train_curve = npy[0]
 val_curve = [train_curve[0]] + npy[1]
 
 plt.figure(figsize=(6,3))
-plt.plot([pt[0] for pt in train_curve], [np.log10(pt[1]) for pt in train_curve])
-plt.plot([pt[0] for pt in val_curve], [np.log10(pt[1]) for pt in val_curve])
+plt.plot([pt[0] for pt in train_curve], [np.log10(pt[1]) for pt in train_curve],
+         c='b', marker='',linestyle='-', linewidth=1, alpha=0.7)
+plt.plot([pt[0] for pt in val_curve], [np.log10(pt[1]) for pt in val_curve],
+         c='r', marker='',linestyle='-', linewidth=1, alpha=0.7)
 plt.yticks([3,4,5], ['10$^3$','10$^4$','10$^5$'])
 plt.show()
 
