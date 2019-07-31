@@ -92,8 +92,8 @@ plt.show()
 
 
 ######################## Rebuttal bsds performance
-bdcn = [0.631, 0.652, 0.699, 0.806]
-gnet = [0.623, 0.700, 0.770, 0.802]
+bdcn = [0.631, 0.652, 0.699, 0.818]
+gnet = [0.627, 0.700, 0.770, 0.802]
 
 plt.figure(figsize=(2.5,4.5))
 plt.scatter([0,1,2,3], [l for l in bdcn],
