@@ -14,8 +14,8 @@ import matplotlib.pyplot as plt
 # plt.show()
 
 ## Summary fig of training/val loss over conditions
-train_loss_1lr = [1771, 1312, 554]
-val_loss_1lr = [16335, 55464, 88482]
+train_loss_1lr = [554, 1312, 1771]
+val_loss_1lr = [88482, 55464, 16335]
 
 plt.figure(figsize=(3,3))
 plt.scatter([0,1,2], [np.log10(l) for l in train_loss_1lr],
@@ -30,4 +30,6 @@ plt.scatter([0,1,2], [np.log10(l) for l in val_loss_1lr],
 plt.plot([0,1,2], [np.log10(l) for l in val_loss_1lr],
          c='r', marker='',
          linestyle='-', linewidth=1.4, alpha=0.7)
+plt.yticks([1,2,3,4,5], ['10\^1','10\^2','10\^3','10\^4','10\^5'])
+plt.xticks([0,1,2], ['1\%','10\%','100\%'])
 plt.show()
