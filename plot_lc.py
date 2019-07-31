@@ -10,9 +10,10 @@ npy = np.load(lc_npy_path)
 train_curve = npy[0]
 val_curve = [train_curve[0]] + npy[1]
 
-plt.figure(figsize=(3,3))
-plt.plot([pt[0] for pt in train_curve], [pt[1] for pt in train_curve])
-plt.plot([pt[0] for pt in val_curve], [pt[1] for pt in val_curve])
+plt.figure(figsize=(6,3))
+plt.plot([pt[0] for pt in train_curve], [np.log10(pt[1]) for pt in train_curve])
+plt.plot([pt[0] for pt in val_curve], [np.log10(pt[1]) for pt in val_curve])
+plt.yticks([3,4,5], ['10$^3$','10$^4$','10$^5$'])
 plt.show()
 
 ## Summary fig of training/val loss over conditions
