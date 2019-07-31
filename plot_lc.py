@@ -28,3 +28,4 @@ plt.scatter([0,1,2], val_loss_1lr,
 plt.plot([0,1,2], val_loss_1lr,
          c='r', marker='',
          linestyle='-', linewidth=1.4, alpha=0.7)
+plt.show()
