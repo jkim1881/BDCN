@@ -108,7 +108,7 @@ plt.scatter([0,1,2,3], [l for l in gnet],
 plt.plot([0,1,2,3], [l for l in gnet],
          c='b', marker='',
          linestyle='-', linewidth=2, alpha=0.7)
-plt.plot([0,1,2,3], [0,0,0,0],
+plt.plot([0,1,2,3], [0.803,0.803,0.803,0.803],
          color='black', marker='',
          linestyle='--', linewidth=2, alpha=0.7)
 plt.xticks([0,1,2,3], ['1%','10%','100%','A+100%'])
