@@ -7,6 +7,6 @@ npy = np.load(lc_npy_path)
 train_curve = npy[0]
 val_curve = npy[1]
 
-plt.plot([pt[0] for pt in train_curve],[pt[1] for pt in train_curve])
-plt.plot([pt[0] for pt in val_curve],[pt[1] for pt in val_curve])
+plt.plot([pt[0] for pt in train_curve],[np.log(pt[1]) for pt in train_curve])
+plt.plot([pt[0] for pt in val_curve],[no.log(pt[1]) for pt in val_curve])
 plt.show()
