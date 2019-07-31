@@ -30,6 +30,6 @@ plt.scatter([0,1,2], [np.log10(l) for l in val_loss_1lr],
 plt.plot([0,1,2], [np.log10(l) for l in val_loss_1lr],
          c='r', marker='',
          linestyle='-', linewidth=1.4, alpha=0.7)
-plt.yticks([3,4,5], ['10$^3','10$^4','10$^5'])
+plt.yticks([3,4,5], ['10$^3$','10$^4$','10$^5$'])
 plt.xticks([0,1,2], ['1%','10%','100%'])
 plt.show()
