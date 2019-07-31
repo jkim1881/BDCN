@@ -59,3 +59,29 @@ plt.plot([0,1,2], [np.log10(l) for l in val_loss_1lr],
 plt.yticks([3,4,5], ['10$^3$','10$^4$','10$^5$'])
 plt.xticks([0,1,2], ['0.1x','1x','10x'])
 plt.show()
+
+
+
+
+######################## CONNECTOMICS
+
+## Summary fig of training/val loss over data size (Unet on Connectomics)
+train_loss_1lr = [0.025, 0.104, 0.177]
+val_loss_1lr = [1.079, 0.378, 0.253]
+
+plt.figure(figsize=(3,6))
+plt.scatter([0,1,2], [np.log10(l) for l in train_loss_1lr],
+            c='b', marker='o',
+            s=70, alpha=0.7)
+plt.plot([0,1,2], [np.log10(l) for l in train_loss_1lr],
+         c='b', marker='',
+         linestyle='-', linewidth=2, alpha=0.7)
+plt.scatter([0,1,2], [np.log10(l) for l in val_loss_1lr],
+            c='r', marker='o',
+            s=70, alpha=0.7)
+plt.plot([0,1,2], [np.log10(l) for l in val_loss_1lr],
+         c='r', marker='',
+         linestyle='-', linewidth=2, alpha=0.7)
+plt.yticks([-2,-1,0], ['10$^-2$','10$^-1$','10$^0$'])
+plt.xticks([0,1,2], ['1%','10%','100%'])
+plt.show()
