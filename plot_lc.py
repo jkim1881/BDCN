@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 ## This code shows that BDCN overfits to 10%, 1% of dataset
 
 ## LC from data
-lc_npy_path = '/media/data_cifs/pytorch_projects/model_out_001data_01lr/learning_curves.npy'
+lc_npy_path = '/media/data_cifs/pytorch_projects/model_out_001data_1lr/learning_curves.npy'
 
 npy = np.load(lc_npy_path)
 train_curve = npy[0]
