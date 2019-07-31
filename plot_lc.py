@@ -93,7 +93,7 @@ plt.show()
 
 ######################## Rebuttal bsds performance
 bdcn = [0.631, 0.652, 0.699, 0.818]
-gnet = [0.627, 0.700, 0.770, 0.802]
+gnet = [0.629, 0.700, 0.770, 0.812]
 
 plt.figure(figsize=(2.5,4.5))
 plt.scatter([0,1,2,3], [l for l in bdcn],
@@ -108,6 +108,9 @@ plt.scatter([0,1,2,3], [l for l in gnet],
 plt.plot([0,1,2,3], [l for l in gnet],
          c='b', marker='',
          linestyle='-', linewidth=2, alpha=0.7)
+plt.plot([0,1,2,3], [0,0,0,0],
+         color='black', marker='',
+         linestyle='--', linewidth=2, alpha=0.7)
 plt.xticks([0,1,2,3], ['1%','10%','100%','A+100%'])
 plt.ylim(0.5,0.85)
 plt.show()
