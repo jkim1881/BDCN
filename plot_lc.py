@@ -88,3 +88,26 @@ plt.plot([0,1,2], [np.log10(l) for l in val_loss_1lr],
 plt.yticks([-2,-1,0], ['10$^{-2}$','10$^{-1}$','10$^{0}$'])
 plt.xticks([0,1,2], ['1%','10%','100%'])
 plt.show()
+
+
+
+######################## Rebuttal bsds performance
+bdcn = [0.631, 0.652, 0.699, 0.806]
+gnet = [0.623, 0.700, 0.770, 0.802]
+
+plt.figure(figsize=(2.5,4.5))
+plt.scatter([0,1,2], [l for l in bdcn],
+            c='r', marker='o',
+            s=70, alpha=0.7)
+plt.plot([0,1,2], [l for l in bdcn],
+         c='r', marker='',
+         linestyle='-', linewidth=2, alpha=0.7)
+plt.scatter([0,1,2], [np.log10(l) for l in gnet],
+            c='b', marker='o',
+            s=70, alpha=0.7)
+plt.plot([0,1,2], [l for l in gnet],
+         c='b', marker='',
+         linestyle='-', linewidth=2, alpha=0.7)
+plt.xticks([0,1,2,3], ['1%','10%','100%','A+100%'])
+plt.show()
+
