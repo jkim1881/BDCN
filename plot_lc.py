@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-lc_npy_path = '/media/data_cifs/pytorch_projects/model_out_001data_10lr/learning_curves.npy'
+lc_npy_path = '/media/data_cifs/pytorch_projects/model_out_01data_1lr/learning_curves.npy'
 
 npy = np.load(lc_npy_path)
 train_curve = npy[0]
