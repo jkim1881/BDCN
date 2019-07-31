@@ -11,7 +11,7 @@ train_curve = npy[0]
 val_curve = [train_curve[0]] + npy[1]
 
 plt.figure(figsize=(3,6))
-plt.plot([pt[0] for pt in train_curve], [np.log10(pt[1]+np.random.randint(low=-75,high=100)) for pt in train_curve],
+plt.plot([pt[0] for pt in train_curve], [np.log10(pt[1]) for pt in train_curve],
          c='b', marker='',linestyle='-', linewidth=1, alpha=0.7)
 plt.plot([pt[0] for pt in val_curve], [np.log10(pt[1]) for pt in val_curve],
          c='r', marker='o',linestyle='-', linewidth=1, alpha=0.7)
