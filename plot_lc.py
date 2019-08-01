@@ -17,6 +17,7 @@ plt.plot([pt[0] for pt in val_curve], [np.log10(pt[1]) for pt in val_curve],
          c='r', marker='o',linestyle='-', linewidth=1, alpha=0.7)
 plt.ylim(2.5,5.2)
 plt.yticks([3,4,5], ['10$^3$','10$^4$','10$^5$'])
+plt.tick_params(axis='x', labelsize=15)
 plt.show()
 
 ## Summary fig of training/val loss over data size
