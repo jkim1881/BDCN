@@ -19,6 +19,7 @@ plt.ylim(2.5,5.2)
 plt.yticks([3,4,5], ['10$^3$','10$^4$','10$^5$'])
 plt.tick_params(axis='x', labelsize=13)
 plt.tick_params(axis='y', labelsize=13)
+plt.tight_layout()
 plt.show()
 
 ## Summary fig of training/val loss over data size
