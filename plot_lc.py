@@ -17,7 +17,8 @@ plt.plot([pt[0] for pt in val_curve], [np.log10(pt[1]) for pt in val_curve],
          c='r', marker='o',linestyle='-', linewidth=1, alpha=0.7)
 plt.ylim(2.5,5.2)
 plt.yticks([3,4,5], ['10$^3$','10$^4$','10$^5$'])
-plt.tick_params(axis='x', labelsize=15)
+plt.tick_params(axis='x', labelsize=13)
+plt.tick_params(axis='y', labelsize=13)
 plt.show()
 
 ## Summary fig of training/val loss over data size
@@ -40,6 +41,8 @@ plt.plot([0,1,2], [np.log10(l) for l in val_loss_1lr],
 plt.ylim(2.5,5.2)
 plt.yticks([3,4,5], ['10$^3$','10$^4$','10$^5$'])
 plt.xticks([0,1,2], ['1%','10%','100%'])
+plt.tick_params(axis='x', labelsize=13)
+plt.tick_params(axis='y', labelsize=13)
 plt.show()
 
 ## Summary fig of training/val loss over learning rates
@@ -62,6 +65,8 @@ plt.plot([0,1,2], [np.log10(l) for l in val_loss_1lr],
 plt.ylim(2.5,5.2)
 plt.yticks([3,4,5], ['10$^3$','10$^4$','10$^5$'])
 plt.xticks([0,1,2], ['0.1x','1x','10x'])
+plt.tick_params(axis='x', labelsize=13)
+plt.tick_params(axis='y', labelsize=13)
 plt.show()
 
 
@@ -88,6 +93,8 @@ plt.plot([0,1,2], [np.log10(l) for l in val_loss_1lr],
          linestyle='-', linewidth=2, alpha=0.7)
 plt.yticks([-2,-1,0], ['10$^{-2}$','10$^{-1}$','10$^{0}$'])
 plt.xticks([0,1,2], ['1%','10%','100%'])
+plt.tick_params(axis='x', labelsize=13)
+plt.tick_params(axis='y', labelsize=13)
 plt.show()
 
 
@@ -129,7 +136,9 @@ plt.plot([0,1,2], [l for l in gnet_1ts],
          c='green', marker='',
          linestyle='-', linewidth=2, alpha=0.7)
 
-plt.xticks([0,1,2,3], ['1%','10%','100%','A+100%'])
+plt.xticks([0,1,2,3], ['1%','10%','100%','A+100%')]
+plt.tick_params(axis='x', labelsize=13)
+plt.tick_params(axis='y', labelsize=13)
 plt.ylim(0.5,0.85)
 plt.show()
 
@@ -159,6 +168,8 @@ plt.plot([0,1,2], [l for l in gnet_1ts],
          linestyle='-', linewidth=2, alpha=0.7)
 
 plt.xticks([0,1,2], ['1%','10%','100%'])
+plt.tick_params(axis='x', labelsize=13)
+plt.tick_params(axis='y', labelsize=13)
 plt.ylim(0.5,0.8)
 plt.show()
 
