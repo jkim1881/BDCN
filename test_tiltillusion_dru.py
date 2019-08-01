@@ -169,6 +169,9 @@ def main():
                 axr.plot(np.arange(-90, 90, 1), [0] * np.arange(-90, 90, 1).size, color='black')
                 axr.set_xlim(0, 87)
                 axr.set_ylim(-20, 40)
+                axr.tick_params(axis='x', labelsize=15)
+                axr.tick_params(axis='y', labelsize=15)
+                axr.tight_layout()
                 ff.show()
                 #
                 # plt.subplot(143)
