@@ -136,7 +136,7 @@ plt.plot([0,1,2], [l for l in gnet_1ts],
          c='green', marker='',
          linestyle='-', linewidth=2, alpha=0.7)
 
-plt.xticks([0,1,2,3], ['1%','10%','100%','A+100%')]
+plt.xticks([0,1,2,3], ['1%','10%','100%','A+100%'])
 plt.tick_params(axis='x', labelsize=13)
 plt.tick_params(axis='y', labelsize=13)
 plt.ylim(0.5,0.85)
