@@ -44,6 +44,7 @@ plt.yticks([3,4,5], ['10$^3$','10$^4$','10$^5$'])
 plt.xticks([0,1,2], ['1%','10%','100%'])
 plt.tick_params(axis='x', labelsize=13)
 plt.tick_params(axis='y', labelsize=13)
+plt.tight_layout()
 plt.show()
 
 ## Summary fig of training/val loss over learning rates
@@ -68,6 +69,7 @@ plt.yticks([3,4,5], ['10$^3$','10$^4$','10$^5$'])
 plt.xticks([0,1,2], ['0.1x','1x','10x'])
 plt.tick_params(axis='x', labelsize=13)
 plt.tick_params(axis='y', labelsize=13)
+plt.tight_layout()
 plt.show()
 
 
@@ -96,6 +98,7 @@ plt.yticks([-2,-1,0], ['10$^{-2}$','10$^{-1}$','10$^{0}$'])
 plt.xticks([0,1,2], ['1%','10%','100%'])
 plt.tick_params(axis='x', labelsize=13)
 plt.tick_params(axis='y', labelsize=13)
+plt.tight_layout()
 plt.show()
 
 
@@ -141,6 +144,7 @@ plt.xticks([0,1,2,3], ['1%','10%','100%','A+100%'])
 plt.tick_params(axis='x', labelsize=13)
 plt.tick_params(axis='y', labelsize=13)
 plt.ylim(0.5,0.85)
+plt.tight_layout()
 plt.show()
 
 ######################## Rebuttal bsds performance v lesions
@@ -172,5 +176,6 @@ plt.xticks([0,1,2], ['1%','10%','100%'])
 plt.tick_params(axis='x', labelsize=13)
 plt.tick_params(axis='y', labelsize=13)
 plt.ylim(0.5,0.8)
+plt.tight_layout()
 plt.show()
 
